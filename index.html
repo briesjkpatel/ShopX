@@ -20,6 +20,28 @@ button{cursor:pointer;transition:transform 0.15s ease, background 0.2s ease, box
 button:active{transform:scale(0.96)}
 .hidden{display:none!important}
 
+/* --- TOP CONTACT & EMAIL BAR --- */
+.top-left-contact {
+  background: #0f172a;
+  color: #cbd5e1;
+  font-size: 12px;
+  padding: 6px 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 500;
+  z-index: 1001;
+  position: relative;
+}
+.top-left-contact a {
+  color: #ffd43b;
+  text-decoration: none;
+}
+.top-left-contact a:hover {
+  text-decoration: underline;
+}
+
 /* --- ANIMATIONS --- */
 @keyframes floatHero {
   0%, 100% { transform: translateY(0px) rotate(-7deg); }
@@ -509,6 +531,12 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 
 <div class="festive-banner"></div>
 
+<!-- Top Contact & Support Bar -->
+<div class="top-left-contact">
+  <span>✉️ Support Email: <a href="mailto:support@circutech.in">support@circutech.in</a></span>
+  <span>📞 Contact No. <a href="tel:9217656981">9217656981</a></span>
+</div>
+
 <!-- Theme Floating Elements -->
 <!-- Diwali Elements -->
 <div class="theme-element diwali-radial-glow"></div>
@@ -532,7 +560,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <div class="theme-element diwali-petal" style="left: 65%; animation-delay: 1s;">🌸</div>
 <div class="theme-element diwali-petal" style="left: 85%; animation-delay: 3s;">🌸</div>
 
-<!-- Rakshabandhan Elements[cite: 1] -->
+<!-- Rakshabandhan Elements -->
 <div class="theme-element festive-bg-gradient"></div>
 <div class="theme-element festive-faint-pattern"></div>
 <div class="theme-element background-rangoli-watermark">
@@ -679,7 +707,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
     <button onclick="toggleDrawer(); toggleDark();">🌙 Toggle Theme</button>
     
     <div class="drawer-section-title">Address</div>
-    <button style="font-size:12px; color:var(--muted); cursor:default; pointer-events:none;">📍 RAR-310, Rajendra Arihant Tower, Plot no.-50 & 51, B1 Janakpuri, New Delhi- 110058[cite: 1]</button>
+    <button style="font-size:12px; color:var(--muted); cursor:default; pointer-events:none;">📍 RAR-310, Rajendra Arihant Tower, Plot no.-50 & 51, B1 Janakpuri, New Delhi- 110058</button>
   </div>
 </div>
 
@@ -1600,7 +1628,7 @@ async function adminDeleteMessage(id) {
 
 async function adminDeleteProduct(id) {
   if (!confirm("Are you sure you want to remove this product listing?")) return;
-  const { error } = await db.from('products').delete().eq('id', id);
+  const { error } = await db.products.delete().eq('id', id);
   if (error) {
     notify("Error deleting product: " + error.message);
   } else {
