@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>ShopX Marketplace</title>
+<title>CircuTech</title>
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -635,7 +635,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 
 <header class="top">
   <button class="menu-dots" onclick="toggleDrawer()" title="Menu">⋮</button>
-  <div class="brand" onclick="goHome()">ShopX<small>MARKETPLACE</small></div>
+  <div class="brand" onclick="goHome()">CircuTech<small>MARKETPLACE</small></div>
   <div class="search"><input id="search" placeholder="Search products, brands and categories"><button onclick="render()">🔍</button></div>
   <div class="nav">
     <button id="adminHeaderBtn" class="admin-btn hidden" onclick="openAdminPanel()">⚙️ Admin</button>
@@ -677,6 +677,9 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
     <button onclick="toggleDrawer(); openModal('terms');">📄 Terms & Conditions</button>
     <button onclick="toggleDrawer(); openOrders();">📦 My Orders</button>
     <button onclick="toggleDrawer(); toggleDark();">🌙 Toggle Theme</button>
+    
+    <div class="drawer-section-title">Address</div>
+    <button style="font-size:12px; color:var(--muted); cursor:default; pointer-events:none;">📍 RAR-310, Rajendra Arihant Tower, Plot no.-50 & 51, B1 Janakpuri, New Delhi- 110058[cite: 1]</button>
   </div>
 </div>
 
@@ -788,14 +791,14 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   </div>
   <div class="grid" id="grid"></div>
 </main>
-<footer><h3>ShopX Marketplace</h3><p>Powered by Supabase Cloud Database & Storage.</p></footer>
+<footer><h3>Circutech Systems Private Limited</h3><p>Powered by Supabase Cloud Database & Storage.</p></footer>
 
 <!-- About Modal -->
 <div class="modalbg" id="about">
   <div class="modal"><button class="close" onclick="closeModal('about')">×</button>
     <h2>ℹ️ About Us</h2>
     <p style="margin:12px 0;line-height:1.6;color:var(--muted);">
-      Welcome to <b>ShopX Marketplace</b>! You are our top priority. We strive every day to deliver the best shopping experience possible.
+      Welcome to <b>CircuTech</b>! You are our top priority. We strive every day to deliver the best shopping experience possible.
     </p>
     <div style="margin-top:20px;text-align:center;">
       <button class="primary" onclick="closeModal('about')">Start Shopping 🛍️</button>
@@ -843,7 +846,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   <div class="modal"><button class="close" onclick="closeModal('terms')">×</button>
     <h2>📄 Terms & Conditions</h2>
     <p style="margin:12px 0;line-height:1.6;color:var(--muted);">
-      By accessing and placing an order with ShopX Marketplace, you confirm that you are in agreement with and bound by the terms of service contained herein.
+      By accessing and placing an order with CircuTech, you confirm that you are in agreement with and bound by the terms of service contained herein.
     </p>
   </div>
 </div>
@@ -904,7 +907,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <!-- Admin Panel Modal -->
 <div class="modalbg" id="adminPanel">
 <div class="modal large"><button class="close" onclick="closeModal('adminPanel')">×</button>
-  <h2>⚙️ ShopX Admin Control Panel</h2>
+  <h2>⚙️ CircuTech Admin Control Panel</h2>
   
   <!-- Festival & Seasonal Theme Switcher -->
   <div class="theme-selector-box">
