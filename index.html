@@ -7,44 +7,651 @@
 <!-- Supabase SDK -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--p:#2874f0;--p2:#1557c0;--dark:#131921;--bg:#f4f6f8;--card:#fff;--txt:#172033;--muted:#687386;--green:#16a34a;--red:#ef4444;--gold:#f59e0b;--border:#e5e7eb}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt)}button,input,select,textarea{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+:root{
+  --p:#2874f0;--p2:#1557c0;--dark:#131921;--bg:#f4f6f8;--card:#fff;--txt:#172033;
+  --muted:#687386;--green:#16a34a;--red:#ef4444;--gold:#f59e0b;--border:#e5e7eb;
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt);transition:background 0.3s ease, color 0.3s ease;position:relative;min-height:100vh;}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;transition:transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease}
+button:active{transform:scale(0.96)}
+.hidden{display:none!important}
+
+/* --- ANIMATIONS --- */
+@keyframes floatHero {
+  0%, 100% { transform: translateY(0px) rotate(-7deg); }
+  50% { transform: translateY(-12px) rotate(-3deg); }
+}
+@keyframes shimmerSweep {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes popIn {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes floatDiya {
+  0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 10px #f59e0b); }
+  50% { transform: translateY(-10px) scale(1.08); filter: drop-shadow(0 0 20px #fbbf24); }
+}
+@keyframes swayLantern {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes fallPetal {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  20% { opacity: 0.9; }
+  100% { transform: translateY(105vh) rotate(360deg); opacity: 0.2; }
+}
+@keyframes sparkleTwinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+@keyframes glowPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
+  50% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.75; }
+}
+@keyframes floatWave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+@keyframes floatBubble {
+  0% { transform: translateY(0px) scale(0.8); opacity: 0; }
+  20% { opacity: 0.7; }
+  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+@keyframes swayPalm {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes sunsetPulse {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+  100% { transform: translateX(-50%) scale(1.3); opacity: 0.85; }
+}
+@keyframes nebulaDrift {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(360deg) scale(1.15); }
+}
+@keyframes starTwinkle {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.95; }
+}
+@keyframes floatPlanet {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(8deg); }
+}
+@keyframes flyBat {
+  0% { left: -10%; transform: scale(0.6) translateY(0); opacity: 0; }
+  20% { opacity: 1; }
+  50% { transform: scale(1) translateY(-35px); }
+  80% { opacity: 1; }
+  100% { left: 110%; transform: scale(0.6) translateY(0); opacity: 0; }
+}
+@keyframes floatFirefly {
+  0%, 100% { transform: translate(0, 0) scale(0.8); opacity: 0.2; }
+  50% { transform: translate(40px, -60px) scale(1.3); opacity: 1; }
+}
+@keyframes rangoliPulseFade {
+  0%, 100% { opacity: 0.65; transform: translate(-50%, 0) scale(0.98); }
+  50% { opacity: 0.95; transform: translate(-50%, 0) scale(1.02); }
+}
+@keyframes floatDecoItem {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(5deg); }
+}
+
+/* --- THEME STYLES --- */
+body.diwali-mode {
+  background: linear-gradient(135deg, #fffcf0 0%, #faedd0 100%);
+  background-attachment: fixed;
+  --bg: transparent; --card: #ffffff; --txt: #3b2314; --p: #d97706; --p2: #b45309;
+  --border: #fde68a; --dark: #291507; --muted: #92400e;
+}
+body.diwali-mode .card, body.diwali-mode .stat {
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.2);
+  border: 1px solid #fde68a;
+}
+
+body.holi-mode {
+  --bg:#fdf2f8; --card:#ffffff; --txt:#1e1b4b; --p:#ec4899; --p2:#db2777;
+  --border:#fbcfe8; --dark:#31103f; --muted:#831843;
+}
+body.holi-mode .card, body.holi-mode .stat {
+  box-shadow: 0 6px 22px rgba(236, 72, 153, 0.22);
+}
+
+body.ocean-mode {
+  --bg:#030f26; --card:#0a2540; --txt:#e0f2fe; --p:#0284c7; --p2:#0369a1;
+  --border:#1e40af; --dark:#020617; --muted:#7dd3fc;
+}
+body.ocean-mode .card, body.ocean-mode .stat {
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.25);
+  border: 1px solid #1d4ed8;
+}
+
+body.summer-mode {
+  background: linear-gradient(180deg, #2b1055 0%, #7597de 35%, #b15383 65%, #ff7e5f 100%);
+  background-attachment: fixed;
+  --bg: transparent; --card: rgba(255, 243, 236, 0.95); --txt: #2b1055; --p: #ff6b4a; --p2: #e04823;
+  --border: #ffb7a1; --dark: #1f0b40; --muted: #78350f;
+}
+body.summer-mode .card, body.summer-mode .stat {
+  box-shadow: 0 4px 18px rgba(255, 126, 95, 0.35);
+  backdrop-filter: blur(5px);
+}
+
+body.halloween-mode {
+  --bg:#0f0f11; --card:#1c1917; --txt:#f5f5f4; --p:#ea580c; --p2:#c2410c;
+  --border:#44403c; --dark:#09090b; --muted:#a8a29e;
+}
+body.halloween-mode .card, body.halloween-mode .stat {
+  box-shadow: 0 4px 18px rgba(234, 88, 12, 0.2);
+}
+
+body.cosmic-mode {
+  background-color: #050515;
+  --bg: #050515; --card: #0f1129; --txt: #e2e8f0; --p: #7b2cbf; --p2: #9d4edd;
+  --border: #3c096c; --dark: #02020a; --muted: #94a3b8;
+}
+body.cosmic-mode .card, body.cosmic-mode .stat {
+  box-shadow: 0 4px 22px rgba(123, 44, 191, 0.35);
+  border: 1px solid rgba(123, 44, 191, 0.4);
+}
+
+/* --- RAKSHABANDHAN THEME --- */
+body.rakshabandhan-mode {
+  background: linear-gradient(135deg, #fffaf0 0%, #fff0f5 50%, #fff8e8 100%);
+  background-attachment: fixed;
+  --bg: transparent; --card: #ffffff; --txt: #3b1128; --p: #d946ef; --p2: #c026d3;
+  --border: #fbcfe8; --dark: #2e0822; --muted: #9d174d;
+}
+body.rakshabandhan-mode .card, body.rakshabandhan-mode .stat {
+  box-shadow: 0 6px 24px rgba(217, 70, 239, 0.18);
+  border: 1px solid #fbcfe8;
+}
+
+/* Top Banner Shimmer */
+.festive-banner {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 6px;
+  z-index: 2000; pointer-events: none; display: none;
+  background-size: 200% 200%;
+  animation: shimmerSweep 3s linear infinite;
+}
+body.diwali-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706, #f59e0b); box-shadow: 0 0 14px #f59e0b; }
+body.holi-mode .festive-banner { display: block; background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8, #ff4e50, #ff007f); box-shadow: 0 0 16px #ff007f; }
+body.ocean-mode .festive-banner { display: block; background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8); box-shadow: 0 0 16px #38bdf8; }
+body.summer-mode .festive-banner { display: block; background: linear-gradient(90deg, #2b1055, #ff7e5f, #ffd186, #ff7e5f); box-shadow: 0 0 16px #ff7e5f; }
+body.halloween-mode .festive-banner { display: block; background: linear-gradient(90deg, #ea580c, #a855f7, #22c55e, #ea580c); box-shadow: 0 0 14px #ea580c; }
+body.cosmic-mode .festive-banner { display: block; background: linear-gradient(90deg, #7b2cbf, #00b4d8, #e2e8f0, #7b2cbf); box-shadow: 0 0 16px #7b2cbf; }
+body.rakshabandhan-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #ec4899, #eab308, #d946ef, #f59e0b); box-shadow: 0 0 18px #d946ef; }
+
+/* THEME SPECIFIC DECORATIONS */
+.theme-element { display: none; pointer-events: none; position: fixed; z-index: 1001; }
+
+/* Diwali Theme Elements */
+body.diwali-mode .diwali-radial-glow {
+  display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.22) 0%, rgba(245, 158, 11, 0.05) 60%, transparent 80%);
+  animation: glowPulse 5s ease-in-out infinite; z-index: 0;
+}
+body.diwali-mode .diwali-rangoli-pattern {
+  display: block; position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.07;
+  background-image: radial-gradient(#d97706 2px, transparent 2px), radial-gradient(#d97706 2px, #fffcf0 2px);
+  background-size: 60px 60px; background-position: 0 0, 30px 30px;
+}
+body.diwali-mode .diwali-diya { display: block; position: fixed; bottom: 15px; font-size: 28px; animation: floatDiya 2.5s infinite ease-in-out; z-index: 1002; }
+body.diwali-mode .diwali-lantern { display: block; position: fixed; font-size: 34px; animation: swayLantern 3.5s infinite ease-in-out; transform-origin: top center; z-index: 1002; }
+body.diwali-mode .diwali-sparkle { display: block; position: fixed; font-size: 18px; animation: sparkleTwinkle 2s infinite ease-in-out; z-index: 1001; }
+body.diwali-mode .diwali-petal { display: block; position: fixed; font-size: 16px; animation: fallPetal 6s infinite linear; z-index: 1001; }
+body.diwali-mode .diwali-rangoli-circle {
+  display: block; position: fixed; top: 35%; left: 50%; transform: translate(-50%, -50%);
+  width: 450px; height: 450px; border: 2px dashed rgba(217, 119, 6, 0.25); border-radius: 50%;
+  animation: nebulaDrift 40s linear infinite; pointer-events: none; z-index: 0;
+}
+
+/* Rakshabandhan Elements */
+body.rakshabandhan-mode .festive-bg-gradient {
+  display: block; position: fixed; inset: 0; pointer-events: none; z-index: -1;
+  background: radial-gradient(circle at 50% 25%, rgba(245, 158, 11, 0.18) 0%, rgba(236, 72, 153, 0.12) 45%, transparent 75%);
+  animation: glowPulse 6s ease-in-out infinite;
+}
+body.rakshabandhan-mode .festive-faint-pattern {
+  display: block; position: fixed; inset: 0; pointer-events: none; z-index: -1; opacity: 0.08;
+  background-image: radial-gradient(#d946ef 3px, transparent 3px), radial-gradient(#f59e0b 3px, #fffaf0 3px);
+  background-size: 80px 80px; background-position: 0 0, 40px 40px;
+}
+body.rakshabandhan-mode .background-rangoli-watermark {
+  display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 85vw; height: 85vw; max-width: 800px; max-height: 800px;
+  pointer-events: none; z-index: -1; opacity: 0.14;
+  animation: nebulaDrift 60s linear infinite;
+}
+body.rakshabandhan-mode .festive-sparkle { display: block; position: fixed; font-size: 18px; animation: sparkleTwinkle 2.2s infinite ease-in-out; z-index: 1001; }
+body.rakshabandhan-mode .festive-petal { display: block; position: fixed; font-size: 16px; animation: fallPetal 5.5s infinite linear; z-index: 1001; }
+body.rakshabandhan-mode .festive-diya { display: block; position: fixed; bottom: 20px; font-size: 28px; animation: floatDiya 2.8s infinite ease-in-out; z-index: 1002; }
+body.rakshabandhan-mode .festive-lotus { display: block; position: fixed; font-size: 32px; animation: floatDecoItem 3.2s infinite ease-in-out; z-index: 1001; }
+
+/* Ocean Elements */
+body.ocean-mode .ocean-wave {
+  display: block; position: fixed; bottom: 0; left: 0; width: 200%; height: 80px;
+  background: repeating-linear-gradient(90deg, rgba(56, 189, 248, 0.1) 0px, rgba(56, 189, 248, 0.1) 100px, transparent 100px, transparent 200px);
+  animation: floatWave 12s linear infinite; z-index: 999;
+}
+body.ocean-mode .ocean-bubble { display: block; position: fixed; bottom: -20px; background: rgba(125, 211, 252, 0.35); border-radius: 50%; animation: floatBubble 6s infinite ease-in; }
+
+/* Summer Elements */
+body.summer-mode .sunset-sun-glow {
+  display: block; position: fixed; bottom: -50px; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(254, 209, 134, 0.6) 0%, rgba(255, 126, 95, 0) 70%);
+  filter: blur(40px); animation: sunsetPulse 8s ease-in-out infinite alternate; z-index: 0;
+}
+body.summer-mode .palm-tree { display: block; font-size: 50px; animation: swayPalm 4s infinite ease-in-out; }
+.palm-left { bottom: 20px; left: 15px; transform-origin: bottom center; }
+.palm-right { bottom: 20px; right: 15px; transform-origin: bottom center; }
+body.summer-mode .summer-cloud { display: block; position: fixed; font-size: 40px; opacity: 0.8; animation: floatWave 25s infinite linear reverse; }
+.cloud1 { top: 15%; animation-duration: 30s; }
+.cloud2 { top: 25%; animation-duration: 20s; animation-delay: -10s; }
+
+/* Cosmic Nebula Elements */
+body.cosmic-mode .cosmic-nebula-bg {
+  display: block; position: fixed; inset: -30%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(123, 44, 191, 0.45) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(60, 9, 108, 0.55) 0%, transparent 60%),
+    radial-gradient(circle at 50% 80%, rgba(0, 180, 216, 0.35) 0%, transparent 50%);
+  filter: blur(45px); animation: nebulaDrift 22s linear infinite alternate; z-index: 0;
+}
+body.cosmic-mode .cosmic-stars {
+  display: block; position: fixed; inset: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0, 0, 0, 0)),
+    radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0, 0, 0, 0));
+  background-repeat: repeat; background-size: 200px 200px;
+  animation: starTwinkle 4s ease-in-out infinite alternate; opacity: 0.75; z-index: 0;
+}
+body.cosmic-mode .cosmic-planet { display: block; font-size: 38px; animation: floatPlanet 5s ease-in-out infinite; }
+.planet-left { top: 90px; left: 20px; }
+.planet-right { top: 120px; right: 20px; }
+
+/* Halloween Elements */
+body.halloween-mode .bat { display: block; font-size: 2rem; animation: flyBat 8s linear infinite; }
+.bat1 { top: 20%; animation-delay: 0s; }
+.bat2 { top: 50%; animation-delay: 3s; }
+body.halloween-mode .halloween-moon { display: block; position: fixed; top: 40px; right: 40px; font-size: 50px; filter: drop-shadow(0 0 20px rgba(234, 88, 12, 0.6)); z-index: 0; }
+body.halloween-mode .halloween-pumpkin { display: block; position: fixed; bottom: 20px; left: 20px; font-size: 40px; z-index: 1001; }
+body.halloween-mode .halloween-firefly { display: block; position: fixed; width: 6px; height: 6px; background: #fb923c; border-radius: 50%; box-shadow: 0 0 8px #ea580c; animation: floatFirefly 4s infinite ease-in-out; }
+body.halloween-mode .halloween-fog { display: block; position: fixed; bottom: 0; left: 0; width: 100%; height: 120px; background: linear-gradient(0deg, rgba(30, 30, 35, 0.8), transparent); pointer-events: none; z-index: 999; }
+
+/* DYNAMIC HERO & BAG ICONS */
+.hero-art-icon { display: none; }
+body:not(.halloween-mode):not(.diwali-mode):not(.holi-mode):not(.ocean-mode):not(.summer-mode):not(.cosmic-mode):not(.rakshabandhan-mode) .default-bag-icon { display: inline-block; }
+body.halloween-mode .pumpkin-basket-icon { display: inline-block; }
+body.diwali-mode .kaju-katli-icon { display: inline-block; }
+body.holi-mode .holi-gulal-icon { display: inline-block; }
+body.ocean-mode .ocean-shell-icon { display: inline-block; }
+body.summer-mode .summer-sun-icon { display: inline-block; }
+body.cosmic-mode .cosmic-star-icon { display: inline-block; }
+body.rakshabandhan-mode .festive-bag-icon { display: inline-block; }
+
+/* CANVAS FOR DIWALI FIREWORKS & HOLI POWDER SPLASHES */
+#festival-canvas {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none; z-index: 1999; display: none;
+}
+body.diwali-mode #festival-canvas, body.holi-mode #festival-canvas, body.rakshabandhan-mode #festival-canvas { display: block; }
+
+#fireworks-launcher {
+  position: fixed; bottom: 0; left: 0; width: 100%; height: 48px;
+  background: linear-gradient(0deg, rgba(245, 158, 11, 0.95), rgba(245, 158, 11, 0.2));
+  color: #fff; display: none; align-items: center; justify-content: center;
+  font-weight: bold; font-size: 14px; cursor: pointer; z-index: 2000;
+  box-shadow: 0 -4px 15px rgba(245, 158, 11, 0.4); user-select: none;
+}
+body.diwali-mode #fireworks-launcher, body.rakshabandhan-mode #fireworks-launcher { display: flex; }
 
 /* Header & Nav */
 .top{position:sticky;top:0;z-index:1000;background:var(--dark);color:#fff;padding:10px 4%;display:flex;align-items:center;gap:13px;box-shadow:0 2px 10px #0003}
 .menu-dots{background:transparent;border:none;color:#fff;font-size:24px;padding:0 8px;cursor:pointer;line-height:1}
-.brand{font-size:26px;font-weight:900;color:#ffd43b;white-space:nowrap;cursor:pointer}.brand small{display:block;font-size:9px;color:#fff;letter-spacing:2px;text-align:center}.search{flex:1;display:flex;min-width:130px}.search input{width:100%;border:0;outline:0;padding:12px 14px;border-radius:8px 0 0 8px}.search button{border:0;background:#ffb703;padding:0 17px;border-radius:0 8px 8px 0}.nav{display:flex;gap:7px}.nav button{border:0;background:#ffffff14;color:#fff;padding:9px 11px;border-radius:7px}.badge{background:#ef4444;border-radius:999px;padding:2px 6px;font-size:11px}.subnav{background:#fff;padding:9px 4%;display:flex;gap:10px;overflow:auto;border-bottom:1px solid var(--border)}.subnav button{white-space:nowrap;border:0;background:#f1f5f9;padding:8px 13px;border-radius:20px}.subnav button.active,.subnav button:hover{background:var(--p);color:#fff}
+.brand{font-size:26px;font-weight:900;color:#ffd43b;white-space:nowrap;cursor:pointer;position:relative;z-index:1005;}.brand small{display:block;font-size:9px;color:#fff;letter-spacing:2px;text-align:center}
+.search{flex:1;display:flex;min-width:130px}
+.search input{width:100%;border:0;outline:0;padding:12px 14px;border-radius:8px 0 0 8px}
+.search button{border:0;background:#ffb703;padding:0 17px;border-radius:0 8px 8px 0}
+.nav{display:flex;gap:7px}
+.nav button{border:0;background:#ffffff14;color:#fff;padding:9px 11px;border-radius:7px}
+.badge{background:#ef4444;border-radius:999px;padding:2px 6px;font-size:11px}
+.subnav{background:var(--card);padding:9px 4%;display:flex;gap:10px;overflow:auto;border-bottom:1px solid var(--border)}
+.subnav button{white-space:nowrap;border:0;background:#ffffff22;color:var(--txt);padding:8px 13px;border-radius:20px;border:1px solid var(--border)}
+.subnav button.active,.subnav button:hover{background:var(--p);color:#fff}
 
-/* Sidebar / Menu Drawer */
-.drawer-bg{position:fixed;inset:0;background:#0008;z-index:2500;display:none}
-.drawer{position:fixed;top:0;left:0;bottom:0;width:280px;background:#fff;z-index:2600;padding:20px;display:flex;flex-direction:column;gap:15px;box-shadow:4px 0 15px #0003;transform:translateX(-100%);transition:transform .25s ease}
+/* Sidebar Drawer */
+.drawer-bg{position:fixed;inset:0;background:#0008;z-index:2500;display:none;backdrop-filter:blur(2px);}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:280px;background:var(--card);z-index:2600;padding:20px;display:flex;flex-direction:column;gap:15px;box-shadow:4px 0 15px #0003;transform:translateX(-100%);transition:transform .25s ease}
 .drawer.open{transform:translateX(0)}
 .drawer-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding-bottom:12px}
-.drawer-menu{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.drawer-menu button{background:none;border:none;text-align:left;padding:12px 14px;border-radius:8px;font-size:15px;font-weight:bold;color:var(--txt);display:flex;align-items:center;gap:10px}
-.drawer-menu button:hover{background:#f1f5f9;color:var(--p)}
+.drawer-menu{display:flex;flex-direction:column;gap:4px;margin-top:10px;overflow-y:auto;max-height:calc(100vh - 100px);}
+.drawer-section-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin:12px 0 4px 14px;font-weight:bold;}
+.drawer-menu button{background:none;border:none;text-align:left;padding:10px 14px;border-radius:8px;font-size:14px;font-weight:bold;color:var(--txt);display:flex;align-items:center;gap:10px;width:100%}
+.drawer-menu button:hover{background:#ffffff22;color:var(--p)}
 
-.hero{margin:18px 4%;border-radius:18px;min-height:270px;padding:38px;background:linear-gradient(120deg,#dbeafe,#fff7ed);display:flex;justify-content:space-between;align-items:center;overflow:hidden}.hero h1{font-size:43px;line-height:1.05;margin-bottom:12px}.hero p{color:#536173;max-width:620px}.hero-actions{margin-top:20px;display:flex;gap:10px}.primary,.secondary,.danger{border:0;border-radius:99px;padding:11px 17px;font-weight:bold}.primary{background:var(--p);color:#fff}.primary:hover{background:var(--p2)}.secondary{background:#fff;border:1px solid var(--border)}.danger{background:#fee2e2;color:#b91c1c}.hero-art{font-size:125px;transform:rotate(-7deg)}
-.wrap{margin:0 4% 35px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 4% 20px}.stat{background:#fff;padding:17px;border-radius:13px;box-shadow:0 2px 10px #0000000b}.stat b{display:block;font-size:27px;color:var(--p)}.stat span{color:var(--muted);font-size:13px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 13px}.section-head h2{font-size:22px}.category-row{display:flex;gap:10px;overflow:auto;padding:3px 0 8px}.cat{border:1px solid var(--border);background:#fff;padding:11px 16px;border-radius:99px;white-space:nowrap}.cat.active{background:var(--p);color:#fff;border-color:var(--p)}
-.toolbar{display:flex;gap:8px;align-items:center}.toolbar input,.toolbar select{padding:9px;border:1px solid var(--border);border-radius:8px;background:#fff}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:15px}.card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px #0001;position:relative;transition:.18s}.card:hover{transform:translateY(-4px);box-shadow:0 8px 22px #0002}.pic{height:185px;background:#eef2f7;display:flex;align-items:center;justify-content:center;font-size:76px;position:relative;overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover;display:block}.fallbackEmoji{display:flex;align-items:center;justify-content:center;width:100%;height:100%}.wish{position:absolute;right:9px;top:9px;width:35px;height:35px;border:0;border-radius:50%;background:#fff;font-size:18px}.cardbody{padding:13px}.cardbody h3{font-size:16px;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.seller{font-size:11px;color:var(--muted)}.price{font-size:20px;font-weight:900;margin-top:6px}.old{text-decoration:line-through;color:#9ca3af;font-size:12px;margin-left:4px}.off{color:var(--green);font-size:12px;font-weight:bold}.rating{margin:7px 0;font-size:12px;color:#555}.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}.card-actions button{padding:9px;border-radius:7px;border:0}.add{background:var(--p);color:#fff}.view{background:#eef4ff;color:#1557c0}.empty{grid-column:1/-1;background:#fff;padding:50px;text-align:center;border-radius:12px;color:var(--muted)}
-.modalbg{position:fixed;inset:0;background:#0008;z-index:2000;display:none;align-items:center;justify-content:center;padding:14px}.modal{background:#fff;width:min(650px,100%);max-height:92vh;overflow:auto;border-radius:17px;padding:22px;position:relative}.modal.small{width:min(460px,100%)}.close{position:absolute;right:14px;top:14px;border:0;background:#eee;width:32px;height:32px;border-radius:50%}.modal h2{margin-bottom:15px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.formgrid .full{grid-column:1/-1}.modal input,.modal select,.modal textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;margin:4px 0;outline:none}.modal textarea{min-height:85px;resize:vertical}.modal label{font-size:12px;color:var(--muted);display:block;margin-top:6px}.product-detail{display:grid;grid-template-columns:1fr 1fr;gap:20px}.detailpic{background:#eef2f7;border-radius:13px;min-height:300px;display:flex;align-items:center;justify-content:center;font-size:130px;overflow:hidden}.detailpic img{width:100%;height:100%;min-height:300px;object-fit:contain}.image-preview{width:100%;height:140px;border:2px dashed #cbd5e1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:6px;background:#f8fafc}.image-preview img{max-width:100%;max-height:100%;object-fit:contain}.detailprice{font-size:30px;font-weight:900;margin:12px 0}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{background:#f1f5f9;padding:7px 10px;border-radius:7px;font-size:12px}.cartrow{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--border);padding:13px 0}.cartemoji{font-size:45px}.cartinfo{flex:1}.qty button{width:28px;height:28px;border:1px solid var(--border);background:#fff}.totalbox{background:#f8fafc;padding:15px;border-radius:10px;margin-top:14px}.totalbox b{font-size:23px}.order{background:#fff;border:1px solid var(--border);border-radius:10px;padding:13px;margin:9px 0}.orderhead{display:flex;justify-content:space-between;gap:8px}.success{background:#dcfce7;color:#166534;padding:10px;border-radius:9px;margin-bottom:10px}.notice{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 17px;border-radius:10px;z-index:3000;box-shadow:0 4px 15px #0004}
-footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin-top:35px}
-.dark{--bg:#0f172a;--card:#172033;--txt:#f1f5f9;--muted:#a8b3c4;--border:#334155}.dark .card,.dark .stat,.dark .modal,.dark .subnav,.dark .cat,.dark .toolbar input,.dark .toolbar select,.dark .secondary,.dark .cartrow,.dark .drawer{background:#172033;color:#f1f5f9}.dark .pic,.dark .detailpic{background:#243047}.dark .subnav{border-color:#334155}.dark .hero{background:linear-gradient(120deg,#1e3a5f,#3b2f20)}.dark .drawer-menu button{color:#f1f5f9}.dark .drawer-menu button:hover{background:#243047}
-@media(max-width:800px){.top{flex-wrap:wrap;padding:9px 3%}.brand{font-size:22px}.search{order:3;flex-basis:100%}.nav button{padding:8px}.hero{margin:12px 3%;padding:25px;min-height:210px}.hero h1{font-size:30px}.hero-art{font-size:75px}.wrap,.stats{margin-left:3%;margin-right:3%}.stats{grid-template-columns:1fr 1fr}.product-detail{grid-template-columns:1fr}.detailpic{min-height:220px;font-size:95px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pic{height:145px;font-size:57px}.toolbar{width:100%}.toolbar select{flex:1}}
+.hero{margin:18px 4%;border-radius:18px;min-height:270px;padding:38px;background:linear-gradient(120deg,#dbeafe,#fff7ed);display:flex;justify-content:space-between;align-items:center;overflow:hidden;position:relative;}
+.hero h1{font-size:43px;line-height:1.05;margin-bottom:12px}
+.hero p{color:#536173;max-width:620px}
+.hero-actions{margin-top:20px;display:flex;gap:10px}
+.primary,.secondary,.danger,.admin-btn{border:0;border-radius:99px;padding:11px 17px;font-weight:bold}
+.primary{background:var(--p);color:#fff}
+.primary:hover{background:var(--p2);box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+.secondary{background:var(--card);color:var(--txt);border:1px solid var(--border)}
+.danger{background:#fee2e2;color:#b91c1c}
+.admin-btn{background:var(--gold);color:#000}
+.hero-art{font-size:125px;animation: floatHero 4s ease-in-out infinite;}
+
+/* Rakshabandhan Hero Theme Overrides & Rangoli Container */
+body.rakshabandhan-mode .hero {
+  background: linear-gradient(135deg, rgba(255, 248, 220, 0.95), rgba(255, 228, 230, 0.95));
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 10px 30px rgba(217, 70, 239, 0.15);
+  backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+}
+body.rakshabandhan-mode .hero h1 { color: #831843; }
+body.rakshabandhan-mode .hero p { color: #9d174d; }
+body.rakshabandhan-mode .hero-glow-bg {
+  display: block; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 100%; height: 100%; pointer-events: none; z-index: 0;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.25) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 80%);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* Bottom-center Rangoli Container inside Hero Section */
+.hero-rangoli-container {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 160px;
+  pointer-events: none;
+  z-index: 1;
+  animation: rangoliPulseFade 4s ease-in-out infinite;
+}
+body.rakshabandhan-mode .hero-rangoli-container {
+  display: block;
+}
+.rangoli-circle-svg {
+  width: 100%;
+  height: 100%;
+  animation: nebulaDrift 30s linear infinite;
+  filter: drop-shadow(0 0 8px rgba(236, 72, 153, 0.5));
+}
+
+body.summer-mode .hero { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.3); }
+body.summer-mode .hero h1 { color: #fff; }
+body.summer-mode .hero p { color: #fff3ec; }
+body.cosmic-mode .hero { background: linear-gradient(120deg, #10002b, #240046); border: 1px solid #3c096c; }
+body.cosmic-mode .hero h1 { color: #e2e8f0; }
+body.cosmic-mode .hero p { color: #94a3b8; }
+
+.wrap{margin:0 4% 35px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 4% 20px}
+.stat{background:var(--card);padding:17px;border-radius:13px;box-shadow:0 2px 10px #0000000b;transition:transform 0.2s ease}
+.stat:hover{transform:translateY(-2px);}
+.stat b{display:block;font-size:27px;color:var(--p)}
+.stat span{color:var(--muted);font-size:13px}
+.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 13px}
+.section-head h2{font-size:22px}
+.category-row{display:flex;gap:10px;overflow:auto;padding:3px 0 8px}
+.cat{border:1px solid var(--border);background:var(--card);color:var(--txt);padding:11px 16px;border-radius:99px;white-space:nowrap}
+.cat.active{background:var(--p);color:#fff;border-color:var(--p)}
+.toolbar{display:flex;gap:8px;align-items:center}
+.toolbar input,.toolbar select{padding:9px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--txt)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:15px}
+.card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 2px 10px #0001;position:relative;transition:transform 0.22s ease, box-shadow 0.22s ease;animation: popIn 0.3s ease-out;}
+.card:hover{transform:translateY(-6px);box-shadow:0 10px 25px rgba(0,0,0,0.15)}
+.pic{height:185px;background:#eef2f7;display:flex;align-items:center;justify-content:center;font-size:76px;position:relative;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.3s ease}
+.card:hover .pic img{transform:scale(1.05)}
+.fallbackEmoji{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+.wish{position:absolute;right:9px;top:9px;width:35px;height:35px;border:0;border-radius:50%;background:#fff;font-size:18px}
+.cardbody{padding:13px}
+.cardbody h3{font-size:16px;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seller{font-size:11px;color:var(--muted)}
+.price{font-size:20px;font-weight:900;margin-top:6px}
+.old{text-decoration:line-through;color:#9ca3af;font-size:12px;margin-left:4px}
+.off{color:var(--green);font-size:12px;font-weight:bold}
+.rating{margin:7px 0;font-size:12px;color:var(--muted)}
+.card-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.card-actions button{padding:9px;border-radius:7px;border:0}
+.add{background:var(--p);color:#fff}
+.view{background:rgba(40,116,240,0.15);color:var(--p)}
+.empty{grid-column:1/-1;background:var(--card);padding:50px;text-align:center;border-radius:12px;color:var(--muted)}
+
+.modalbg{position:fixed;inset:0;background:#0008;z-index:3000;display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(2px);}
+.modal{background:var(--card);color:var(--txt);width:min(650px,100%);max-height:92vh;overflow:auto;border-radius:17px;padding:22px;position:relative;animation:popIn 0.25s ease-out;}
+.modal.small{width:min(460px,100%)}
+.modal.large{width:min(900px,100%)}
+.close{position:absolute;right:14px;top:14px;border:0;background:#eee;width:32px;height:32px;border-radius:50%;cursor:pointer;}
+.modal h2{margin-bottom:15px}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.formgrid .full{grid-column:1/-1}
+.modal input,.modal select,.modal textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;margin:4px 0;outline:none;background:var(--card);color:var(--txt)}
+.modal textarea{min-height:85px;resize:vertical}
+.modal label{font-size:12px;color:var(--muted);display:block;margin-top:6px}
+.product-detail{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.detailpic{background:#eef2f7;border-radius:13px;min-height:300px;display:flex;align-items:center;justify-content:center;font-size:130px;overflow:hidden}
+.detailpic img{width:100%;height:100%;min-height:300px;object-fit:contain}
+.image-preview{width:100%;height:140px;border:2px dashed #cbd5e1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:6px;background:#f8fafc}
+.image-preview img{max-width:100%;max-height:100%;object-fit:contain}
+.detailprice{font-size:30px;font-weight:900;margin:12px 0}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.chip{background:#ffffff22;border:1px solid var(--border);padding:7px 10px;border-radius:7px;font-size:12px}
+.cartrow{display:flex;gap:12px;align-items:center;border-bottom:1px solid var(--border);padding:13px 0}
+.cartemoji{font-size:45px}
+.cartinfo{flex:1}
+.qty button{width:28px;height:28px;border:1px solid var(--border);background:var(--card);color:var(--txt)}
+.totalbox{background:var(--bg);padding:15px;border-radius:10px;margin-top:14px}
+.totalbox b{font-size:23px}
+.order{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:13px;margin:9px 0}
+.orderhead{display:flex;justify-content:space-between;gap:8px}
+.success{background:#dcfce7;color:#166534;padding:10px;border-radius:99px;margin-bottom:10px;text-align:center}
+.notice{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 17px;border-radius:10px;z-index:4000;box-shadow:0 4px 15px #0004;animation:popIn 0.2s ease-out;}
+
+/* Admin Panel */
+.admin-tab-bar{display:flex;gap:10px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:15px}
+.admin-tab-bar button{background:none;border:none;padding:8px 14px;border-radius:6px;font-weight:bold;color:var(--muted)}
+.admin-tab-bar button.active{background:var(--p);color:#fff}
+.admin-table{width:100%;border-collapse:collapse;margin-top:10px}
+.admin-table th,.admin-table td{border:1px solid var(--border);padding:10px;text-align:left;font-size:13px}
+.admin-table th{background:var(--bg)}
+
+.theme-selector-box{background:var(--bg);border:1px solid var(--border);padding:14px;border-radius:10px;margin-bottom:15px}
+.theme-options{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
+.theme-options button{padding:6px 12px;border-radius:6px;font-size:12px;border:1px solid var(--border);background:var(--card);color:var(--txt);}
+
+footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin-top:35px;padding-bottom: 70px;position:relative;z-index:10;}
+.dark{--bg:#0f172a;--card:#172033;--txt:#f1f5f9;--muted:#a8b3c4;--border:#334155}
+.dark .card,.dark .stat,.dark .modal,.dark .subnav,.dark .cat,.dark .toolbar input,.dark .toolbar select,.dark .secondary,.dark .cartrow,.dark .drawer,.dark .admin-table th,.dark .theme-selector-box{background:#172033;color:#f1f5f9}
+.dark .pic,.dark .detailpic{background:#243047}
+.dark .subnav{border-color:#334155}
+.dark .hero{background:linear-gradient(120deg,#1e3a5f,#3b2f20)}
+.dark .drawer-menu button{color:#f1f5f9}
+.dark .drawer-menu button:hover{background:#243047}
+
+@media(max-width:800px){
+  .top{flex-wrap:wrap;padding:9px 3%}
+  .brand{font-size:22px}
+  .search{order:3;flex-basis:100%}
+  .nav button{padding:8px}
+  .hero{margin:12px 3%;padding:25px;min-height:210px}
+  .hero h1{font-size:30px}
+  .hero-art{font-size:75px}
+  .wrap,.stats{margin-left:3%;margin-right:3%}
+  .stats{grid-template-columns:1fr 1fr}
+  .product-detail{grid-template-columns:1fr}
+  .detailpic{min-height:220px;font-size:95px}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pic{height:145px;font-size:57px}
+  .toolbar{width:100%}
+  .toolbar select{flex:1}
+}
 </style>
 </head>
 <body>
 
+<div class="festive-banner"></div>
+
+<!-- Theme Floating Elements -->
+<!-- Diwali Elements -->
+<div class="theme-element diwali-radial-glow"></div>
+<div class="theme-element diwali-rangoli-pattern"></div>
+<div class="theme-element diwali-rangoli-circle"></div>
+<div class="theme-element diwali-diya" style="left: 10%;">🪔</div>
+<div class="theme-element diwali-diya" style="left: 30%;">🪔</div>
+<div class="theme-element diwali-diya" style="left: 50%;">🪔</div>
+<div class="theme-element diwali-diya" style="left: 70%;">🪔</div>
+<div class="theme-element diwali-diya" style="left: 90%;">🪔</div>
+<div class="theme-element diwali-lantern" style="top: 15px; left: 5%;">🏮</div>
+<div class="theme-element diwali-lantern" style="top: 15px; left: 22%;">🏮</div>
+<div class="theme-element diwali-lantern" style="top: 15px; left: 45%;">🏮</div>
+<div class="theme-element diwali-lantern" style="top: 15px; left: 70%;">🏮</div>
+<div class="theme-element diwali-lantern" style="top: 15px; left: 88%;">🏮</div>
+<div class="theme-element diwali-sparkle" style="top: 25%; left: 15%;">✨</div>
+<div class="theme-element diwali-sparkle" style="top: 45%; right: 18%;">✨</div>
+<div class="theme-element diwali-sparkle" style="top: 65%; left: 25%;">✨</div>
+<div class="theme-element diwali-petal" style="left: 10%; animation-delay: 0s;">🌸</div>
+<div class="theme-element diwali-petal" style="left: 35%; animation-delay: 2s;">🌸</div>
+<div class="theme-element diwali-petal" style="left: 65%; animation-delay: 1s;">🌸</div>
+<div class="theme-element diwali-petal" style="left: 85%; animation-delay: 3s;">🌸</div>
+
+<!-- Rakshabandhan Elements[cite: 1] -->
+<div class="theme-element festive-bg-gradient"></div>
+<div class="theme-element festive-faint-pattern"></div>
+<div class="theme-element background-rangoli-watermark">
+  <svg class="rangoli-circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#ec4899" opacity="0.9">
+      <ellipse cx="50" cy="18" rx="6" ry="14" />
+      <ellipse cx="50" cy="82" rx="6" ry="14" />
+      <ellipse cx="18" cy="50" rx="14" ry="6" />
+      <ellipse cx="82" cy="50" rx="14" ry="6" />
+      <ellipse cx="27" cy="27" rx="10" ry="6" transform="rotate(-45 27 27)" />
+      <ellipse cx="73" cy="27" rx="10" ry="6" transform="rotate(45 73 27)" />
+      <ellipse cx="27" cy="73" rx="10" ry="6" transform="rotate(45 27 73)" />
+      <ellipse cx="73" cy="73" rx="10" ry="6" transform="rotate(-45 73 73)" />
+    </g>
+    <g fill="#f97316" opacity="0.95">
+      <path d="M50 32 Q54 42 50 50 Q46 42 50 32 Z" />
+      <path d="M50 68 Q54 58 50 50 Q46 58 50 68 Z" />
+      <path d="M32 50 Q42 54 50 50 Q42 46 32 50 Z" />
+      <path d="M68 50 Q58 54 50 50 Q58 46 68 50 Z" />
+      <path d="M37 37 Q45 43 50 50 Q43 45 37 37 Z" />
+      <path d="M63 37 Q55 43 50 50 Q55 45 63 37 Z" />
+      <path d="M37 63 Q45 57 50 50 Q43 55 37 63 Z" />
+      <path d="M63 63 Q55 57 50 50 Q55 55 63 63 Z" />
+    </g>
+    <circle cx="50" cy="35" r="3" fill="#a855f7" />
+    <circle cx="50" cy="65" r="3" fill="#a855f7" />
+    <circle cx="35" cy="50" r="3" fill="#a855f7" />
+    <circle cx="65" cy="50" r="3" fill="#a855f7" />
+    <circle cx="50" cy="50" r="7" fill="#f59e0b" />
+    <circle cx="50" cy="24" r="1.5" fill="#facc15" />
+    <circle cx="50" cy="76" r="1.5" fill="#facc15" />
+    <circle cx="24" cy="50" r="1.5" fill="#facc15" />
+    <circle cx="76" cy="50" r="1.5" fill="#facc15" />
+    <circle cx="33" cy="33" r="1.5" fill="#facc15" />
+    <circle cx="67" cy="33" r="1.5" fill="#facc15" />
+    <circle cx="33" cy="67" r="1.5" fill="#facc15" />
+    <circle cx="67" cy="67" r="1.5" fill="#facc15" />
+    <circle cx="50" cy="10" r="1" fill="#ffffff" />
+    <circle cx="50" cy="90" r="1" fill="#ffffff" />
+    <circle cx="10" cy="50" r="1" fill="#ffffff" />
+    <circle cx="90" cy="50" r="1" fill="#ffffff" />
+    <circle cx="20" cy="20" r="1" fill="#ffffff" />
+    <circle cx="80" cy="20" r="1" fill="#ffffff" />
+    <circle cx="20" cy="80" r="1" fill="#ffffff" />
+    <circle cx="80" cy="80" r="1" fill="#ffffff" />
+    <circle cx="50" cy="50" r="3" fill="#ffffff" />
+    <circle cx="50" cy="50" r="1.2" fill="#ec4899" />
+  </svg>
+</div>
+<div class="theme-element festive-sparkle" style="top: 20%; left: 12%;">✨</div>
+<div class="theme-element festive-sparkle" style="top: 40%; right: 15%;">✨</div>
+<div class="theme-element festive-sparkle" style="top: 70%; left: 22%;">✨</div>
+<div class="theme-element festive-petal" style="left: 8%; animation-delay: 0s;">🌸</div>
+<div class="theme-element festive-petal" style="left: 32%; animation-delay: 1.5s;">🌸</div>
+<div class="theme-element festive-petal" style="left: 68%; animation-delay: 0.8s;">🌸</div>
+<div class="theme-element festive-petal" style="left: 90%; animation-delay: 2.5s;">🌸</div>
+<div class="theme-element festive-diya" style="left: 15%;">🪔</div>
+<div class="theme-element festive-diya" style="left: 45%;">🪔</div>
+<div class="theme-element festive-diya" style="left: 85%;">🪔</div>
+<div class="theme-element festive-lotus" style="top: 18%; left: 5%;">🪷</div>
+<div class="theme-element festive-lotus" style="top: 22%; right: 7%;">🪷</div>
+
+<!-- Ocean Elements -->
+<div class="theme-element ocean-wave"></div>
+<div class="theme-element ocean-bubble" style="left: 10%; width: 15px; height: 15px; animation-duration: 5s;"></div>
+<div class="theme-element ocean-bubble" style="left: 30%; width: 25px; height: 25px; animation-duration: 7s; animation-delay: 1s;"></div>
+<div class="theme-element ocean-bubble" style="left: 60%; width: 12px; height: 12px; animation-duration: 4.5s; animation-delay: 2s;"></div>
+<div class="theme-element ocean-bubble" style="left: 80%; width: 20px; height: 20px; animation-duration: 8s; animation-delay: 0.5s;"></div>
+
+<!-- Summer Elements -->
+<div class="theme-element sunset-sun-glow"></div>
+<div class="theme-element palm-tree palm-left">🌴</div>
+<div class="theme-element palm-tree palm-right">🌴</div>
+<div class="theme-element summer-cloud cloud1">☁️</div>
+<div class="theme-element summer-cloud cloud2">⛅</div>
+
+<!-- Cosmic Nebula Elements -->
+<div class="theme-element cosmic-nebula-bg"></div>
+<div class="theme-element cosmic-stars"></div>
+<div class="theme-element cosmic-planet planet-left">🪐</div>
+<div class="theme-element cosmic-planet planet-right">🌌</div>
+
+<!-- Halloween Elements -->
+<div class="theme-element bat bat1">🦇</div>
+<div class="theme-element bat bat2">🦇</div>
+<div class="theme-element halloween-moon">🌕</div>
+<div class="theme-element halloween-pumpkin">🎃</div>
+<div class="theme-element halloween-firefly" style="top: 30%; left: 20%; animation-delay: 0s;"></div>
+<div class="theme-element halloween-firefly" style="top: 50%; left: 70%; animation-delay: 1.5s;"></div>
+<div class="theme-element halloween-firefly" style="top: 70%; left: 40%; animation-delay: 0.7s;"></div>
+<div class="theme-element halloween-fog"></div>
+
+<!-- Dynamic Canvas for Diwali Fireworks & Holi Splash Engine -->
+<canvas id="festival-canvas"></canvas>
+
+<!-- Diwali / Rakshabandhan Launcher Bar -->
+<div id="fireworks-launcher" onclick="launchFirework(event)">
+  🎆 Click anywhere on this bottom launcher bar to set off festive fireworks! 🎆
+</div>
+
 <header class="top">
-  <!-- Three Dot Menu Button -->
   <button class="menu-dots" onclick="toggleDrawer()" title="Menu">⋮</button>
   <div class="brand" onclick="goHome()">ShopX<small>MARKETPLACE</small></div>
   <div class="search"><input id="search" placeholder="Search products, brands and categories"><button onclick="render()">🔍</button></div>
   <div class="nav">
+    <button id="adminHeaderBtn" class="admin-btn hidden" onclick="openAdminPanel()">⚙️ Admin</button>
     <button onclick="openAccount()">👤 <span id="accountLabel">Sign in</span></button>
     <button onclick="openWishlist()">❤️ <span id="wishCount">0</span></button>
-    <button onclick="openCart()">🛒 <span id="cartCount" class="badge">0</span></button>
+    <button onclick="openCart()">
+      <span class="hero-art-icon default-bag-icon">🛒</span>
+      <span class="hero-art-icon pumpkin-basket-icon">🎃</span>
+      <span class="hero-art-icon kaju-katli-icon">🪔</span>
+      <span class="hero-art-icon holi-gulal-icon">🎨</span>
+      <span class="hero-art-icon ocean-shell-icon">🌊</span>
+      <span class="hero-art-icon summer-sun-icon">🌅</span>
+      <span class="hero-art-icon cosmic-star-icon">✨</span>
+      <span class="hero-art-icon festive-bag-icon">🪷</span>
+      <span id="cartCount" class="badge">0</span>
+    </button>
   </div>
 </header>
 
@@ -52,14 +659,22 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <div class="drawer-bg" id="drawerBg" onclick="toggleDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-header">
-    <h3>Menu</h3>
+    <h3>Main Menu</h3>
     <button class="close" onclick="toggleDrawer()">×</button>
   </div>
   <div class="drawer-menu">
+    <button id="adminDrawerBtn" class="hidden" style="color:var(--gold);" onclick="toggleDrawer(); openAdminPanel();">⚙️ Admin Panel</button>
+    
+    <div class="drawer-section-title">Company</div>
     <button onclick="toggleDrawer(); openModal('about');">ℹ️ About Us</button>
     <button onclick="toggleDrawer(); openModal('contact');">📞 Contact Us</button>
     <button onclick="toggleDrawer(); openModal('bug');">🐛 Report a Bug</button>
     <button onclick="toggleDrawer(); openModal('sell');">➕ Sell a Product</button>
+    
+    <div class="drawer-section-title">Customer</div>
+    <button onclick="toggleDrawer(); openModal('refund');">🔄 Refund & Cancellation</button>
+    <button onclick="toggleDrawer(); openModal('privacy');">🔒 Policy & Privacy</button>
+    <button onclick="toggleDrawer(); openModal('terms');">📄 Terms & Conditions</button>
     <button onclick="toggleDrawer(); openOrders();">📦 My Orders</button>
     <button onclick="toggleDrawer(); toggleDark();">🌙 Toggle Theme</button>
   </div>
@@ -68,11 +683,22 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <nav class="subnav" id="quickNav">
   <button onclick="setCategory('All')" class="active">🏠 All</button>
   <button onclick="setCategory('Electronics')">📱 Electronics</button>
-  <button onclick="setCategory('Fashion')">👕 Fashion</button>
-  <button onclick="setCategory('Home')">🏠 Home</button>
-  <button onclick="setCategory('Beauty')">✨ Beauty</button>
-  <button onclick="setCategory('Gaming')">🎮 Gaming</button>
-  <button onclick="setCategory('Sports')">⚽ Sports</button>
+  <button onclick="setCategory('Air conditioner')">❄️ Air conditioner</button>
+  <button onclick="setCategory('Fan')">🌀 Fan</button>
+  <button onclick="setCategory('Water Cooler')">💧 Water Cooler</button>
+  <button onclick="setCategory('Mobile')">📱 Mobile</button>
+  <button onclick="setCategory('Tablet and accessories')">📱 Tablet & accessories</button>
+  <button onclick="setCategory('Laptops')">💻 Laptops</button>
+  <button onclick="setCategory('Kitchen appliances')">🍳 Kitchen appliances</button>
+  <button onclick="setCategory('TV and entertainment')">📺 TV & entertainment</button>
+  <button onclick="setCategory('Headphones')">🎧 Headphones</button>
+  <button onclick="setCategory('Earbuds')">🎵 Earbuds</button>
+  <button onclick="setCategory('Bluetooth Speakers')">🔊 Bluetooth Speakers</button>
+  <button onclick="setCategory('Gaming Controllers')">🎮 Gaming Controllers</button>
+  <button onclick="setCategory('Gaming Headsets')">🎧 Gaming Headsets</button>
+  <button onclick="setCategory('Gaming Keyboards')">⌨️ Gaming Keyboards</button>
+  <button onclick="setCategory('Gaming Mice')">🖱️ Gaming Mice</button>
+  <button onclick="setCategory('Gaming Chairs')">💺 Gaming Chairs</button>
   <button onclick="openModal('sell')">➕ Sell a product</button>
   <button onclick="openOrders()">📦 My orders</button>
   <button onclick="openModal('bug')">🐛 Report Bug</button>
@@ -80,12 +706,70 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 </nav>
 
 <section class="hero">
+  <div class="hero-glow-bg"></div>
   <div>
     <h1>Shop smart.<br>Sell anything.</h1>
     <p>A complete marketplace connected to Supabase Database.</p>
     <div class="hero-actions"><button class="primary" onclick="document.getElementById('products').scrollIntoView()">Start Shopping</button><button class="secondary" onclick="openModal('sell')">Sell a Product</button></div>
   </div>
-  <div class="hero-art">🛍️</div>
+  <div class="hero-art">
+    <span class="hero-art-icon default-bag-icon">🛍️</span>
+    <span class="hero-art-icon pumpkin-basket-icon">🎃</span>
+    <span class="hero-art-icon kaju-katli-icon">🪔</span>
+    <span class="hero-art-icon holi-gulal-icon">🎨</span>
+    <span class="hero-art-icon ocean-shell-icon">🌊</span>
+    <span class="hero-art-icon summer-sun-icon">🌅</span>
+    <span class="hero-art-icon cosmic-star-icon">🪐</span>
+    <span class="hero-art-icon festive-bag-icon">🪷</span>
+  </div>
+  <!-- Bottom-center Rangoli Design inside hero section -->
+  <div class="hero-rangoli-container">
+    <svg class="rangoli-circle-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g fill="#ec4899" opacity="0.9">
+        <ellipse cx="50" cy="18" rx="6" ry="14" />
+        <ellipse cx="50" cy="82" rx="6" ry="14" />
+        <ellipse cx="18" cy="50" rx="14" ry="6" />
+        <ellipse cx="82" cy="50" rx="14" ry="6" />
+        <ellipse cx="27" cy="27" rx="10" ry="6" transform="rotate(-45 27 27)" />
+        <ellipse cx="73" cy="27" rx="10" ry="6" transform="rotate(45 73 27)" />
+        <ellipse cx="27" cy="73" rx="10" ry="6" transform="rotate(45 27 73)" />
+        <ellipse cx="73" cy="73" rx="10" ry="6" transform="rotate(-45 73 73)" />
+      </g>
+      <g fill="#f97316" opacity="0.95">
+        <path d="M50 32 Q54 42 50 50 Q46 42 50 32 Z" />
+        <path d="M50 68 Q54 58 50 50 Q46 58 50 68 Z" />
+        <path d="M32 50 Q42 54 50 50 Q42 46 32 50 Z" />
+        <path d="M68 50 Q58 54 50 50 Q58 46 68 50 Z" />
+        <path d="M37 37 Q45 43 50 50 Q43 45 37 37 Z" />
+        <path d="M63 37 Q55 43 50 50 Q55 45 63 37 Z" />
+        <path d="M37 63 Q45 57 50 50 Q43 55 37 63 Z" />
+        <path d="M63 63 Q55 57 50 50 Q55 55 63 63 Z" />
+      </g>
+      <circle cx="50" cy="35" r="3" fill="#a855f7" />
+      <circle cx="50" cy="65" r="3" fill="#a855f7" />
+      <circle cx="35" cy="50" r="3" fill="#a855f7" />
+      <circle cx="65" cy="50" r="3" fill="#a855f7" />
+      <circle cx="50" cy="50" r="7" fill="#f59e0b" />
+      <circle cx="50" cy="24" r="1.5" fill="#facc15" />
+      <circle cx="50" cy="76" r="1.5" fill="#facc15" />
+      <circle cx="24" cy="50" r="1.5" fill="#facc15" />
+      <circle cx="76" cy="50" r="1.5" fill="#facc15" />
+      <circle cx="33" cy="33" r="1.5" fill="#facc15" />
+      <circle cx="67" cy="33" r="1.5" fill="#facc15" />
+      <circle cx="33" cy="67" r="1.5" fill="#facc15" />
+      <circle cx="67" cy="67" r="1.5" fill="#facc15" />
+      <circle cx="50" cy="10" r="1" fill="#ffffff" />
+      <circle cx="50" cy="90" r="1" fill="#ffffff" />
+      <circle cx="10" cy="50" r="1" fill="#ffffff" />
+      <circle cx="90" cy="50" r="1" fill="#ffffff" />
+      <circle cx="20" cy="20" r="1" fill="#ffffff" />
+      <circle cx="80" cy="20" r="1" fill="#ffffff" />
+      <circle cx="20" cy="80" r="1" fill="#ffffff" />
+      <circle cx="80" cy="80" r="1" fill="#ffffff" />
+      <circle cx="50" cy="50" r="3" fill="#ffffff" />
+      <circle cx="50" cy="50" r="1.2" fill="#ec4899" />
+    </svg>
+  </div>
 </section>
 
 <section class="stats">
@@ -106,15 +790,12 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 </main>
 <footer><h3>ShopX Marketplace</h3><p>Powered by Supabase Cloud Database & Storage.</p></footer>
 
-<!-- About Us Modal -->
+<!-- About Modal -->
 <div class="modalbg" id="about">
   <div class="modal"><button class="close" onclick="closeModal('about')">×</button>
-    <h2>ℹ️ About ShopX</h2>
+    <h2>ℹ️ About Us</h2>
     <p style="margin:12px 0;line-height:1.6;color:var(--muted);">
-      Welcome to <b>ShopX Marketplace</b>! You are our top priority. We strive every day to deliver the best shopping experience possible—from seamless ordering to lightning-fast seller updates.
-    </p>
-    <p style="line-height:1.6;color:var(--muted);">
-      Whether you're browsing electronics, fashion, or home gear, we built this platform to ensure quality, transparency, and top-tier support.
+      Welcome to <b>ShopX Marketplace</b>! You are our top priority. We strive every day to deliver the best shopping experience possible.
     </p>
     <div style="margin-top:20px;text-align:center;">
       <button class="primary" onclick="closeModal('about')">Start Shopping 🛍️</button>
@@ -122,7 +803,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   </div>
 </div>
 
-<!-- Contact Us Modal -->
+<!-- Contact Modal -->
 <div class="modalbg" id="contact">
   <div class="modal small"><button class="close" onclick="closeModal('contact')">×</button>
     <h2>📞 Contact Us</h2>
@@ -133,7 +814,37 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
     <input id="cEmail" type="email" placeholder="john@example.com">
     <label>Message</label>
     <textarea id="cMsg" placeholder="How can we help you today?"></textarea>
-    <button class="primary" style="width:100%;margin-top:12px;" onclick="sendContact()">Send Message</button>
+    <button class="primary" id="sendContactBtn" style="width:100%;margin-top:12px;" onclick="sendContact()">Send Message</button>
+  </div>
+</div>
+
+<!-- Refund & Cancellation Modal -->
+<div class="modalbg" id="refund">
+  <div class="modal"><button class="close" onclick="closeModal('refund')">×</button>
+    <h2>🔄 Refund & Cancellation</h2>
+    <p style="margin:12px 0;line-height:1.6;color:var(--muted);">
+      You can cancel your order before it has shipped for a full refund. For returns and refunds after delivery, requests must be made within 7 days of receiving the item. Items must be unused and in their original packaging.
+    </p>
+  </div>
+</div>
+
+<!-- Policy & Privacy Modal -->
+<div class="modalbg" id="privacy">
+  <div class="modal"><button class="close" onclick="closeModal('privacy')">×</button>
+    <h2>🔒 Policy & Privacy</h2>
+    <p style="margin:12px 0;line-height:1.6;color:var(--muted);">
+      We respect your privacy and are committed to protecting your personal data. This policy outlines how we collect, use, and safeguard your information when you use our platform.
+    </p>
+  </div>
+</div>
+
+<!-- Terms & Conditions Modal -->
+<div class="modalbg" id="terms">
+  <div class="modal"><button class="close" onclick="closeModal('terms')">×</button>
+    <h2>📄 Terms & Conditions</h2>
+    <p style="margin:12px 0;line-height:1.6;color:var(--muted);">
+      By accessing and placing an order with ShopX Marketplace, you confirm that you are in agreement with and bound by the terms of service contained herein.
+    </p>
   </div>
 </div>
 
@@ -148,7 +859,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <div class="formgrid">
 <div class="full"><label>Product name</label><input id="sName" placeholder="Example: Wireless Earbuds"></div>
 <div><label>Price (₹)</label><input id="sPrice" type="number" min="1" placeholder="999"></div>
-<div><label>Category</label><select id="sCat"><option>Electronics</option><option>Fashion</option><option>Home</option><option>Beauty</option><option>Gaming</option><option>Sports</option><option>Other</option></select></div>
+<div><label>Category</label><select id="sCat"><option>Electronics</option><option>Air conditioner</option><option>Fan</option><option>Water Cooler</option><option>Mobile</option><option>Tablet and accessories</option><option>Laptops</option><option>Kitchen appliances</option><option>TV and entertainment</option><option>Headphones</option><option>Earbuds</option><option>Bluetooth Speakers</option><option>Gaming Controllers</option><option>Gaming Headsets</option><option>Gaming Keyboards</option><option>Gaming Mice</option><option>Gaming Chairs</option><option>Other</option></select></div>
 <div><label>Product photo</label><input id="sImageFile" type="file" accept="image/*" onchange="previewImage(this)"></div>
 <div class="full"><label>Or paste an image URL</label><input id="sImageUrl" type="url" placeholder="https://example.com/product.jpg" oninput="previewUrl(this.value)"><div class="image-preview" id="imagePreview">📷 Product photo preview</div></div>
 <div><label>Discount %</label><input id="sOff" type="number" min="0" max="99" placeholder="10"></div>
@@ -157,7 +868,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 </div>
 <button class="primary" style="margin-top:10px;width:100%" onclick="addProduct()">Publish Product</button></div></div>
 
-<!-- Enhanced Bug Report Modal -->
+<!-- Bug Report Modal -->
 <div class="modalbg" id="bug">
 <div class="modal small"><button class="close" onclick="closeModal('bug')">×</button><h2>🐛 Report a Bug</h2>
 <div style="margin-top:10px">
@@ -190,6 +901,34 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <div class="modalbg" id="checkout">
 <div class="modal"><button class="close" onclick="closeModal('checkout')">×</button><h2>💳 Checkout</h2><div id="checkoutContent"></div></div></div>
 
+<!-- Admin Panel Modal -->
+<div class="modalbg" id="adminPanel">
+<div class="modal large"><button class="close" onclick="closeModal('adminPanel')">×</button>
+  <h2>⚙️ ShopX Admin Control Panel</h2>
+  
+  <!-- Festival & Seasonal Theme Switcher -->
+  <div class="theme-selector-box">
+    <b>🎨 Realtime Global Theme Switcher</b>
+    <div class="theme-options">
+      <button onclick="setFestivalTheme('default')">Default Theme</button>
+      <button onclick="setFestivalTheme('diwali')">🪔 Diwali</button>
+      <button onclick="setFestivalTheme('holi')">🎨 Holi</button>
+      <button onclick="setFestivalTheme('ocean')">🌊 Ocean</button>
+      <button onclick="setFestivalTheme('summer')">☀️ Summer</button>
+      <button onclick="setFestivalTheme('halloween')">🎃 Halloween</button>
+      <button onclick="setFestivalTheme('cosmic')">🌌 Cosmic Nebula</button>
+      <button onclick="setFestivalTheme('rakshabandhan')">🧵 Rakshabandhan</button>
+    </div>
+  </div>
+
+  <div class="admin-tab-bar">
+    <button id="btnTabProds" class="active" onclick="switchAdminTab('products')">📦 Products</button>
+    <button id="btnTabBugs" onclick="switchAdminTab('bugs')">🐛 Bug Reports</button>
+    <button id="btnTabMsgs" onclick="switchAdminTab('msgs')">📩 Contact Messages</button>
+  </div>
+  <div id="adminTabContent"></div>
+</div></div>
+
 <script>
 // --- SUPABASE CONFIGURATION ---
 const SUPABASE_URL = "https://putnsyoidbojxwrijide.supabase.co";
@@ -213,7 +952,6 @@ function closeModal(id){document.getElementById(id).style.display="none"}
 function goHome(){category="All";document.getElementById("search").value="";render();scrollTo(0,0)}
 function setCategory(c){category=c;render();document.getElementById("products").scrollIntoView({behavior:"smooth"})}
 
-// Drawer Toggle
 function toggleDrawer() {
   let drawer = document.getElementById("drawer");
   let bg = document.getElementById("drawerBg");
@@ -226,12 +964,176 @@ function toggleDrawer() {
   }
 }
 
+// --- SPECIAL DIWALI / RAKSHABANDHAN SEQUENCE ---
+function triggerFestiveSequence() {
+  if (!document.body.classList.contains("diwali-mode") && !document.body.classList.contains("rakshabandhan-mode")) return;
+  const elements = document.querySelectorAll(".diwali-diya, .festive-diya");
+  elements.forEach((d, idx) => {
+    d.style.opacity = "0.3";
+    setTimeout(() => {
+      d.style.opacity = "1";
+      d.style.transform = "scale(1.2)";
+      setTimeout(() => d.style.transform = "scale(1)", 400);
+    }, idx * 400);
+  });
+}
+
+// --- GLOBAL REALTIME THEMES LOGIC ---
+function applyThemeUI(theme) {
+  document.body.classList.remove("diwali-mode", "holi-mode", "ocean-mode", "summer-mode", "halloween-mode", "cosmic-mode", "rakshabandhan-mode");
+  if (theme && theme !== "default") {
+    document.body.classList.add(theme + "-mode");
+    if (theme === "diwali" || theme === "rakshabandhan") {
+      setTimeout(triggerFestiveSequence, 300);
+    }
+  }
+}
+
+async function setFestivalTheme(theme) {
+  applyThemeUI(theme);
+
+  const { error } = await db
+    .from('app_settings')
+    .update({ current_theme: theme })
+    .eq('id', 'global_config');
+
+  if (error) {
+    notify("Failed to broadcast theme: " + error.message);
+  } else {
+    notify(`Broadcasted ${theme.toUpperCase()} theme live! 🎉`);
+  }
+}
+
+async function initGlobalThemeSync() {
+  const { data, error } = await db
+    .from('app_settings')
+    .select('current_theme')
+    .eq('id', 'global_config')
+    .single();
+
+  if (!error && data) {
+    applyThemeUI(data.current_theme);
+  }
+
+  db.channel('public:app_settings')
+    .on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'app_settings', filter: 'id=eq.global_config' },
+      (payload) => {
+        const newTheme = payload.new.current_theme;
+        applyThemeUI(newTheme);
+        notify(`Theme updated to ${newTheme.toUpperCase()}! ✨`);
+      }
+    )
+    .subscribe();
+}
+
+// --- CANVAS ANIMATION ENGINE (FIREWORKS & GULAL POWDER SPLASHES) ---
+const canvas = document.getElementById('festival-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let rockets = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+window.addEventListener('click', (e) => {
+  if (document.body.classList.contains('holi-mode')) {
+    createHoliSplash(e.clientX, e.clientY);
+  }
+});
+
+function createHoliSplash(x, y) {
+  const colors = ['#FF007F', '#FFD700', '#00DFD8', '#7928CA', '#FF4E50', '#00FF66', '#FF9900'];
+  for (let i = 0; i < 70; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 10 + 2;
+    particles.push({
+      x: x, y: y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size: Math.random() * 8 + 4,
+      alpha: 1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      type: 'holi'
+    });
+  }
+}
+
+function launchFirework(e) {
+  const startX = e.clientX;
+  const startY = window.innerHeight - 50;
+  const targetY = e.clientY < window.innerHeight - 150 ? e.clientY : Math.random() * (window.innerHeight * 0.4) + 100;
+
+  rockets.push({ x: startX, y: startY, targetY: targetY, speed: 13 });
+}
+
+function createDiwaliExplosion(x, y) {
+  const colors = ['#FFD700', '#FF5733', '#C70039', '#FFB703', '#FFFFFF', '#00FFFF', '#EC4899', '#D946EF'];
+  for (let i = 0; i < 80; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 8 + 2;
+    particles.push({
+      x: x, y: y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size: 3.5,
+      alpha: 1,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      type: 'diwali'
+    });
+  }
+}
+
+function animateCanvas() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let i = rockets.length - 1; i >= 0; i--) {
+    let r = rockets[i];
+    r.y -= r.speed;
+    ctx.fillStyle = '#FFD700';
+    ctx.beginPath();
+    ctx.arc(r.x, r.y, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (r.y <= r.targetY) {
+      createDiwaliExplosion(r.x, r.targetY);
+      rockets.splice(i, 1);
+    }
+  }
+
+  for (let i = particles.length - 1; i >= 0; i--) {
+    let p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    
+    if (p.type === 'holi') {
+      p.vx *= 0.95; p.vy *= 0.95; p.vy += 0.04; p.alpha -= 0.015;
+    } else {
+      p.vy += 0.07; p.alpha -= 0.016;
+    }
+
+    ctx.globalAlpha = Math.max(0, p.alpha);
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    if (p.alpha <= 0) particles.splice(i, 1);
+  }
+
+  requestAnimationFrame(animateCanvas);
+}
+animateCanvas();
+
 // --- SUPABASE DATA FETCHING ---
 async function fetchProductsFromSupabase() {
   const { data, error } = await db.from('products').select('*');
-  if (error) {
-    console.error("Error loading products:", error);
-  } else {
+  if (!error && data) {
     products = data;
     render();
   }
@@ -289,6 +1191,16 @@ function updateNav(){
  document.getElementById("cartCount").textContent=cart.reduce((a,x)=>a+x.q,0);
  document.getElementById("wishCount").textContent=wishlist.length;
  document.getElementById("accountLabel").textContent=user?user.name:"Sign in";
+ 
+ const isAdmin = user && user.name === "Admin" && user.email === "admin//shopx";
+ if(isAdmin) {
+   document.getElementById("adminHeaderBtn").classList.remove("hidden");
+   document.getElementById("adminDrawerBtn").classList.remove("hidden");
+ } else {
+   document.getElementById("adminHeaderBtn").classList.add("hidden");
+   document.getElementById("adminDrawerBtn").classList.add("hidden");
+ }
+
  [...document.querySelectorAll("#quickNav button")].forEach(b=>b.classList.remove("active"));
 }
 
@@ -402,30 +1314,41 @@ async function placeOrder(){
 
 function openAccount(){
  let el=document.getElementById("accountContent");
- if(user)el.innerHTML=`<div class="success">You're signed in.</div><h3>${esc(user.name)}</h3><p style="color:var(--muted);margin:7px 0">${esc(user.email)}</p><button class="primary" style="width:100%;margin-top:10px" onclick="openOrders();closeModal('account')">View Orders</button><button class="danger" style="width:100%;margin-top:8px" onclick="signOut()">Sign out</button>`;
- else el.innerHTML=`<p style="color:var(--muted);margin-bottom:10px">Sign in to buy products and save preferences!</p><input id="loginName" placeholder="Your name"><input id="loginEmail" type="email" placeholder="Email address"><button class="primary" style="width:100%;margin-top:8px" onclick="signIn()">Sign in / Register</button>`;
+ if(user) {
+   const isAdmin = user.name === "Admin" && user.email === "admin//shopx";
+   el.innerHTML=`<div class="success">You're signed in ${isAdmin?'<b>(Admin)</b>':''}</div><h3 style="text-align:center">${esc(user.name)}</h3><p style="color:var(--muted);margin:7px 0;text-align:center">${esc(user.email)}</p>${isAdmin ? `<button class="admin-btn" style="width:100%;margin-top:10px;" onclick="openAdminPanel();closeModal('account')">⚙️ Open Admin Panel</button>` : ''}<button class="primary" style="width:100%;margin-top:10px" onclick="openOrders();closeModal('account')">View Orders</button><button class="danger" style="width:100%;margin-top:8px" onclick="signOut()">Sign out</button>`;
+ }
+ else el.innerHTML=`<p style="color:var(--muted);margin-bottom:10px">Sign in to save preferences, order, or manage your profile!</p><label>Name</label><input id="loginName" placeholder="John Doe"><label>Email</label><input id="loginEmail" placeholder="john@example.com"><button class="primary" style="width:100%;margin-top:12px" onclick="signIn()">Sign in / Register</button>`;
  openModal("account");
 }
 
-// --- SIGN IN FUNCTIONALITY (Direct to Database) ---
 async function signIn(){
   let n=document.getElementById("loginName").value.trim(),
       e=document.getElementById("loginEmail").value.trim();
   if(!n||!e){notify("Enter your name and email");return}
-  
-  user={name:n,email:e};
-  save();
 
-  // Save profile info directly in Supabase profiles table
-  const { error: profileErr } = await db.from('profiles').insert([{ name: n, email: e }]);
-  
-  if(profileErr) {
-    console.log("Note on profile insert:", profileErr.message);
+  const isAttemptingAdmin = (n === "Admin" && e === "admin//shopx");
+
+  if(isAttemptingAdmin) {
+    let pin = prompt("Enter Admin Security PIN:");
+    if(pin !== "31414142") {
+      notify("Incorrect PIN! Access denied.");
+      return;
+    }
   }
+
+  const { data: existingProfile } = await db.from('profiles').select('*').eq('email', e).maybeSingle();
+  
+  if(!existingProfile) {
+    await db.from('profiles').insert([{ name: n, email: e, role: isAttemptingAdmin ? 'admin' : 'user' }]);
+  }
+
+  user = { name: n, email: e };
+  save();
 
   closeModal("account");
   updateNav();
-  notify("Welcome back, "+n+"! 👋");
+  notify(isAttemptingAdmin ? "Welcome back, Admin! ⚙️" : "Welcome, "+n+"! 👋");
 }
 
 function signOut(){user=null;save();closeModal("account");updateNav();notify("Signed out")}
@@ -485,7 +1408,6 @@ async function addProduct(){
  notify("Product published 🎉");
 }
 
-// --- BUG REPORT WITH IMAGE ATTACHMENT ---
 async function submitBug() {
   let title = document.getElementById("bugTitle").value.trim();
   let desc = document.getElementById("bugDesc").value.trim();
@@ -525,29 +1447,163 @@ async function submitBug() {
   }
 }
 
-// --- CONTACT MESSAGES FUNCTION (Connected to 'contact-messages' table) ---
+// --- CONTACT MESSAGES SUBMISSION ---
 async function sendContact() {
   let name = document.getElementById("cName").value.trim();
   let email = document.getElementById("cEmail").value.trim();
   let msg = document.getElementById("cMsg").value.trim();
+  let btn = document.getElementById("sendContactBtn");
 
   if(!name || !email || !msg) { 
-    notify("Please fill out all fields"); 
+    notify("Please fill out all contact fields"); 
     return; 
   }
 
-  const { error } = await db.from('contact-messages').insert([
+  btn.innerText = "Sending...";
+  btn.disabled = true;
+
+  const { data, error } = await db.from('contact-messages').insert([
     { name: name, email: email, message: msg }
-  ]);
+  ]).select();
+
+  btn.innerText = "Send Message";
+  btn.disabled = false;
 
   if(error) {
+    console.error("Contact Submission Error:", error);
     notify("Failed to send message: " + error.message);
   } else {
-    notify("Message sent! We'll reach back shortly 📩");
+    notify("Message sent successfully! 📩");
     document.getElementById("cName").value = "";
     document.getElementById("cEmail").value = "";
     document.getElementById("cMsg").value = "";
     closeModal("contact");
+  }
+}
+
+// --- ADMIN CONTROL PANEL LOGIC ---
+let activeAdminTab = "products";
+
+function openAdminPanel() {
+  openModal("adminPanel");
+  switchAdminTab(activeAdminTab);
+}
+
+function switchAdminTab(tab) {
+  activeAdminTab = tab;
+  document.querySelectorAll(".admin-tab-bar button").forEach(b => b.classList.remove("active"));
+  if (tab === 'products') document.getElementById("btnTabProds").classList.add("active");
+  if (tab === 'bugs') document.getElementById("btnTabBugs").classList.add("active");
+  if (tab === 'msgs') document.getElementById("btnTabMsgs").classList.add("active");
+
+  renderAdminTabContent();
+}
+
+async function renderAdminTabContent() {
+  let content = document.getElementById("adminTabContent");
+  content.innerHTML = "<p style='padding:15px;color:var(--muted);'>Loading records...</p>";
+
+  if (activeAdminTab === "products") {
+    content.innerHTML = `
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${products.map(p => `
+            <tr>
+              <td><b>${esc(p.name)}</b></td>
+              <td>${esc(p.category)}</td>
+              <td>${money(p.price)}</td>
+              <td>${p.stock}</td>
+              <td><button class="danger" onclick="adminDeleteProduct('${p.id}')">Delete</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } else if (activeAdminTab === "bugs") {
+    const { data: bugs, error } = await db.from('bug_reports').select('*');
+    if (error || !bugs || !bugs.length) {
+      content.innerHTML = "<p style='padding:20px;text-align:center;'>No bug reports found ✨</p>";
+      return;
+    }
+    content.innerHTML = `
+      <table class="admin-table">
+        <thead>
+          <tr><th>Title</th><th>Description</th><th>Submitted</th></tr>
+        </thead>
+        <tbody>
+          ${bugs.map(b => `
+            <tr>
+              <td><b>${esc(b.title)}</b></td>
+              <td>${esc(b.description)}</td>
+              <td>${new Date(b.created_at || Date.now()).toLocaleDateString()}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  } else if (activeAdminTab === "msgs") {
+    const { data: msgs, error } = await db.from('contact-messages').select('*').order('created_at', { ascending: false });
+    
+    if (error) {
+      content.innerHTML = `<p style='padding:20px;color:var(--red);text-align:center;'>Error loading messages: ${esc(error.message)}</p>`;
+      return;
+    }
+    
+    if (!msgs || !msgs.length) {
+      content.innerHTML = "<p style='padding:20px;text-align:center;'>No contact messages received yet 📩</p>";
+      return;
+    }
+    
+    content.innerHTML = `
+      <table class="admin-table">
+        <thead>
+          <tr><th>Sender</th><th>Email</th><th>Message</th><th>Received</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          ${msgs.map(m => `
+            <tr>
+              <td><b>${esc(m.name || 'Anonymous')}</b></td>
+              <td><a href="mailto:${esc(m.email)}" style="color:var(--p);">${esc(m.email)}</a></td>
+              <td>${esc(m.message)}</td>
+              <td>${new Date(m.created_at || Date.now()).toLocaleString()}</td>
+              <td><button class="danger" onclick="adminDeleteMessage('${m.id}')">Delete</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+  }
+}
+
+async function adminDeleteMessage(id) {
+  if (!confirm("Are you sure you want to delete this message?")) return;
+  const { error } = await db.from('contact-messages').delete().eq('id', id);
+  if (error) {
+    notify("Error deleting message: " + error.message);
+  } else {
+    notify("Message deleted 🗑️");
+    renderAdminTabContent();
+  }
+}
+
+async function adminDeleteProduct(id) {
+  if (!confirm("Are you sure you want to remove this product listing?")) return;
+  const { error } = await db.from('products').delete().eq('id', id);
+  if (error) {
+    notify("Error deleting product: " + error.message);
+  } else {
+    notify("Product deleted from database 🗑️");
+    fetchProductsFromSupabase();
+    setTimeout(() => renderAdminTabContent(), 300);
   }
 }
 
@@ -596,6 +1652,7 @@ document.getElementById("search").addEventListener("input",render);
 // Initial fetches
 fetchProductsFromSupabase();
 fetchOrdersFromSupabase();
+initGlobalThemeSync();
 </script>
 </body>
 </html>
