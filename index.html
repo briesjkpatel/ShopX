@@ -203,13 +203,13 @@ body.rakshabandhan-mode .card, body.rakshabandhan-mode .stat {
   background-size: 200% 200%;
   animation: shimmerSweep 3s linear infinite;
 }
-body.diwali-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706, #f59e0b); box-shadow: 0 0 14px #f59e0b; }
-body.holi-mode .festive-banner { display: block; background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8, #ff4e50, #ff007f); box-shadow: 0 0 16px #ff007f; }
-body.ocean-mode .festive-banner { display: block; background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8); box-shadow: 0 0 16px #38bdf8; }
-body.summer-mode .festive-banner { display: block; background: linear-gradient(90deg, #2b1055, #ff7e5f, #ffd186, #ff7e5f); box-shadow: 0 0 16px #ff7e5f; }
-body.halloween-mode .festive-banner { display: block; background: linear-gradient(90deg, #ea580c, #a855f7, #22c55e, #ea580c); box-shadow: 0 0 14px #ea580c; }
-body.cosmic-mode .festive-banner { display: block; background: linear-gradient(90deg, #7b2cbf, #00b4d8, #e2e8f0, #7b2cbf); box-shadow: 0 0 16px #7b2cbf; }
-body.rakshabandhan-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #ec4899, #eab308, #d946ef, #f59e0b); box-shadow: 0 0 18px #d946ef; }
+body.diwali-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706, #f59e0b); box-shadow: 0 0 14px #f59e0b;[cite: 1] }
+body.holi-mode .festive-banner { display: block; background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8, #ff4e50, #ff007f); box-shadow: 0 0 16px #ff007f;[cite: 1] }
+body.ocean-mode .festive-banner { display: block; background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8); box-shadow: 0 0 16px #38bdf8;[cite: 1] }
+body.summer-mode .festive-banner { display: block; background: linear-gradient(90deg, #2b1055, #ff7e5f, #ffd186, #ff7e5f); box-shadow: 0 0 16px #ff7e5f;[cite: 1] }
+body.halloween-mode .festive-banner { display: block; background: linear-gradient(90deg, #ea580c, #a855f7, #22c55e, #ea580c); box-shadow: 0 0 14px #ea580c;[cite: 1] }
+body.cosmic-mode .festive-banner { display: block; background: linear-gradient(90deg, #7b2cbf, #00b4d8, #e2e8f0, #7b2cbf); box-shadow: 0 0 16px #7b2cbf;[cite: 1] }
+body.rakshabandhan-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #ec4899, #eab308, #d946ef, #f59e0b); box-shadow: 0 0 18px #d946ef;[cite: 1] }
 
 /* THEME SPECIFIC DECORATIONS */
 .theme-element { display: none; pointer-events: none; position: fixed; z-index: 1001; }
@@ -468,11 +468,20 @@ body.cosmic-mode .hero p { color: #94a3b8; }
 .modal input,.modal select,.modal textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;margin:4px 0;outline:none;background:var(--card);color:var(--txt)}
 .modal textarea{min-height:85px;resize:vertical}
 .modal label{font-size:12px;color:var(--muted);display:block;margin-top:6px}
+
+/* Multi-image Gallery CSS */
 .product-detail{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.detailpic{background:#eef2f7;border-radius:13px;min-height:300px;display:flex;align-items:center;justify-content:center;font-size:130px;overflow:hidden}
-.detailpic img{width:100%;height:100%;min-height:300px;object-fit:contain}
-.image-preview{width:100%;height:140px;border:2px dashed #cbd5e1;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:6px;background:#f8fafc}
-.image-preview img{max-width:100%;max-height:100%;object-fit:contain}
+.detailpic-container{display:flex;flex-direction:column;gap:10px}
+.detailpic{background:#eef2f7;border-radius:13px;height:280px;display:flex;align-items:center;justify-content:center;font-size:130px;overflow:hidden}
+.detailpic img{width:100%;height:100%;object-fit:contain}
+.detail-thumbnails{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.detail-thumb{width:60px;height:60px;border-radius:8px;border:2px solid var(--border);cursor:pointer;object-fit:cover;background:#eef2f7;flex-shrink:0}
+.detail-thumb.active{border-color:var(--p)}
+
+.image-preview-container{display:flex;gap:8px;overflow-x:auto;margin-top:6px;padding-bottom:4px}
+.image-preview-item{width:70px;height:70px;border:2px dashed #cbd5e1;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#f8fafc;flex-shrink:0;position:relative}
+.image-preview-item img{width:100%;height:100%;object-fit:cover}
+
 .detailprice{font-size:30px;font-weight:900;margin:12px 0}
 .chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
 .chip{background:#ffffff22;border:1px solid var(--border);padding:7px 10px;border-radius:7px;font-size:12px}
@@ -488,7 +497,7 @@ body.cosmic-mode .hero p { color: #94a3b8; }
 .notice{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 17px;border-radius:10px;z-index:4000;box-shadow:0 4px 15px #0004;animation:popIn 0.2s ease-out;}
 
 /* Admin Panel */
-.admin-tab-bar{display:flex;gap:10px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:15px}
+.admin-tab-bar{display:flex;gap:10px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:15px;flex-wrap:wrap}
 .admin-tab-bar button{background:none;border:none;padding:8px 14px;border-radius:6px;font-weight:bold;color:var(--muted)}
 .admin-tab-bar button.active{background:var(--p);color:#fff}
 .admin-table{width:100%;border-collapse:collapse;margin-top:10px}
@@ -538,7 +547,6 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 </div>
 
 <!-- Theme Floating Elements -->
-<!-- Diwali Elements -->
 <div class="theme-element diwali-radial-glow"></div>
 <div class="theme-element diwali-rangoli-pattern"></div>
 <div class="theme-element diwali-rangoli-circle"></div>
@@ -590,24 +598,6 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
     <circle cx="35" cy="50" r="3" fill="#a855f7" />
     <circle cx="65" cy="50" r="3" fill="#a855f7" />
     <circle cx="50" cy="50" r="7" fill="#f59e0b" />
-    <circle cx="50" cy="24" r="1.5" fill="#facc15" />
-    <circle cx="50" cy="76" r="1.5" fill="#facc15" />
-    <circle cx="24" cy="50" r="1.5" fill="#facc15" />
-    <circle cx="76" cy="50" r="1.5" fill="#facc15" />
-    <circle cx="33" cy="33" r="1.5" fill="#facc15" />
-    <circle cx="67" cy="33" r="1.5" fill="#facc15" />
-    <circle cx="33" cy="67" r="1.5" fill="#facc15" />
-    <circle cx="67" cy="67" r="1.5" fill="#facc15" />
-    <circle cx="50" cy="10" r="1" fill="#ffffff" />
-    <circle cx="50" cy="90" r="1" fill="#ffffff" />
-    <circle cx="10" cy="50" r="1" fill="#ffffff" />
-    <circle cx="90" cy="50" r="1" fill="#ffffff" />
-    <circle cx="20" cy="20" r="1" fill="#ffffff" />
-    <circle cx="80" cy="20" r="1" fill="#ffffff" />
-    <circle cx="20" cy="80" r="1" fill="#ffffff" />
-    <circle cx="80" cy="80" r="1" fill="#ffffff" />
-    <circle cx="50" cy="50" r="3" fill="#ffffff" />
-    <circle cx="50" cy="50" r="1.2" fill="#ec4899" />
   </svg>
 </div>
 <div class="theme-element festive-sparkle" style="top: 20%; left: 12%;">✨</div>
@@ -697,7 +687,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
     <button onclick="toggleDrawer(); openModal('about');">ℹ️ About Us</button>
     <button onclick="toggleDrawer(); openModal('contact');">📞 Contact Us</button>
     <button onclick="toggleDrawer(); openModal('bug');">🐛 Report a Bug</button>
-    <button onclick="toggleDrawer(); openModal('sell');">➕ Sell a Product</button>
+    <button id="drawerSellBtn" class="hidden" onclick="toggleDrawer(); openModal('sell');">➕ Sell a Product</button>
     
     <div class="drawer-section-title">Customer</div>
     <button onclick="toggleDrawer(); openModal('refund');">🔄 Refund & Cancellation</button>
@@ -730,7 +720,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   <button onclick="setCategory('Gaming Keyboards')">⌨️ Gaming Keyboards</button>
   <button onclick="setCategory('Gaming Mice')">🖱️ Gaming Mice</button>
   <button onclick="setCategory('Gaming Chairs')">💺 Gaming Chairs</button>
-  <button onclick="openModal('sell')">➕ Sell a product</button>
+  <button id="quickSellBtn" class="hidden" onclick="openModal('sell')">➕ Sell a product</button>
   <button onclick="openOrders()">📦 My orders</button>
   <button onclick="openModal('bug')">🐛 Report Bug</button>
   <button onclick="toggleDark()">🌙 Theme</button>
@@ -741,7 +731,10 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   <div>
     <h1>Shop smart.<br>Sell anything.</h1>
     <p>A complete marketplace connected to Supabase Database.</p>
-    <div class="hero-actions"><button class="primary" onclick="document.getElementById('products').scrollIntoView()">Start Shopping</button><button class="secondary" onclick="openModal('sell')">Sell a Product</button></div>
+    <div class="hero-actions">
+      <button class="primary" onclick="document.getElementById('products').scrollIntoView()">Start Shopping</button>
+      <button id="heroSellBtn" class="secondary hidden" onclick="openModal('sell')">Sell a Product</button>
+    </div>
   </div>
   <div class="hero-art">
     <span class="hero-art-icon default-bag-icon">🛍️</span>
@@ -761,44 +754,8 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
         <ellipse cx="50" cy="82" rx="6" ry="14" />
         <ellipse cx="18" cy="50" rx="14" ry="6" />
         <ellipse cx="82" cy="50" rx="14" ry="6" />
-        <ellipse cx="27" cy="27" rx="10" ry="6" transform="rotate(-45 27 27)" />
-        <ellipse cx="73" cy="27" rx="10" ry="6" transform="rotate(45 73 27)" />
-        <ellipse cx="27" cy="73" rx="10" ry="6" transform="rotate(45 27 73)" />
-        <ellipse cx="73" cy="73" rx="10" ry="6" transform="rotate(-45 73 73)" />
       </g>
-      <g fill="#f97316" opacity="0.95">
-        <path d="M50 32 Q54 42 50 50 Q46 42 50 32 Z" />
-        <path d="M50 68 Q54 58 50 50 Q46 58 50 68 Z" />
-        <path d="M32 50 Q42 54 50 50 Q42 46 32 50 Z" />
-        <path d="M68 50 Q58 54 50 50 Q58 46 68 50 Z" />
-        <path d="M37 37 Q45 43 50 50 Q43 45 37 37 Z" />
-        <path d="M63 37 Q55 43 50 50 Q55 45 63 37 Z" />
-        <path d="M37 63 Q45 57 50 50 Q43 55 37 63 Z" />
-        <path d="M63 63 Q55 57 50 50 Q55 55 63 63 Z" />
-      </g>
-      <circle cx="50" cy="35" r="3" fill="#a855f7" />
-      <circle cx="50" cy="65" r="3" fill="#a855f7" />
-      <circle cx="35" cy="50" r="3" fill="#a855f7" />
-      <circle cx="65" cy="50" r="3" fill="#a855f7" />
       <circle cx="50" cy="50" r="7" fill="#f59e0b" />
-      <circle cx="50" cy="24" r="1.5" fill="#facc15" />
-      <circle cx="50" cy="76" r="1.5" fill="#facc15" />
-      <circle cx="24" cy="50" r="1.5" fill="#facc15" />
-      <circle cx="76" cy="50" r="1.5" fill="#facc15" />
-      <circle cx="33" cy="33" r="1.5" fill="#facc15" />
-      <circle cx="67" cy="33" r="1.5" fill="#facc15" />
-      <circle cx="33" cy="67" r="1.5" fill="#facc15" />
-      <circle cx="67" cy="67" r="1.5" fill="#facc15" />
-      <circle cx="50" cy="10" r="1" fill="#ffffff" />
-      <circle cx="50" cy="90" r="1" fill="#ffffff" />
-      <circle cx="10" cy="50" r="1" fill="#ffffff" />
-      <circle cx="90" cy="50" r="1" fill="#ffffff" />
-      <circle cx="20" cy="20" r="1" fill="#ffffff" />
-      <circle cx="80" cy="20" r="1" fill="#ffffff" />
-      <circle cx="20" cy="80" r="1" fill="#ffffff" />
-      <circle cx="80" cy="80" r="1" fill="#ffffff" />
-      <circle cx="50" cy="50" r="3" fill="#ffffff" />
-      <circle cx="50" cy="50" r="1.2" fill="#ec4899" />
     </svg>
   </div>
 </section>
@@ -884,15 +841,15 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <div class="modal small"><button class="close" onclick="closeModal('account')">×</button><h2>👤 Your Account</h2>
 <div id="accountContent"></div></div></div>
 
-<!-- Sell -->
+<!-- Sell (Updated to support multiple images) -->
 <div class="modalbg" id="sell">
 <div class="modal"><button class="close" onclick="closeModal('sell')">×</button><h2>➕ Add your product</h2>
 <div class="formgrid">
 <div class="full"><label>Product name</label><input id="sName" placeholder="Example: Wireless Earbuds"></div>
 <div><label>Price (₹)</label><input id="sPrice" type="number" min="1" placeholder="999"></div>
 <div><label>Category</label><select id="sCat"><option>Electronics</option><option>Air conditioner</option><option>Fan</option><option>Water Cooler</option><option>Mobile</option><option>Tablet and accessories</option><option>Laptops</option><option>Kitchen appliances</option><option>TV and entertainment</option><option>Headphones</option><option>Earbuds</option><option>Bluetooth Speakers</option><option>Gaming Controllers</option><option>Gaming Headsets</option><option>Gaming Keyboards</option><option>Gaming Mice</option><option>Gaming Chairs</option><option>Other</option></select></div>
-<div><label>Product photo</label><input id="sImageFile" type="file" accept="image/*" onchange="previewImage(this)"></div>
-<div class="full"><label>Or paste an image URL</label><input id="sImageUrl" type="url" placeholder="https://example.com/product.jpg" oninput="previewUrl(this.value)"><div class="image-preview" id="imagePreview">📷 Product photo preview</div></div>
+<div class="full"><label>Product photos (Select multiple)</label><input id="sImageFiles" type="file" accept="image/*" multiple onchange="previewImages(this)"></div>
+<div class="full"><label>Or paste image URLs (comma separated)</label><input id="sImageUrls" type="text" placeholder="https://url1.jpg, https://url2.jpg" oninput="previewUrls(this.value)"><div class="image-preview-container" id="imagePreviewContainer"><div class="image-preview-item" style="width:100%">📷 Product photo previews</div></div></div>
 <div><label>Discount %</label><input id="sOff" type="number" min="0" max="99" placeholder="10"></div>
 <div><label>Stock</label><input id="sStock" type="number" min="1" placeholder="20"></div>
 <div class="full"><label>Description</label><textarea id="sDesc" placeholder="Tell customers about your product"></textarea></div>
@@ -937,7 +894,6 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <div class="modal large"><button class="close" onclick="closeModal('adminPanel')">×</button>
   <h2>⚙️ CircuTech Admin Control Panel</h2>
   
-  <!-- Festival & Seasonal Theme Switcher -->
   <div class="theme-selector-box">
     <b>🎨 Realtime Global Theme Switcher</b>
     <div class="theme-options">
@@ -954,6 +910,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 
   <div class="admin-tab-bar">
     <button id="btnTabProds" class="active" onclick="switchAdminTab('products')">📦 Products</button>
+    <button id="btnTabAdmins" onclick="switchAdminTab('admins')">👑 Manage Admins</button>
     <button id="btnTabBugs" onclick="switchAdminTab('bugs')">🐛 Bug Reports</button>
     <button id="btnTabMsgs" onclick="switchAdminTab('msgs')">📩 Contact Messages</button>
   </div>
@@ -972,6 +929,8 @@ let wishlist = load("shopx_wishlist", []);
 let orders = [];
 let user = load("shopx_user", null);
 let category = "All";
+
+let tempUploadedImages = []; // Holds preview/uploaded image URLs during submission
 
 function load(k,d){try{let x=localStorage.getItem(k);return x?JSON.parse(x):d}catch(e){return d}}
 function save(){localStorage.setItem("shopx_cart",JSON.stringify(cart));localStorage.setItem("shopx_wishlist",JSON.stringify(wishlist));localStorage.setItem("shopx_user",JSON.stringify(user))}
@@ -995,7 +954,6 @@ function toggleDrawer() {
   }
 }
 
-// --- SPECIAL DIWALI / RAKSHABANDHAN SEQUENCE ---
 function triggerFestiveSequence() {
   if (!document.body.classList.contains("diwali-mode") && !document.body.classList.contains("rakshabandhan-mode")) return;
   const elements = document.querySelectorAll(".diwali-diya, .festive-diya");
@@ -1009,7 +967,6 @@ function triggerFestiveSequence() {
   });
 }
 
-// --- GLOBAL REALTIME THEMES LOGIC ---
 function applyThemeUI(theme) {
   document.body.classList.remove("diwali-mode", "holi-mode", "ocean-mode", "summer-mode", "halloween-mode", "cosmic-mode", "rakshabandhan-mode");
   if (theme && theme !== "default") {
@@ -1022,44 +979,25 @@ function applyThemeUI(theme) {
 
 async function setFestivalTheme(theme) {
   applyThemeUI(theme);
-
-  const { error } = await db
-    .from('app_settings')
-    .update({ current_theme: theme })
-    .eq('id', 'global_config');
-
-  if (error) {
-    notify("Failed to broadcast theme: " + error.message);
-  } else {
-    notify(`Broadcasted ${theme.toUpperCase()} theme live! 🎉`);
-  }
+  const { error } = await db.from('app_settings').update({ current_theme: theme }).eq('id', 'global_config');
+  if (error) notify("Failed to broadcast theme: " + error.message);
+  else notify(`Broadcasted ${theme.toUpperCase()} theme live! 🎉`);
 }
 
 async function initGlobalThemeSync() {
-  const { data, error } = await db
-    .from('app_settings')
-    .select('current_theme')
-    .eq('id', 'global_config')
-    .single();
-
-  if (!error && data) {
-    applyThemeUI(data.current_theme);
-  }
+  const { data, error } = await db.from('app_settings').select('current_theme').eq('id', 'global_config').single();
+  if (!error && data) applyThemeUI(data.current_theme);
 
   db.channel('public:app_settings')
-    .on(
-      'postgres_changes',
-      { event: 'UPDATE', schema: 'public', table: 'app_settings', filter: 'id=eq.global_config' },
+    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'app_settings', filter: 'id=eq.global_config' },
       (payload) => {
         const newTheme = payload.new.current_theme;
         applyThemeUI(newTheme);
         notify(`Theme updated to ${newTheme.toUpperCase()}! ✨`);
       }
-    )
-    .subscribe();
+    ).subscribe();
 }
 
-// --- CANVAS ANIMATION ENGINE (FIREWORKS & GULAL POWDER SPLASHES) ---
 const canvas = document.getElementById('festival-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -1073,9 +1011,7 @@ window.addEventListener('resize', resizeCanvas);
 resizeCanvas();
 
 window.addEventListener('click', (e) => {
-  if (document.body.classList.contains('holi-mode')) {
-    createHoliSplash(e.clientX, e.clientY);
-  }
+  if (document.body.classList.contains('holi-mode')) createHoliSplash(e.clientX, e.clientY);
 });
 
 function createHoliSplash(x, y) {
@@ -1083,24 +1019,12 @@ function createHoliSplash(x, y) {
   for (let i = 0; i < 70; i++) {
     const angle = Math.random() * Math.PI * 2;
     const speed = Math.random() * 10 + 2;
-    particles.push({
-      x: x, y: y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      size: Math.random() * 8 + 4,
-      alpha: 1,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      type: 'holi'
-    });
+    particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, size: Math.random() * 8 + 4, alpha: 1, color: colors[Math.floor(Math.random() * colors.length)], type: 'holi' });
   }
 }
 
 function launchFirework(e) {
-  const startX = e.clientX;
-  const startY = window.innerHeight - 50;
-  const targetY = e.clientY < window.innerHeight - 150 ? e.clientY : Math.random() * (window.innerHeight * 0.4) + 100;
-
-  rockets.push({ x: startX, y: startY, targetY: targetY, speed: 13 });
+  rockets.push({ x: e.clientX, y: window.innerHeight - 50, targetY: e.clientY < window.innerHeight - 150 ? e.clientY : Math.random() * (window.innerHeight * 0.4) + 100, speed: 13 });
 }
 
 function createDiwaliExplosion(x, y) {
@@ -1108,21 +1032,12 @@ function createDiwaliExplosion(x, y) {
   for (let i = 0; i < 80; i++) {
     const angle = Math.random() * Math.PI * 2;
     const speed = Math.random() * 8 + 2;
-    particles.push({
-      x: x, y: y,
-      vx: Math.cos(angle) * speed,
-      vy: Math.sin(angle) * speed,
-      size: 3.5,
-      alpha: 1,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      type: 'diwali'
-    });
+    particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, size: 3.5, alpha: 1, color: colors[Math.floor(Math.random() * colors.length)], type: 'diwali' });
   }
 }
 
 function animateCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   for (let i = rockets.length - 1; i >= 0; i--) {
     let r = rockets[i];
     r.y -= r.speed;
@@ -1130,100 +1045,89 @@ function animateCanvas() {
     ctx.beginPath();
     ctx.arc(r.x, r.y, 3.5, 0, Math.PI * 2);
     ctx.fill();
-
-    if (r.y <= r.targetY) {
-      createDiwaliExplosion(r.x, r.targetY);
-      rockets.splice(i, 1);
-    }
+    if (r.y <= r.targetY) { createDiwaliExplosion(r.x, r.targetY); rockets.splice(i, 1); }
   }
-
   for (let i = particles.length - 1; i >= 0; i--) {
     let p = particles[i];
-    p.x += p.vx;
-    p.y += p.vy;
-    
-    if (p.type === 'holi') {
-      p.vx *= 0.95; p.vy *= 0.95; p.vy += 0.04; p.alpha -= 0.015;
-    } else {
-      p.vy += 0.07; p.alpha -= 0.016;
-    }
-
+    p.x += p.vx; p.y += p.vy;
+    if (p.type === 'holi') { p.vx *= 0.95; p.vy *= 0.95; p.vy += 0.04; p.alpha -= 0.015; }
+    else { p.vy += 0.07; p.alpha -= 0.016; }
     ctx.globalAlpha = Math.max(0, p.alpha);
     ctx.fillStyle = p.color;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
     ctx.fill();
-
     if (p.alpha <= 0) particles.splice(i, 1);
   }
-
   requestAnimationFrame(animateCanvas);
 }
 animateCanvas();
 
-// --- SUPABASE DATA FETCHING ---
 async function fetchProductsFromSupabase() {
   const { data, error } = await db.from('products').select('*');
   if (!error && data) {
-    products = data;
+    products = data.map(p => ({
+      ...p,
+      images: Array.isArray(p.images) ? p.images : (typeof p.images === 'string' ? JSON.parse(p.images || '[]') : (p.image_url ? [p.image_url] : []))
+    }));
     render();
   }
 }
 
 async function fetchOrdersFromSupabase() {
   const { data, error } = await db.from('orders').select('*, order_items(*, products(*))');
-  if (!error && data) {
-    orders = data;
-    updateStats();
-  }
+  if (!error && data) { orders = data; updateStats(); }
 }
 
 function render(){
- let q=document.getElementById("search").value.toLowerCase().trim(),sort=document.getElementById("sort").value;
- let arr=products.filter(p=>(category==="All"||p.category===category)&&(((p.name||'')+" "+(p.category||'')+" "+(p.seller_name||'')).toLowerCase().includes(q)));
- if(sort==="low")arr.sort((a,b)=>a.price-b.price);
- if(sort==="high")arr.sort((a,b)=>b.price-a.price);
- if(sort==="rating")arr.sort((a,b)=>b.rating-a.rating);
- document.getElementById("heading").textContent=category==="All"?"All products":category;
- let grid=document.getElementById("grid");
- grid.innerHTML="";
+ let q = document.getElementById("search").value.toLowerCase().trim(), sort = document.getElementById("sort").value;
+ let arr = products.filter(p => (category === "All" || p.category === category) && (((p.name || '') + " " + (p.category || '') + " " + (p.seller_name || '')).toLowerCase().includes(q)));
+ if (sort === "low") arr.sort((a,b)=>a.price-b.price);
+ if (sort === "high") arr.sort((a,b)=>b.price-a.price);
+ if (sort === "rating") arr.sort((a,b)=>b.rating-a.rating);
+ document.getElementById("heading").textContent = category === "All" ? "All products" : category;
+ let grid = document.getElementById("grid");
+ grid.innerHTML = "";
  if(!arr.length){grid.innerHTML='<div class="empty">No products found 🔎<br><br>Try another search or add a product.</div>'}
- arr.forEach(p=>{
-  let c=document.createElement("article");c.className="card";
-  let wished=wishlist.includes(p.id);
-  let old=p.discount?Math.round(p.price/(1-p.discount/100)):0;
-  c.innerHTML=`<div class="pic">${p.image_url?`<img src="${p.image_url}" alt="${esc(p.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:""}<span class="fallbackEmoji" style="${p.image_url?"display:none":""}">📦</span><button class="wish" title="Wishlist">${wished?"♥":"♡"}</button></div>
+ arr.forEach(p => {
+  let c = document.createElement("article"); c.className = "card";
+  let wished = wishlist.includes(p.id);
+  let old = p.discount ? Math.round(p.price/(1-p.discount/100)) : 0;
+  let mainImg = (p.images && p.images.length > 0) ? p.images[0] : p.image_url;
+  c.innerHTML = `<div class="pic">${mainImg?`<img src="${mainImg}" alt="${esc(p.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:""}<span class="fallbackEmoji" style="${mainImg?"display:none":""}">📦</span><button class="wish" title="Wishlist">${wished?"♥":"♡"}</button></div>
   <div class="cardbody"><h3>${esc(p.name)}</h3><div class="seller">${esc(p.seller_name||"Marketplace seller")}</div>
   <div class="price">${money(p.price)} ${old?`<span class="old">${money(old)}</span>`:""}</div>
   <div class="off">${p.discount||0}% off • ${p.stock>0?p.stock+" left":"Out of stock"}</div>
   <div class="rating">⭐ ${Number(p.rating||4.5).toFixed(1)} • Free delivery</div>
   <div class="card-actions"><button class="view">View</button><button class="add" ${p.stock<=0?"disabled":""}>Add</button></div></div>`;
-  c.querySelector(".wish").onclick=()=>toggleWish(p.id);
-  c.querySelector(".view").onclick=()=>showDetail(p.id);
-  c.querySelector(".add").onclick=()=>addCart(p.id);
+  c.querySelector(".wish").onclick = () => toggleWish(p.id);
+  c.querySelector(".view").onclick = () => showDetail(p.id);
+  c.querySelector(".add").onclick = () => addCart(p.id);
   grid.appendChild(c);
  });
- renderCats();updateStats();updateNav();
+ renderCats(); updateStats(); updateNav();
 }
 
 function renderCats(){
- let cats=["All",...new Set(products.map(p=>p.category).filter(Boolean))],el=document.getElementById("categories");el.innerHTML="";
- cats.forEach(c=>{let b=document.createElement("button");b.className="cat"+(c===category?" active":"");b.textContent=c;b.onclick=()=>setCategory(c);el.appendChild(b)})
+ let cats = ["All", ...new Set(products.map(p=>p.category).filter(Boolean))], el = document.getElementById("categories"); el.innerHTML = "";
+ cats.forEach(c => {let b = document.createElement("button"); b.className = "cat" + (c === category ? " active" : ""); b.textContent = c; b.onclick = () => setCategory(c); el.appendChild(b)})
 }
 
 function updateStats(){
- document.getElementById("productCount").textContent=products.length;
- document.getElementById("categoryCount").textContent=new Set(products.map(p=>p.category)).size;
- document.getElementById("cartStat").textContent=cart.reduce((a,x)=>a+x.q,0);
- document.getElementById("orderCount").textContent=orders.length;
+ document.getElementById("productCount").textContent = products.length;
+ document.getElementById("categoryCount").textContent = new Set(products.map(p=>p.category)).size;
+ document.getElementById("cartStat").textContent = cart.reduce((a,x)=>a+x.q,0);
+ document.getElementById("orderCount").textContent = orders.length;
 }
 
 function updateNav(){
- document.getElementById("cartCount").textContent=cart.reduce((a,x)=>a+x.q,0);
- document.getElementById("wishCount").textContent=wishlist.length;
- document.getElementById("accountLabel").textContent=user?user.name:"Sign in";
+ document.getElementById("cartCount").textContent = cart.reduce((a,x)=>a+x.q,0);
+ document.getElementById("wishCount").textContent = wishlist.length;
+ document.getElementById("accountLabel").textContent = user ? user.name : "Sign in";
  
- const isAdmin = user && user.name === "Admin" && user.email === "admin//shopx";
+ const isAdmin = user && ((user.name === "Admin" && user.email === "admin//shopx") || user.role === "admin");
+ const isSellerOrAdmin = user && (isAdmin || user.role === "seller");
+ 
  if(isAdmin) {
    document.getElementById("adminHeaderBtn").classList.remove("hidden");
    document.getElementById("adminDrawerBtn").classList.remove("hidden");
@@ -1232,49 +1136,113 @@ function updateNav(){
    document.getElementById("adminDrawerBtn").classList.add("hidden");
  }
 
+ if(isSellerOrAdmin) {
+   document.getElementById("drawerSellBtn").classList.remove("hidden");
+   document.getElementById("quickSellBtn").classList.remove("hidden");
+   document.getElementById("heroSellBtn").classList.remove("hidden");
+ } else {
+   document.getElementById("drawerSellBtn").classList.add("hidden");
+   document.getElementById("quickSellBtn").classList.add("hidden");
+   document.getElementById("heroSellBtn").classList.add("hidden");
+ }
+ 
  [...document.querySelectorAll("#quickNav button")].forEach(b=>b.classList.remove("active"));
 }
 
 function addCart(id){
- let p=products.find(x=>x.id===id);if(!p||p.stock<=0){notify("Out of stock");return}
- let x=cart.find(a=>a.id===id);if(x){if(x.q>=p.stock){notify("Maximum stock reached");return}x.q++}else cart.push({id:id,q:1});
- save();updateStats();updateNav();notify("Added to cart 🛒");
+ let p = products.find(x=>x.id===id); if(!p || p.stock<=0){notify("Out of stock");return}
+ let x = cart.find(a=>a.id===id); if(x){if(x.q>=p.stock){notify("Maximum stock reached");return}x.q++}else cart.push({id:id,q:1});
+ save(); updateStats(); updateNav(); notify("Added to cart 🛒");
 }
 
 function toggleWish(id){let i=wishlist.indexOf(id);if(i>=0){wishlist.splice(i,1);notify("Removed from wishlist")}else{wishlist.push(id);notify("Added to wishlist ❤️")}save();render()}
 
+// --- PRODUCT DETAILS WITH MULTI-IMAGE GALLERY ---
 function showDetail(id){
- let p=products.find(x=>x.id===id);if(!p)return;
- let old=p.discount?Math.round(p.price/(1-p.discount/100)):0;
- document.getElementById("detailContent").innerHTML=`<div class="product-detail"><div class="detailpic">${p.image_url?`<img src="${p.image_url}" alt="${esc(p.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`:""}<span class="fallbackEmoji" style="${p.image_url?"display:none":""}">📦</span></div><div><h2>${esc(p.name)}</h2><div class="seller">${esc(p.seller_name)}</div><div class="detailprice">${money(p.price)} ${old?`<span class="old">${money(old)}</span>`:""}</div><div class="off">${p.discount||0}% off</div><div class="rating">⭐ ${Number(p.rating||4.5).toFixed(1)} / 5</div><div class="chips"><span class="chip">🚚 Free delivery</span><span class="chip">↩️ Easy returns</span><span class="chip">🔒 Secure checkout</span></div><p style="color:var(--muted);line-height:1.5;margin:10px 0">${esc(p.description||"No description provided.")}</p><p><b>Stock:</b> ${p.stock}</p><button class="primary" style="width:100%;margin-top:15px" onclick="addCart('${p.id}');closeModal('detail')">Add to Cart</button></div></div>`;
+ let p = products.find(x=>x.id===id); if(!p) return;
+ let old = p.discount ? Math.round(p.price/(1-p.discount/100)) : 0;
+ let imgList = p.images && p.images.length > 0 ? p.images : (p.image_url ? [p.image_url] : []);
+ let defaultImg = imgList.length > 0 ? imgList[0] : "";
+
+ document.getElementById("detailContent").innerHTML = `
+   <div class="product-detail">
+     <div class="detailpic-container">
+       <div class="detailpic" id="mainDetailPicBox">
+         ${defaultImg ? `<img id="activeDetailImg" src="${defaultImg}" alt="${esc(p.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">` : ""}
+         <span class="fallbackEmoji" style="${defaultImg?"display:none":""}">📦</span>
+       </div>
+       ${imgList.length > 1 ? `
+         <div class="detail-thumbnails">
+           ${imgList.map((img, idx) => `<img class="detail-thumb ${idx===0?'active':''}" src="${img}" onclick="switchDetailImage('${img}', this)">`).join('')}
+         </div>
+       ` : ''}
+     </div>
+     <div>
+       <h2>${esc(p.name)}</h2>
+       <div class="seller">${esc(p.seller_name)}</div>
+       <div class="detailprice">${money(p.price)} ${old?`<span class="old">${money(old)}</span>`:""}</div>
+       <div class="off">${p.discount||0}% off</div>
+       <div class="rating">⭐ ${Number(p.rating||4.5).toFixed(1)} / 5</div>
+       <div class="chips"><span class="chip">🚚 Free delivery</span><span class="chip">↩️ Easy returns</span><span class="chip">🔒 Secure checkout</span></div>
+       <p style="color:var(--muted);line-height:1.5;margin:10px 0">${esc(p.description||"No description provided.")}</p>
+       <p><b>Stock:</b> ${p.stock}</p>
+       <button class="primary" style="width:100%;margin-top:15px" onclick="addCart('${p.id}');closeModal('detail')">Add to Cart</button>
+     </div>
+   </div>`;
  openModal("detail");
+}
+
+function switchDetailImage(url, thumbEl) {
+  let imgBox = document.getElementById("activeDetailImg");
+  if(imgBox) imgBox.src = url;
+  document.querySelectorAll(".detail-thumb").forEach(t => t.classList.remove("active"));
+  thumbEl.classList.add("active");
 }
 
 function openCart(){renderCart();openModal("cart")}
 
 function renderCart(){
- let el=document.getElementById("cartContent");
+ let el = document.getElementById("cartContent");
  if(!cart.length){el.innerHTML='<div class="empty">Your cart is empty 🛒<br><br>Start shopping to add products.</div>';return}
  let total=0;
  el.innerHTML="";
- cart.forEach(x=>{let p=products.find(a=>a.id===x.id);if(!p)return;total+=p.price*x.q;let r=document.createElement("div");r.className="cartrow";r.innerHTML=`<div class="cartemoji">📦</div><div class="cartinfo"><b>${esc(p.name)}</b><br>${money(p.price)} × ${x.q}</div><div class="qty"><button>−</button> ${x.q} <button>+</button></div><button class="danger">×</button>`;let bs=r.querySelectorAll(".qty button");bs[0].onclick=()=>changeQty(p.id,-1);bs[1].onclick=()=>changeQty(p.id,1);r.querySelector(".danger").onclick=()=>removeCart(p.id);el.appendChild(r)});
- let box=document.createElement("div");box.className="totalbox";box.innerHTML=`Subtotal: <b>${money(total)}</b><br><small>Taxes and delivery are calculated at checkout.</small><button class="primary" style="width:100%;margin-top:10px">Proceed to Checkout</button>`;box.querySelector("button").onclick=()=>startCheckout();el.appendChild(box)
+ cart.forEach(x=>{
+   let p=products.find(a=>a.id===x.id); if(!p) return;
+   total+=p.price*x.q;
+   let mainImg = (p.images && p.images.length>0)?p.images[0]:p.image_url;
+   let r=document.createElement("div"); r.className="cartrow";
+   r.innerHTML=`<div class="cartemoji">${mainImg?`<img src="${mainImg}" style="width:50px;height:50px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">`:'📦'}</div><div class="cartinfo"><b>${esc(p.name)}</b><br>${money(p.price)} × ${x.q}</div><div class="qty"><button>−</button> ${x.q} <button>+</button></div><button class="danger">×</button>`;
+   let bs=r.querySelectorAll(".qty button"); bs[0].onclick=()=>changeQty(p.id,-1); bs[1].onclick=()=>changeQty(p.id,1);
+   r.querySelector(".danger").onclick=()=>removeCart(p.id); el.appendChild(r);
+ });
+ let box=document.createElement("div"); box.className="totalbox";
+ box.innerHTML=`Subtotal: <b>${money(total)}</b><br><small>Taxes and delivery are calculated at checkout.</small><button class="primary" style="width:100%;margin-top:10px">Proceed to Checkout</button>`;
+ box.querySelector("button").onclick=()=>startCheckout(); el.appendChild(box);
 }
 
 function changeQty(id,d){let x=cart.find(a=>a.id===id),p=products.find(a=>a.id===id);if(!x)return;x.q+=d;if(x.q>p.stock)x.q=p.stock;if(x.q<=0)cart=cart.filter(a=>a.id!==id);save();renderCart();updateStats();updateNav()}
 function removeCart(id){cart=cart.filter(x=>x.id!==id);save();renderCart();updateStats();updateNav();notify("Removed from cart")}
-function openWishlist(){let el=document.getElementById("wishlistContent");let arr=wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);if(!arr.length)el.innerHTML='<div class="empty">Your wishlist is empty ❤️</div>';else{el.innerHTML="";arr.forEach(p=>{let r=document.createElement("div");r.className="cartrow";r.innerHTML=`<div class="cartemoji">📦</div><div class="cartinfo"><b>${esc(p.name)}</b><br>${money(p.price)}</div><button class="primary">Add</button><button class="danger">Remove</button>`;r.querySelector(".primary").onclick=()=>addCart(p.id);r.querySelector(".danger").onclick=()=>toggleWish(p.id);el.appendChild(r)})}openModal("wishlist")}
+function openWishlist(){
+ let el=document.getElementById("wishlistContent"); let arr=wishlist.map(id=>products.find(p=>p.id===id)).filter(Boolean);
+ if(!arr.length) el.innerHTML='<div class="empty">Your wishlist is empty ❤️</div>';
+ else{
+   el.innerHTML="";
+   arr.forEach(p=>{
+     let mainImg = (p.images && p.images.length>0)?p.images[0]:p.image_url;
+     let r=document.createElement("div"); r.className="cartrow";
+     r.innerHTML=`<div class="cartemoji">${mainImg?`<img src="${mainImg}" style="width:50px;height:50px;object-fit:cover;border-radius:6px;" onerror="this.style.display='none'">`:'📦'}</div><div class="cartinfo"><b>${esc(p.name)}</b><br>${money(p.price)}</div><button class="primary">Add</button><button class="danger">Remove</button>`;
+     r.querySelector(".primary").onclick=()=>addCart(p.id); r.querySelector(".danger").onclick=()=>toggleWish(p.id); el.appendChild(r);
+   })
+ }
+ openModal("wishlist");
+}
 
 function openOrders(){
-  let el=document.getElementById("ordersContent");
-  if(!orders.length){
-    el.innerHTML='<div class="empty">No orders yet 📦</div>';
-  } else {
-    el.innerHTML=orders.slice().reverse().map(o=> {
-      let itemsList = (o.order_items||[]).map(i => {
-        let name = i.products ? i.products.name : 'Item';
-        return `${esc(name)} × ${i.quantity || 1}`;
-      }).join(", ");
+  let el = document.getElementById("ordersContent");
+  if(!orders.length){ el.innerHTML='<div class="empty">No orders yet 📦</div>'; }
+  else {
+    el.innerHTML = orders.slice().reverse().map(o=> {
+      let itemsList = (o.order_items||[]).map(i => `${esc(i.products ? i.products.name : 'Item')} × ${i.quantity || 1}`).join(", ");
       return `<div class="order"><div class="orderhead"><b>Order</b><span>${new Date(o.created_at||Date.now()).toLocaleString()}</span></div><p style="margin:8px 0">Status: <b style="color:#16a34a">${esc(o.status||'Confirmed')}</b></p><p>${itemsList || 'No item details'}</p><b>Total: ${money(o.total)}</b></div>`;
     }).join("");
   }
@@ -1286,67 +1254,34 @@ function startCheckout(){
  if(!user){closeModal("cart");openModal("account");notify("Please sign in first");return}
  let total=cart.reduce((s,x)=>{let p=products.find(a=>a.id===x.id);return s+(p?p.price*x.q:0)},0);
  document.getElementById("checkoutContent").innerHTML=`<div class="success">Signed in as ${esc(user.name)}</div><h3>Delivery details</h3><div class="formgrid"><div class="full"><label>Full name</label><input id="coName" value="${esc(user.name)}"></div><div class="full"><label>Address</label><textarea id="coAddress" placeholder="House, street, city, state, PIN code"></textarea></div><div><label>Phone</label><input id="coPhone" placeholder="10 digit mobile number"></div><div><label>Payment</label><select id="coPay"><option>Cash on Delivery</option><option>Demo Card Payment</option><option>Demo UPI</option></select></div></div><div class="totalbox">Order total: <b>${money(total)}</b><br><button class="primary" style="width:100%;margin-top:10px" onclick="placeOrder()">Place Order</button></div>`;
- closeModal("cart");openModal("checkout");
+ closeModal("cart"); openModal("checkout");
 }
 
 async function placeOrder(){
- let name=document.getElementById("coName").value.trim(),
-     addr=document.getElementById("coAddress").value.trim(),
-     phone=document.getElementById("coPhone").value.trim(),
-     payMethod=document.getElementById("coPay").value;
+ let name = document.getElementById("coName").value.trim(),
+     addr = document.getElementById("coAddress").value.trim(),
+     phone = document.getElementById("coPhone").value.trim(),
+     payMethod = document.getElementById("coPay").value;
+ if(!name || !addr || !phone){notify("Please complete delivery details");return}
+ let total = cart.reduce((s,x)=>{let p=products.find(a=>a.id===x.id);return s+(p?p.price*x.q:0)},0);
 
- if(!name||!addr||!phone){notify("Please complete delivery details");return}
-
- let total = cart.reduce((s,x)=>{
-   let p=products.find(a=>a.id===x.id);
-   return s+(p?p.price*x.q:0)
- },0);
-
- const { data: orderData, error: orderErr } = await db.from('orders').insert([{
-   customer_name: name,
-   address: addr,
-   phone: phone,
-   payment_method: payMethod,
-   total: total,
-   status: "Confirmed"
- }]).select();
-
- if(orderErr) {
-   notify("Failed to place order: " + orderErr.message);
-   return;
- }
-
- const newOrderId = orderData[0].id;
+ const { data: orderData, error: orderErr } = await db.from('orders').insert([{ customer_name: name, address: addr, phone, payment_method: payMethod, total, status: "Confirmed" }]).select();
+ if(orderErr) { notify("Failed to place order: " + orderErr.message); return; }
 
  const orderItemsToInsert = cart.map(x => {
    let p = products.find(a => a.id === x.id);
-   return {
-     order_id: newOrderId,
-     product_id: p.id,
-     quantity: x.q,
-     price: p.price
-   };
+   return { order_id: orderData[0].id, product_id: p.id, quantity: x.q, price: p.price };
  });
 
- const { error: itemsErr } = await db.from('order_items').insert(orderItemsToInsert);
-
- if(itemsErr) {
-   notify("Error saving order items: " + itemsErr.message);
-   return;
- }
-
- cart=[];
- save();
- closeModal("checkout");
- fetchOrdersFromSupabase();
- notify("Order placed successfully 🎉");
+ await db.from('order_items').insert(orderItemsToInsert);
+ cart=[]; save(); closeModal("checkout"); fetchOrdersFromSupabase(); notify("Order placed successfully 🎉");
  setTimeout(()=>openOrders(),350);
 }
 
 function openAccount(){
- let el=document.getElementById("accountContent");
+ let el = document.getElementById("accountContent");
  if(user) {
-   const isAdmin = user.name === "Admin" && user.email === "admin//shopx";
+   const isAdmin = (user.name === "Admin" && user.email === "admin//shopx") || user.role === "admin";
    el.innerHTML=`<div class="success">You're signed in ${isAdmin?'<b>(Admin)</b>':''}</div><h3 style="text-align:center">${esc(user.name)}</h3><p style="color:var(--muted);margin:7px 0;text-align:center">${esc(user.email)}</p>${isAdmin ? `<button class="admin-btn" style="width:100%;margin-top:10px;" onclick="openAdminPanel();closeModal('account')">⚙️ Open Admin Panel</button>` : ''}<button class="primary" style="width:100%;margin-top:10px" onclick="openOrders();closeModal('account')">View Orders</button><button class="danger" style="width:100%;margin-top:8px" onclick="signOut()">Sign out</button>`;
  }
  else el.innerHTML=`<p style="color:var(--muted);margin-bottom:10px">Sign in to save preferences, order, or manage your profile!</p><label>Name</label><input id="loginName" placeholder="John Doe"><label>Email</label><input id="loginEmail" placeholder="john@example.com"><button class="primary" style="width:100%;margin-top:12px" onclick="signIn()">Sign in / Register</button>`;
@@ -1354,77 +1289,119 @@ function openAccount(){
 }
 
 async function signIn(){
-  let n=document.getElementById("loginName").value.trim(),
-      e=document.getElementById("loginEmail").value.trim();
-  if(!n||!e){notify("Enter your name and email");return}
-
-  const isAttemptingAdmin = (n === "Admin" && e === "admin//shopx");
-
-  if(isAttemptingAdmin) {
+  let n = document.getElementById("loginName").value.trim(), e = document.getElementById("loginEmail").value.trim();
+  if(!n || !e){notify("Enter your name and email");return}
+  
+  const isHardcodedAdmin = (n === "Admin" && e === "admin//shopx");
+  if(isHardcodedAdmin) {
     let pin = prompt("Enter Admin Security PIN:");
-    if(pin !== "31414142") {
-      notify("Incorrect PIN! Access denied.");
+    if(pin !== "31414142") { notify("Incorrect PIN! Access denied."); return; }
+  }
+
+  // Check if profile exists in Supabase profiles table
+  const { data: existingProfile, error: fetchErr } = await db.from('profiles').select('*').eq('email', e).maybeSingle();
+  let role = isHardcodedAdmin ? 'admin' : (existingProfile ? existingProfile.role : 'user');
+
+  if(!existingProfile) {
+    // Insert new profile into Supabase profiles table
+    const { error: insertErr } = await db.from('profiles').insert([{ name: n, email: e, role }]);
+    if(insertErr) {
+      notify("Error saving profile: " + insertErr.message);
       return;
+    }
+  } else {
+    // Optionally update name if it changed
+    if(existingProfile.name !== n || (isHardcodedAdmin && existingProfile.role !== 'admin')) {
+      await db.from('profiles').update({ name: n, role }).eq('email', e);
     }
   }
 
-  const { data: existingProfile } = await db.from('profiles').select('*').eq('email', e).maybeSingle();
-  
-  if(!existingProfile) {
-    await db.from('profiles').insert([{ name: n, email: e, role: isAttemptingAdmin ? 'admin' : 'user' }]);
-  }
-
-  user = { name: n, email: e };
-  save();
-
-  closeModal("account");
-  updateNav();
-  notify(isAttemptingAdmin ? "Welcome back, Admin! ⚙️" : "Welcome, "+n+"! 👋");
+  user = { name: n, email: e, role }; save(); closeModal("account"); updateNav();
+  notify(role === 'admin' ? "Welcome back, Admin! ⚙️" : role === 'seller' ? "Welcome back, Seller! 🛍️" : "Welcome, "+n+"! 👋 (Saved to database)");
 }
 
-function signOut(){user=null;save();closeModal("account");updateNav();notify("Signed out")}
+function signOut(){user=null; save(); closeModal("account"); updateNav(); notify("Signed out")}
+
+// --- MULTI-IMAGE UPLOAD & SUBMISSION HANDLERS ---
+async function previewImages(input) {
+  let files = input.files;
+  if (!files || files.length === 0) return;
+  tempUploadedImages = [];
+  let container = document.getElementById("imagePreviewContainer");
+  container.innerHTML = "";
+
+  for (let i = 0; i < files.length; i++) {
+    let file = files[i];
+    let base64 = await resizeImage(file);
+    tempUploadedImages.push(base64);
+    
+    let item = document.createElement("div");
+    item.className = "image-preview-item";
+    item.innerHTML = `<img src="${base64}" alt="Preview">`;
+    container.appendChild(item);
+  }
+}
+
+function previewUrls(urlStr) {
+  let container = document.getElementById("imagePreviewContainer");
+  if (!urlStr) { container.innerHTML = '<div class="image-preview-item" style="width:100%">📷 Product photo previews</div>'; tempUploadedImages = []; return; }
+  
+  let urls = urlStr.split(',').map(u => u.trim()).filter(Boolean);
+  tempUploadedImages = urls;
+  container.innerHTML = "";
+
+  urls.forEach(url => {
+    let item = document.createElement("div");
+    item.className = "image-preview-item";
+    item.innerHTML = `<img src="${esc(url)}" alt="Preview" onerror="this.parentElement.innerHTML='⚠️'">`;
+    container.appendChild(item);
+  });
+}
 
 async function addProduct(){
- let n=document.getElementById("sName").value.trim(),
- price=Number(document.getElementById("sPrice").value),
- cat=document.getElementById("sCat").value,
- off=Number(document.getElementById("sOff").value)||0,
- stock=Number(document.getElementById("sStock").value)||1,
- desc=document.getElementById("sDesc").value.trim(),
- file=document.getElementById("sImageFile").files[0],
- url=document.getElementById("sImageUrl").value.trim();
+ let n = document.getElementById("sName").value.trim(),
+     price = Number(document.getElementById("sPrice").value),
+     cat = document.getElementById("sCat").value,
+     off = Number(document.getElementById("sOff").value)||0,
+     stock = Number(document.getElementById("sStock").value)||1,
+     desc = document.getElementById("sDesc").value.trim();
 
- if(!n||price<=0){notify("Enter a product name and valid price");return}
+ if(!n || price <= 0){notify("Enter a product name and valid price");return}
 
- let image = url;
+ let imagesArray = tempUploadedImages;
 
- if(file){
-   try {
-     const fileExt = file.name.split('.').pop();
-     const fileName = `${Date.now()}.${fileExt}`;
-     const { data: uploadData, error: uploadErr } = await db.storage.from('product-images').upload(fileName, file);
-
-     if (uploadErr) {
-       image = await resizeImage(file);
-     } else {
-       const { data: publicUrlData } = db.storage.from('product-images').getPublicUrl(fileName);
-       image = publicUrlData.publicUrl;
+ let fileInput = document.getElementById("sImageFiles");
+ if (fileInput.files && fileInput.files.length > 0) {
+   imagesArray = [];
+   for (let i = 0; i < fileInput.files.length; i++) {
+     let file = fileInput.files[i];
+     try {
+       const fileExt = file.name.split('.').pop();
+       const fileName = `${Date.now()}_${i}.${fileExt}`;
+       const { error: uploadErr } = await db.storage.from('product-images').upload(fileName, file);
+       if (!uploadErr) {
+         const { data: publicUrlData } = db.storage.from('product-images').getPublicUrl(fileName);
+         imagesArray.push(publicUrlData.publicUrl);
+       } else {
+         imagesArray.push(await resizeImage(file));
+       }
+     } catch(err) {
+       imagesArray.push(await resizeImage(file));
      }
-   } catch(err) {
-     image = await resizeImage(file);
    }
  }
 
- const { data, error } = await db.from('products').insert([{
+ const { error } = await db.from('products').insert([{
    name: n,
    price: price,
    category: cat,
    rating: 4.5,
-   discount: Math.min(99,Math.max(0,off)),
+   discount: Math.min(99, Math.max(0, off)),
    stock: stock,
    seller_name: user ? user.name : "New Seller",
    description: desc,
-   image_url: image || ""
+   image_url: imagesArray.length > 0 ? imagesArray[0] : "",
+   images: imagesArray
  }]).select();
 
  if (error) {
@@ -1433,209 +1410,125 @@ async function addProduct(){
  }
 
  closeModal("sell");
- ["sName","sPrice","sImageFile","sImageUrl","sOff","sStock","sDesc"].forEach(id=>document.getElementById(id).value="");
- document.getElementById("imagePreview").innerHTML="📷 Product photo preview";
+ ["sName","sPrice","sImageFiles","sImageUrls","sOff","sStock","sDesc"].forEach(id => { let el = document.getElementById(id); if(el) el.value=""; });
+ document.getElementById("imagePreviewContainer").innerHTML = '<div class="image-preview-item" style="width:100%">📷 Product photo previews</div>';
+ tempUploadedImages = [];
  fetchProductsFromSupabase();
- notify("Product published 🎉");
+ notify("Product published with multiple images 🎉");
 }
 
 async function submitBug() {
   let title = document.getElementById("bugTitle").value.trim();
   let desc = document.getElementById("bugDesc").value.trim();
   let file = document.getElementById("bugFile").files[0];
-
   if(!title || !desc) { notify("Please fill bug details"); return; }
 
   let imageUrl = null;
-
   if (file) {
     try {
       const fileName = `bug_${Date.now()}.${file.name.split('.').pop()}`;
-      const { data: uploadData, error: uploadErr } = await db.storage.from('bug-images').upload(fileName, file);
+      const { error: uploadErr } = await db.storage.from('bug-images').upload(fileName, file);
       if (!uploadErr) {
         const { data: publicUrl } = db.storage.from('bug-images').getPublicUrl(fileName);
         imageUrl = publicUrl.publicUrl;
       }
-    } catch(e) {
-      console.log("Bug image upload note:", e);
-    }
+    } catch(e) { console.log("Bug image upload note:", e); }
   }
 
-  const { error } = await db.from('bug_reports').insert([{ 
-    title, 
-    description: desc,
-    image_url: imageUrl
-  }]);
-
-  if(error) {
-    notify("Failed to submit bug: " + error.message);
-  } else {
+  const { error } = await db.from('bug_reports').insert([{ title, description: desc, image_url: imageUrl }]);
+  if(error) notify("Failed to submit bug: " + error.message);
+  else {
     notify("Bug report submitted! Thank you ❤️");
-    document.getElementById("bugTitle").value = "";
-    document.getElementById("bugDesc").value = "";
-    document.getElementById("bugFile").value = "";
+    document.getElementById("bugTitle").value = ""; document.getElementById("bugDesc").value = ""; document.getElementById("bugFile").value = "";
     closeModal("bug");
   }
 }
 
-// --- CONTACT MESSAGES SUBMISSION ---
 async function sendContact() {
   let name = document.getElementById("cName").value.trim();
   let email = document.getElementById("cEmail").value.trim();
   let msg = document.getElementById("cMsg").value.trim();
   let btn = document.getElementById("sendContactBtn");
+  if(!name || !email || !msg) { notify("Please fill out all contact fields"); return; }
 
-  if(!name || !email || !msg) { 
-    notify("Please fill out all contact fields"); 
-    return; 
-  }
+  btn.innerText = "Sending..."; btn.disabled = true;
+  const { error } = await db.from('contact-messages').insert([{ name, email, message: msg }]);
+  btn.innerText = "Send Message"; btn.disabled = false;
 
-  btn.innerText = "Sending...";
-  btn.disabled = true;
-
-  const { data, error } = await db.from('contact-messages').insert([
-    { name: name, email: email, message: msg }
-  ]).select();
-
-  btn.innerText = "Send Message";
-  btn.disabled = false;
-
-  if(error) {
-    console.error("Contact Submission Error:", error);
-    notify("Failed to send message: " + error.message);
-  } else {
+  if(error) notify("Failed to send message: " + error.message);
+  else {
     notify("Message sent successfully! 📩");
-    document.getElementById("cName").value = "";
-    document.getElementById("cEmail").value = "";
-    document.getElementById("cMsg").value = "";
+    document.getElementById("cName").value = ""; document.getElementById("cEmail").value = ""; document.getElementById("cMsg").value = "";
     closeModal("contact");
   }
 }
 
-// --- ADMIN CONTROL PANEL LOGIC ---
 let activeAdminTab = "products";
-
-function openAdminPanel() {
-  openModal("adminPanel");
-  switchAdminTab(activeAdminTab);
-}
-
+function openAdminPanel() { openModal("adminPanel"); switchAdminTab(activeAdminTab); }
 function switchAdminTab(tab) {
   activeAdminTab = tab;
   document.querySelectorAll(".admin-tab-bar button").forEach(b => b.classList.remove("active"));
   if (tab === 'products') document.getElementById("btnTabProds").classList.add("active");
+  if (tab === 'admins') document.getElementById("btnTabAdmins").classList.add("active");
   if (tab === 'bugs') document.getElementById("btnTabBugs").classList.add("active");
   if (tab === 'msgs') document.getElementById("btnTabMsgs").classList.add("active");
-
   renderAdminTabContent();
 }
 
 async function renderAdminTabContent() {
   let content = document.getElementById("adminTabContent");
   content.innerHTML = "<p style='padding:15px;color:var(--muted);'>Loading records...</p>";
-
+  
   if (activeAdminTab === "products") {
-    content.innerHTML = `
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Category</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${products.map(p => `
-            <tr>
-              <td><b>${esc(p.name)}</b></td>
-              <td>${esc(p.category)}</td>
-              <td>${money(p.price)}</td>
-              <td>${p.stock}</td>
-              <td><button class="danger" onclick="adminDeleteProduct('${p.id}')">Delete</button></td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `;
+    content.innerHTML = `<table class="admin-table"><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead><tbody>${products.map(p => `<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.category)}</td><td>${money(p.price)}</td><td>${p.stock}</td><td><button class="danger" onclick="adminDeleteProduct('${p.id}')">Delete</button></td></tr>`).join('')}</tbody></table>`;
+  } else if (activeAdminTab === "admins") {
+    const { data: profiles, error } = await db.from('profiles').select('*');
+    if (error || !profiles || !profiles.length) { content.innerHTML = "<p style='padding:20px;text-align:center;'>No registered profiles found in database.</p>"; return; }
+    content.innerHTML = `<table class="admin-table"><thead><tr><th>User Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead><tbody>${profiles.map(u => `
+      <tr>
+        <td><b>${esc(u.name)}</b></td>
+        <td>${esc(u.email)}</td>
+        <td><span style="color:${u.role==='admin'?'var(--gold)':u.role==='seller'?'var(--green)':'var(--txt)'};font-weight:bold;">${esc(u.role||'user')}</span></td>
+        <td>
+          <select onchange="updateUserRole('${u.id}', this.value)" style="padding:4px 8px;border-radius:4px;border:1px solid var(--border);">
+            <option value="user" ${u.role==='user'?'selected':''}>User</option>
+            <option value="seller" ${u.role==='seller'?'selected':''}>Seller</option>
+            <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+          </select>
+        </td>
+      </tr>
+    `).join('')}</tbody></table>`;
   } else if (activeAdminTab === "bugs") {
-    const { data: bugs, error } = await db.from('bug_reports').select('*');
-    if (error || !bugs || !bugs.length) {
-      content.innerHTML = "<p style='padding:20px;text-align:center;'>No bug reports found ✨</p>";
-      return;
-    }
-    content.innerHTML = `
-      <table class="admin-table">
-        <thead>
-          <tr><th>Title</th><th>Description</th><th>Submitted</th></tr>
-        </thead>
-        <tbody>
-          ${bugs.map(b => `
-            <tr>
-              <td><b>${esc(b.title)}</b></td>
-              <td>${esc(b.description)}</td>
-              <td>${new Date(b.created_at || Date.now()).toLocaleDateString()}</td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `;
+    const { data: bugs } = await db.from('bug_reports').select('*');
+    if (!bugs || !bugs.length) { content.innerHTML = "<p style='padding:20px;text-align:center;'>No bug reports found ✨</p>"; return; }
+    content.innerHTML = `<table class="admin-table"><thead><tr><th>Title</th><th>Description</th><th>Submitted</th></tr></thead><tbody>${bugs.map(b => `<tr><td><b>${esc(b.title)}</b></td><td>${esc(b.description)}</td><td>${new Date(b.created_at || Date.now()).toLocaleDateString()}</td></tr>`).join('')}</tbody></table>`;
   } else if (activeAdminTab === "msgs") {
-    const { data: msgs, error } = await db.from('contact-messages').select('*').order('created_at', { ascending: false });
-    
-    if (error) {
-      content.innerHTML = `<p style='padding:20px;color:var(--red);text-align:center;'>Error loading messages: ${esc(error.message)}</p>`;
-      return;
-    }
-    
-    if (!msgs || !msgs.length) {
-      content.innerHTML = "<p style='padding:20px;text-align:center;'>No contact messages received yet 📩</p>";
-      return;
-    }
-    
-    content.innerHTML = `
-      <table class="admin-table">
-        <thead>
-          <tr><th>Sender</th><th>Email</th><th>Message</th><th>Received</th><th>Action</th></tr>
-        </thead>
-        <tbody>
-          ${msgs.map(m => `
-            <tr>
-              <td><b>${esc(m.name || 'Anonymous')}</b></td>
-              <td><a href="mailto:${esc(m.email)}" style="color:var(--p);">${esc(m.email)}</a></td>
-              <td>${esc(m.message)}</td>
-              <td>${new Date(m.created_at || Date.now()).toLocaleString()}</td>
-              <td><button class="danger" onclick="adminDeleteMessage('${m.id}')">Delete</button></td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
-    `;
+    const { data: msgs } = await db.from('contact-messages').select('*').order('created_at', { ascending: false });
+    if (!msgs || !msgs.length) { content.innerHTML = "<p style='padding:20px;text-align:center;'>No contact messages received yet 📩</p>"; return; }
+    content.innerHTML = `<table class="admin-table"><thead><tr><th>Sender</th><th>Email</th><th>Message</th><th>Received</th><th>Action</th></tr></thead><tbody>${msgs.map(m => `<tr><td><b>${esc(m.name || 'Anonymous')}</b></td><td><a href="mailto:${esc(m.email)}" style="color:var(--p);">${esc(m.email)}</a></td><td>${esc(m.message)}</td><td>${new Date(m.created_at || Date.now()).toLocaleString()}</td><td><button class="danger" onclick="adminDeleteMessage('${m.id}')">Delete</button></td></tr>`).join('')}</tbody></table>`;
+  }
+}
+
+async function updateUserRole(userId, newRole) {
+  const { error } = await db.from('profiles').update({ role: newRole }).eq('id', userId);
+  if(error) {
+    notify("Failed to update role: " + error.message);
+  } else {
+    notify(`User role successfully updated to ${newRole.toUpperCase()}! 🛡️`);
+    renderAdminTabContent();
   }
 }
 
 async function adminDeleteMessage(id) {
   if (!confirm("Are you sure you want to delete this message?")) return;
-  const { error } = await db.from('contact-messages').delete().eq('id', id);
-  if (error) {
-    notify("Error deleting message: " + error.message);
-  } else {
-    notify("Message deleted 🗑️");
-    renderAdminTabContent();
-  }
+  await db.from('contact-messages').delete().eq('id', id);
+  notify("Message deleted 🗑️"); renderAdminTabContent();
 }
 
 async function adminDeleteProduct(id) {
   if (!confirm("Are you sure you want to remove this product listing?")) return;
-  const { error } = await db.products.delete().eq('id', id);
-  if (error) {
-    notify("Error deleting product: " + error.message);
-  } else {
-    notify("Product deleted from database 🗑️");
-    fetchProductsFromSupabase();
-    setTimeout(() => renderAdminTabContent(), 300);
-  }
+  await db.from('products').delete().eq('id', id);
+  notify("Product deleted 🗑️"); fetchProductsFromSupabase(); setTimeout(() => renderAdminTabContent(), 300);
 }
 
 function resizeImage(file){
@@ -1652,35 +1545,16 @@ function resizeImage(file){
        ctx.drawImage(img,0,0,c.width,c.height);
        resolve(c.toDataURL("image/jpeg",0.78));
      };
-     img.onerror=reject;
-     img.src=e.target.result;
+     img.onerror=reject; img.src=e.target.result;
    };
-   reader.onerror=reject;
-   reader.readAsDataURL(file);
+   reader.onerror=reject; reader.readAsDataURL(file);
  });
-}
-
-function previewImage(input){
- let file=input.files[0];
- if(!file)return;
- let reader=new FileReader();
- reader.onload=e=>{
-   document.getElementById("imagePreview").innerHTML=`<img src="${e.target.result}" alt="Preview">`;
- };
- reader.readAsDataURL(file);
-}
-
-function previewUrl(url){
- let box=document.getElementById("imagePreview");
- if(!url){box.innerHTML="📷 Product photo preview";return}
- box.innerHTML=`<img src="${esc(url)}" alt="Preview" onerror="this.parentElement.innerHTML='⚠️ Image URL could not be loaded'">`;
 }
 
 function toggleDark(){document.body.classList.toggle("dark");localStorage.setItem("shopx_dark",document.body.classList.contains("dark")?"1":"0")}
 if(localStorage.getItem("shopx_dark")==="1")document.body.classList.add("dark");
 document.getElementById("search").addEventListener("input",render);
 
-// Initial fetches
 fetchProductsFromSupabase();
 fetchOrdersFromSupabase();
 initGlobalThemeSync();
