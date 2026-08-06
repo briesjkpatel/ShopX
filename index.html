@@ -1076,8 +1076,19 @@ async function fetchOrdersFromSupabase() {
 
 function render(){
  let q = document.getElementById("search").value.toLowerCase().trim(), sort = document.getElementById("sort").value;
- // Exact/Normalized matching for category to avoid mismatch issues
- let arr = products.filter(p => (category === "All" || (p.category && p.category.toLowerCase().trim() === category.toLowerCase().trim())) && (((p.name || '') + " " + (p.category || '') + " " + (p.seller_name || '')).toLowerCase().includes(q)));
+ 
+ // Flexible category matching to handle singular/plural discrepancies (e.g., "laptop" vs "laptops")
+ let arr = products.filter(p => {
+   let matchesCategory = true;
+   if (category !== "All") {
+     let pCat = (p.category || '').toLowerCase().trim();
+     let targetCat = category.toLowerCase().trim();
+     matchesCategory = (pCat === targetCat || pCat === targetCat.replace(/s$/, '') || pCat + 's' === targetCat);
+   }
+   let matchesSearch = (((p.name || '') + " " + (p.category || '') + " " + (p.seller_name || '')).toLowerCase().includes(q));
+   return matchesCategory && matchesSearch;
+ });
+
  if (sort === "low") arr.sort((a,b)=>a.price-b.price);
  if (sort === "high") arr.sort((a,b)=>b.price-a.price);
  if (sort === "rating") arr.sort((a,b)=>b.rating-a.rating);
