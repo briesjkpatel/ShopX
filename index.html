@@ -203,13 +203,13 @@ body.rakshabandhan-mode .card, body.rakshabandhan-mode .stat {
   background-size: 200% 200%;
   animation: shimmerSweep 3s linear infinite;
 }
-body.diwali-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706, #f59e0b); box-shadow: 0 0 14px #f59e0b;[cite: 1] }
-body.holi-mode .festive-banner { display: block; background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8, #ff4e50, #ff007f); box-shadow: 0 0 16px #ff007f;[cite: 1] }
-body.ocean-mode .festive-banner { display: block; background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8); box-shadow: 0 0 16px #38bdf8;[cite: 1] }
-body.summer-mode .festive-banner { display: block; background: linear-gradient(90deg, #2b1055, #ff7e5f, #ffd186, #ff7e5f); box-shadow: 0 0 16px #ff7e5f;[cite: 1] }
-body.halloween-mode .festive-banner { display: block; background: linear-gradient(90deg, #ea580c, #a855f7, #22c55e, #ea580c); box-shadow: 0 0 14px #ea580c;[cite: 1] }
-body.cosmic-mode .festive-banner { display: block; background: linear-gradient(90deg, #7b2cbf, #00b4d8, #e2e8f0, #7b2cbf); box-shadow: 0 0 16px #7b2cbf;[cite: 1] }
-body.rakshabandhan-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #ec4899, #eab308, #d946ef, #f59e0b); box-shadow: 0 0 18px #d946ef;[cite: 1] }
+body.diwali-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706, #f59e0b); box-shadow: 0 0 14px #f59e0b;[cite: 1]}
+body.holi-mode .festive-banner { display: block; background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8, #ff4e50, #ff007f); box-shadow: 0 0 16px #ff007f;[cite: 1]}
+body.ocean-mode .festive-banner { display: block; background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8); box-shadow: 0 0 16px #38bdf8;[cite: 1]}
+body.summer-mode .festive-banner { display: block; background: linear-gradient(90deg, #2b1055, #ff7e5f, #ffd186, #ff7e5f); box-shadow: 0 0 16px #ff7e5f;[cite: 1]}
+body.halloween-mode .festive-banner { display: block; background: linear-gradient(90deg, #ea580c, #a855f7, #22c55e, #ea580c); box-shadow: 0 0 14px #ea580c;[cite: 1]}
+body.cosmic-mode .festive-banner { display: block; background: linear-gradient(90deg, #7b2cbf, #00b4d8, #e2e8f0, #7b2cbf); box-shadow: 0 0 16px #7b2cbf;[cite: 1]}
+body.rakshabandhan-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #ec4899, #eab308, #d946ef, #f59e0b); box-shadow: 0 0 18px #d946ef;[cite: 1]}
 
 /* THEME SPECIFIC DECORATIONS */
 .theme-element { display: none; pointer-events: none; position: fixed; z-index: 1001; }
@@ -1081,7 +1081,8 @@ async function fetchOrdersFromSupabase() {
 
 function render(){
  let q = document.getElementById("search").value.toLowerCase().trim(), sort = document.getElementById("sort").value;
- let arr = products.filter(p => (category === "All" || p.category === category) && (((p.name || '') + " " + (p.category || '') + " " + (p.seller_name || '')).toLowerCase().includes(q)));
+ // Exact/Normalized matching for category to avoid mismatch issues
+ let arr = products.filter(p => (category === "All" || (p.category && p.category.toLowerCase().trim() === category.toLowerCase().trim())) && (((p.name || '') + " " + (p.category || '') + " " + (p.seller_name || '')).toLowerCase().includes(q)));
  if (sort === "low") arr.sort((a,b)=>a.price-b.price);
  if (sort === "high") arr.sort((a,b)=>b.price-a.price);
  if (sort === "rating") arr.sort((a,b)=>b.rating-a.rating);
@@ -1110,7 +1111,7 @@ function render(){
 
 function renderCats(){
  let cats = ["All", ...new Set(products.map(p=>p.category).filter(Boolean))], el = document.getElementById("categories"); el.innerHTML = "";
- cats.forEach(c => {let b = document.createElement("button"); b.className = "cat" + (c === category ? " active" : ""); b.textContent = c; b.onclick = () => setCategory(c); el.appendChild(b)})
+ cats.forEach(c => {let b = document.createElement("button"); b.className = "cat" + (c.toLowerCase().trim() === category.toLowerCase().trim() ? " active" : ""); b.textContent = c; b.onclick = () => setCategory(c); el.appendChild(b)})
 }
 
 function updateStats(){
