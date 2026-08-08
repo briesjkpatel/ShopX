@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -203,13 +203,13 @@ body.rakshabandhan-mode .card, body.rakshabandhan-mode .stat {
   background-size: 200% 200%;
   animation: shimmerSweep 3s linear infinite;
 }
-body.diwali-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706, #f59e0b); box-shadow: 0 0 14px #f59e0b;[cite: 1]}
-body.holi-mode .festive-banner { display: block; background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8, #ff4e50, #ff007f); box-shadow: 0 0 16px #ff007f;[cite: 1]}
-body.ocean-mode .festive-banner { display: block; background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8); box-shadow: 0 0 16px #38bdf8;[cite: 1]}
-body.summer-mode .festive-banner { display: block; background: linear-gradient(90deg, #2b1055, #ff7e5f, #ffd186, #ff7e5f); box-shadow: 0 0 16px #ff7e5f;[cite: 1]}
-body.halloween-mode .festive-banner { display: block; background: linear-gradient(90deg, #ea580c, #a855f7, #22c55e, #ea580c); box-shadow: 0 0 14px #ea580c;[cite: 1]}
-body.cosmic-mode .festive-banner { display: block; background: linear-gradient(90deg, #7b2cbf, #00b4d8, #e2e8f0, #7b2cbf); box-shadow: 0 0 16px #7b2cbf;[cite: 1]}
-body.rakshabandhan-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #ec4899, #eab308, #d946ef, #f59e0b); box-shadow: 0 0 18px #d946ef;[cite: 1]}
+body.diwali-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #fbbf24, #d97706, #f59e0b); box-shadow: 0 0 14px #f59e0b; }
+body.holi-mode .festive-banner { display: block; background: linear-gradient(90deg, #ff007f, #7928ca, #00dfd8, #ff4e50, #ff007f); box-shadow: 0 0 16px #ff007f; }
+body.ocean-mode .festive-banner { display: block; background: linear-gradient(90deg, #38bdf8, #818cf8, #38bdf8); box-shadow: 0 0 16px #38bdf8; }
+body.summer-mode .festive-banner { display: block; background: linear-gradient(90deg, #2b1055, #ff7e5f, #ffd186, #ff7e5f); box-shadow: 0 0 16px #ff7e5f; }
+body.halloween-mode .festive-banner { display: block; background: linear-gradient(90deg, #ea580c, #a855f7, #22c55e, #ea580c); box-shadow: 0 0 14px #ea580c; }
+body.cosmic-mode .festive-banner { display: block; background: linear-gradient(90deg, #7b2cbf, #00b4d8, #e2e8f0, #7b2cbf); box-shadow: 0 0 16px #7b2cbf; }
+body.rakshabandhan-mode .festive-banner { display: block; background: linear-gradient(90deg, #f59e0b, #ec4899, #eab308, #d946ef, #f59e0b); box-shadow: 0 0 18px #d946ef; }
 
 /* THEME SPECIFIC DECORATIONS */
 .theme-element { display: none; pointer-events: none; position: fixed; z-index: 1001; }
@@ -457,7 +457,7 @@ body.cosmic-mode .hero p { color: #94a3b8; }
 .modalbg{position:fixed;inset:0;background:#0008;z-index:3000;display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(2px);}
 .modal{background:var(--card);color:var(--txt);width:min(650px,100%);max-height:92vh;overflow:auto;border-radius:17px;padding:22px;position:relative;animation:popIn 0.25s ease-out;}
 .modal.small{width:min(460px,100%)}
-.modal.large{width:min(900px,100%)}
+.modal.large{width:min(950px,100%)}
 .close{position:absolute;right:14px;top:14px;border:0;background:#eee;width:32px;height:32px;border-radius:50%;cursor:pointer;}
 .modal h2{margin-bottom:15px}
 .formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -500,6 +500,18 @@ body.cosmic-mode .hero p { color: #94a3b8; }
 .admin-table{width:100%;border-collapse:collapse;margin-top:10px}
 .admin-table th,.admin-table td{border:1px solid var(--border);padding:10px;text-align:left;font-size:13px}
 .admin-table th{background:var(--bg)}
+
+/* Role Badge Styles */
+.role-badge {
+  padding: 3px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.role-admin { background: #fef3c7; color: #d97706; border: 1px solid #f59e0b; }
+.role-seller { background: #dcfce7; color: #166534; border: 1px solid #22c55e; }
+.role-user { background: #e0f2fe; color: #0369a1; border: 1px solid #38bdf8; }
 
 .theme-selector-box{background:var(--bg);border:1px solid var(--border);padding:14px;border-radius:10px;margin-bottom:15px}
 .theme-options{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;}
@@ -645,7 +657,6 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 
 <!-- Diwali / Rakshabandhan Launcher Bar -->
 <div id="fireworks-launcher" onclick="launchFirework(event)">
-  🎆 Click anywhere on this bottom launcher bar to set off festive fireworks! 🎆
 </div>
 
 <header class="top">
@@ -806,33 +817,31 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   <div class="modal"><button class="close" onclick="closeModal('refund')">×</button>
     <h2>🔄 Refund & Cancellation</h2>
     <div style="margin:12px 0;line-height:1.6;color:var(--muted);font-size:14px;">
-      <p>For privacy-related queries, contact us at: support@circutech.in or call +91- 9217656981.</p>
-      
-      <h3 style="margin-top:15px;color:var(--txt);">1. ❓ Order Cancellation Policy</h3>
-      <p>We understand that sometimes you may need to cancel an order. Here's everything you need to know:</p>
-      <ul style="margin:10px 0 10px 20px;">
-        <li><b>Order Placed (Pending):</b> Yes — Instant | Full Refund within 24 hours</li>
-        <li><b>Order Confirmed / Processing:</b> Yes — Within 2 hours | Full Refund within 3-5 days</li>
-        <li><b>Packed / Ready to Ship:</b> Limited — Contact Support | Full Refund if approved</li>
-        <li><b>Shipped / Out for Delivery:</b> No — Refuse delivery instead | Refund after return received</li>
-        <li><b>Delivered:</b> No — Raise Return Request | As per Return Policy</li>
+      <h3 style="color:var(--txt); margin-bottom:8px;">1. 📋 Order Cancellation Policy</h3>
+      <p style="margin-bottom:8px;">We understand that sometimes you may need to cancel an order. Here's everything you need to know:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
+        <li><b>Order Placed (Pending):</b> Yes — Instant Full Refund within 24 hours</li>
+        <li><b>Order Confirmed / Processing:</b> Yes — Within 2 hours (Full Refund within 3-5 days)</li>
+        <li><b>Packed / Ready to Ship:</b> Limited — Contact Support (Full Refund if approved)</li>
+        <li><b>Shipped / Out for Delivery:</b> No — Refuse delivery instead (Refund after return received)</li>
+        <li><b>Delivered:</b> No — Raise Return Request As per Return Policy</li>
       </ul>
-      <p><b>How to Cancel:</b> Go to My Orders ➔ Select Order ➔ Click "Cancel Order" OR contact us at support@circutech.co.in / +91- 9217656981 with your Order ID.</p>
-
-      <h3 style="margin-top:15px;color:var(--txt);">2. ⚠️ Cancellation by CircuTech Marketplace</h3>
-      <p>In rare cases, we may cancel your order due to:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <p style="margin-bottom:12px;"><b>How to Cancel:</b> Go to My Orders → Select Order → Click "Cancel Order" OR contact us at support@circutech.co.in / +91-9217656981 with your Order ID.</p>
+      
+      <h3 style="color:var(--txt); margin-bottom:8px;">2. 🚫 Cancellation by CircuTech Marketplace</h3>
+      <p style="margin-bottom:8px;">In rare cases, we may cancel your order due to:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Product out of stock or discontinued</li>
         <li>Pricing or listing errors on the website</li>
         <li>Suspected fraudulent transaction</li>
         <li>Delivery not available to your location</li>
         <li>Payment verification failure</li>
       </ul>
-      <p>⚠️ If we cancel your order, you will receive a full refund within 3-5 business days and an email notification explaining the reason.</p>
+      <p style="margin-bottom:12px;">⚠️ If we cancel your order, you will receive a full refund within 3-5 business days and an email notification explaining the reason.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">3. 📦 Return Eligibility</h3>
-      <p>You can return most items within 15 days of delivery. To be eligible for a return:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">3. 📦 Return Eligibility</h3>
+      <p style="margin-bottom:8px;">You can return most items within 15 days of delivery. To be eligible for a return:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Item must be unused and in original condition</li>
         <li>All original tags must be attached</li>
         <li>Item must be in original packaging</li>
@@ -840,67 +849,65 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
         <li>Proof of purchase (Order ID) is required</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">4. 🚫 Non-Returnable Items</h3>
-      <p>The following items cannot be returned:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">4. ❌ Non-Returnable Items</h3>
+      <p style="margin-bottom:8px;">The following items cannot be returned:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Innerwear, lingerie, and swimwear (for hygiene reasons)</li>
         <li>Items marked as "Final Sale" or "Non-Returnable"</li>
         <li>Items that have been worn, washed, or altered</li>
         <li>Items with removed tags or damaged packaging</li>
         <li>Customized or personalized products</li>
       </ul>
-      <p>⚠️ If you receive a damaged or defective item, contact us within 48 hours of delivery with photos at support@circutech.co.in or call +91- 9217656981.</p>
+      <p style="margin-bottom:12px;">⚠️ If you receive a damaged or defective item, contact us within 48 hours of delivery with photos at support@circutech.co.in or call +91-9217656981.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">5. 🔄 How to Return — Step by Step</h3>
-      <ol style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">5. 🔄 How to Return — Step by Step</h3>
+      <ol style="margin-left:20px; margin-bottom:12px;">
         <li><b>Raise Request:</b> Go to My Orders and click "Return" on the item</li>
         <li><b>We Confirm:</b> Our team reviews and approves within 24 hours</li>
         <li><b>Pack & Ship:</b> Pack the item securely and ship it back to us</li>
         <li><b>Get Refund:</b> Refund processed within 5-7 business days</li>
       </ol>
-      <p>Or email us at support@circutech.co.in with your Order ID and reason for return.</p>
+      <p style="margin-bottom:12px;">Or email us at support@circutech.co.in with your Order ID and reason for return.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">6. 💰 Refund Policy</h3>
-      <p>Once your return or cancellation is processed, refunds are issued as follows:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">6. 💰 Refund Policy</h3>
+      <p style="margin-bottom:8px;">Once your return or cancellation is processed, refunds are issued as follows:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li><b>Return / Cancellation Received:</b> We receive and verify your request</li>
         <li><b>Inspection (1-2 days):</b> Quality check for returns; verification for cancellations</li>
         <li><b>Refund Approved:</b> You receive email confirmation of refund approval</li>
         <li><b>Refund Processed (3-7 days):</b> Amount credited to original payment method</li>
       </ul>
-      <p><b>Refund Methods:</b></p>
-      <ul style="margin:10px 0 10px 20px;">
-        <li><b>Online Payment (UPI/Card/Net Banking):</b> Refund to original account within 5-7 business days</li>
-        <li><b>Cash on Delivery:</b> Refund via bank transfer within 7-10 business days</li>
-        <li><b>Cancelled Orders (before shipping):</b> Refund within 24-48 hours</li>
-        <li><b>Store Credit:</b> Instant credit to your CircuTech Marketplace wallet (optional)</li>
+      <p style="margin-bottom:8px;"><b>Refund Methods:</b></p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
+        <li>Online Payment (UPI/Card/Net Banking): Refund to original account within 5-7 business days</li>
+        <li>Cash on Delivery: Refund via bank transfer within 7-10 business days</li>
+        <li>Cancelled Orders (before shipping): Refund within 24-48 hours</li>
+        <li>Store Credit: Instant credit to your CircuTech Marketplace wallet (optional)</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">7. 🔄 Exchange Policy</h3>
-      <p>We offer free size exchanges on all clothing items. To exchange:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">7. 👕 Exchange Policy</h3>
+      <p style="margin-bottom:8px;">We offer free size exchanges on all clothing items. To exchange:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Contact us within 15 days of delivery</li>
         <li>Item must be in original, unworn condition with tags</li>
         <li>Exchange is subject to availability of the desired size/color</li>
         <li>If the desired item is unavailable, a full refund will be issued</li>
       </ul>
-      <p>🏷️ Free Size Exchange: We cover the shipping cost for size exchanges on your first exchange per order.</p>
+      <p style="margin-bottom:12px;">💡 Free Size Exchange: We cover the shipping cost for size exchanges on your first exchange per order.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">8. 📦 Return Shipping</h3>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">8. 🚚 Return Shipping</h3>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li><b>Defective/Wrong Item:</b> We cover return shipping 100%</li>
         <li><b>Size/Fit Issue:</b> Customer bears return shipping cost (₹50-100)</li>
         <li><b>Change of Mind:</b> Customer bears return shipping cost</li>
       </ul>
-      <p>Please use a trackable shipping service for returns. CircuTech Marketplace is not responsible for items lost during return shipping.</p>
+      <p style="margin-bottom:12px;">Please use a trackable shipping service for returns. CircuTech Marketplace is not responsible for items lost during return shipping.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">9. 📞 Contact for Refund & Cancellation</h3>
-      <p>For any refund or cancellation queries, reach out to us:</p>
-      <ul style="margin:10px 0 10px 20px; list-style:none;">
-        <li>📧 Email: support@circutech.co.in</li>
-        <li>📞 Phone: +91- 9217656981</li>
-        <li>🕒 Support Hours: Monday – Saturday, 10:00 AM – 7:00 PM</li>
-      </ul>
+      <h3 style="color:var(--txt); margin-bottom:8px;">9. 📞 Contact for Refund & Cancellation</h3>
+      <p style="margin-bottom:4px;">For any refund or cancellation queries, reach out to us:</p>
+      <p style="margin-bottom:4px;">📧 Email: support@circutech.co.in</p>
+      <p style="margin-bottom:4px;">📞 Phone: +91-9217656981</p>
+      <p style="margin-bottom:8px;">⏰ Support Hours: Monday – Saturday, 10:00 AM – 7:00 PM</p>
       <p>Please mention your Order ID in all communications for faster resolution.</p>
     </div>
   </div>
@@ -911,26 +918,26 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   <div class="modal"><button class="close" onclick="closeModal('privacy')">×</button>
     <h2>🔒 Policy & Privacy</h2>
     <div style="margin:12px 0;line-height:1.6;color:var(--muted);font-size:14px;">
-      <p>?? For privacy-related queries, contact us at: support@circutech.in or call +91- 9217656981.</p>
+      <p style="margin-bottom:12px;">For privacy-related queries, contact us at: support@circutech.in or call +91-9217656981.</p>
       
-      <h3 style="margin-top:15px;color:var(--txt);">1. 🛡️ Information We Collect</h3>
-      <p>We collect information you provide directly to us:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">1. 🔒 Information We Collect</h3>
+      <p style="margin-bottom:4px;">We collect information you provide directly to us:</p>
+      <ul style="margin-left:20px; margin-bottom:8px;">
         <li><b>Account Information:</b> Name, email address, phone number, password</li>
         <li><b>Order Information:</b> Delivery address, payment method, order history</li>
         <li><b>Profile Information:</b> Profile photo, saved addresses, wishlist</li>
         <li><b>Communication:</b> Messages you send to our support team</li>
       </ul>
-      <p>We also automatically collect certain information when you use our website:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <p style="margin-bottom:4px;">We also automatically collect certain information when you use our website:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Device information (browser type, operating system)</li>
         <li>Log data (IP address, pages visited, time spent)</li>
         <li>Cookies and similar tracking technologies</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">2. ⚙️ How We Use Your Information</h3>
-      <p>We use the information we collect to:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">2. ⚙️ How We Use Your Information</h3>
+      <p style="margin-bottom:4px;">We use the information we collect to:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Process and fulfill your orders</li>
         <li>Send order confirmations and shipping updates</li>
         <li>Provide customer support</li>
@@ -940,60 +947,58 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
         <li>Comply with legal obligations</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">3. 🔒 Data Security</h3>
-      <p>We implement industry-standard security measures to protect your personal information:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">3. 🛡️ Data Security</h3>
+      <p style="margin-bottom:4px;">We implement industry-standard security measures to protect your personal information:</p>
+      <ul style="margin-left:20px; margin-bottom:8px;">
         <li>SSL/TLS encryption for all data transmission</li>
         <li>Firebase Authentication for secure login</li>
         <li>Encrypted storage of sensitive information</li>
         <li>Regular security audits and updates</li>
       </ul>
-      <p>⚠️ While we take every precaution, no method of transmission over the internet is 100% secure. We cannot guarantee absolute security of your data.</p>
+      <p style="margin-bottom:12px;">⚠️ While we take every precaution, no method of transmission over the internet is 100% secure. We cannot guarantee absolute security of your data.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">4. 🤝 Information Sharing</h3>
-      <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in these circumstances:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">4. 🤝 Information Sharing</h3>
+      <p style="margin-bottom:4px;">We do not sell, trade, or rent your personal information to third parties. We may share your information only in these circumstances:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li><b>Delivery Partners:</b> To fulfill and deliver your orders</li>
         <li><b>Payment Processors:</b> To process your payments securely</li>
         <li><b>Legal Requirements:</b> When required by law or court order</li>
         <li><b>Business Transfer:</b> In case of merger or acquisition</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">5. 🍪 Cookies Policy</h3>
-      <p>We use cookies to enhance your browsing experience. Cookies help us:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">5. 🍪 Cookies Policy</h3>
+      <p style="margin-bottom:4px;">We use cookies to enhance your browsing experience. Cookies help us:</p>
+      <ul style="margin-left:20px; margin-bottom:8px;">
         <li>Remember your login status</li>
         <li>Save your cart and wishlist</li>
         <li>Understand how you use our website</li>
         <li>Show you relevant products and offers</li>
       </ul>
-      <p>You can disable cookies in your browser settings, but this may affect some features of our website.</p>
+      <p style="margin-bottom:12px;">You can disable cookies in your browser settings, but this may affect some features of our website.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">6. 📋 Your Rights</h3>
-      <p>You have the right to:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">6. 👤 Your Rights</h3>
+      <p style="margin-bottom:4px;">You have the right to:</p>
+      <ul style="margin-left:20px; margin-bottom:8px;">
         <li>Access the personal data we hold about you</li>
         <li>Request correction of inaccurate data</li>
         <li>Request deletion of your account and data</li>
         <li>Opt-out of marketing communications</li>
         <li>Data portability</li>
       </ul>
-      <p>To exercise any of these rights, contact us at support@circutech.co.in or call +91- 9217656981.</p>
+      <p style="margin-bottom:12px;">To exercise any of these rights, contact us at support@circutech.co.in or call +91-9217656981.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">7. 👶 Children's Privacy</h3>
-      <p>CircuTech Marketplace is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have collected such information, please contact us immediately.</p>
+      <h3 style="color:var(--txt); margin-bottom:8px;">7. 👶 Children's Privacy</h3>
+      <p style="margin-bottom:12px;">CircuTech Marketplace is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have collected such information, please contact us immediately.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">8. 🔄 Changes to This Policy</h3>
-      <p>We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last Updated" date. We encourage you to review this policy periodically.</p>
+      <h3 style="color:var(--txt); margin-bottom:8px;">8. 📝 Changes to This Policy</h3>
+      <p style="margin-bottom:12px;">We may update this Privacy Policy from time to time. We will notify you of any significant changes by posting the new policy on this page and updating the "Last Updated" date. We encourage you to review this policy periodically.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">9. 📞 Contact Us</h3>
-      <p>If you have any questions about this Privacy Policy, please contact us:</p>
-      <ul style="margin:10px 0 10px 20px; list-style:none;">
-        <li>🏢 CircuTech Marketplace (Powered by circutech Systems Private Limited)</li>
-        <li>📧 support@circutech.co.in</li>
-        <li>📞 +91- 9217656981</li>
-        <li>🕒 Monday – Saturday, 10:00 AM – 7:00 PM</li>
-      </ul>
+      <h3 style="color:var(--txt); margin-bottom:8px;">9. 📞 Contact Us</h3>
+      <p style="margin-bottom:4px;">If you have any questions about this Privacy Policy, please contact us:</p>
+      <p style="margin-bottom:4px;">🏢 CircuTech Marketplace (Powered by Circutech Systems Private Limited)</p>
+      <p style="margin-bottom:4px;">📧 support@circutech.co.in</p>
+      <p style="margin-bottom:4px;">📞 +91-9217656981</p>
+      <p>⏰ Monday – Saturday, 10:00 AM – 7:00 PM</p>
     </div>
   </div>
 </div>
@@ -1003,13 +1008,13 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
   <div class="modal"><button class="close" onclick="closeModal('terms')">×</button>
     <h2>📄 Terms & Conditions</h2>
     <div style="margin:12px 0;line-height:1.6;color:var(--muted);font-size:14px;">
-      <h3 style="margin-top:15px;color:var(--txt);">1. 🤝 Acceptance of Terms</h3>
-      <p>By accessing or using the CircuTech Marketplace website (circutech.co.in), you agree to be bound by these Terms & Conditions. If you do not agree to these terms, please do not use our website.</p>
-      <p>CircuTech Marketplace is operated by circutech Systems Private Limited. These terms apply to all visitors, users, and customers of the website.</p>
+      <h3 style="color:var(--txt); margin-bottom:8px;">1. 🤝 Acceptance of Terms</h3>
+      <p style="margin-bottom:8px;">By accessing or using the CircuTech Marketplace website (circutech.co.in), you agree to be bound by these Terms & Conditions. If you do not agree to these terms, please do not use our website.</p>
+      <p style="margin-bottom:12px;">CircuTech Marketplace is operated by Circutech Systems Private Limited. These terms apply to all visitors, users, and customers of the website.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">2. 💻 Use of Website</h3>
-      <p>You agree to use this website only for lawful purposes. You must not:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">2. 💻 Use of Website</h3>
+      <p style="margin-bottom:4px;">You agree to use this website only for lawful purposes. You must not:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Use the site in any way that violates applicable local, national, or international laws</li>
         <li>Transmit any unsolicited or unauthorized advertising or promotional material</li>
         <li>Attempt to gain unauthorized access to any part of the website</li>
@@ -1017,19 +1022,19 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
         <li>Reproduce, duplicate, or resell any part of our website without permission</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">3. 📦 Orders & Purchases</h3>
-      <p>When you place an order on CircuTech Marketplace:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">3. 📦 Orders & Purchases</h3>
+      <p style="margin-bottom:4px;">When you place an order on CircuTech Marketplace:</p>
+      <ul style="margin-left:20px; margin-bottom:8px;">
         <li>You confirm that all information provided is accurate and complete</li>
         <li>We reserve the right to refuse or cancel any order at our discretion</li>
         <li>Prices are subject to change without prior notice</li>
         <li>All orders are subject to product availability</li>
         <li>Order confirmation does not guarantee product availability</li>
       </ul>
-      <p>⚠️ CircuTech Marketplace reserves the right to cancel orders in case of pricing errors, fraud suspicion, or stock unavailability. Full refund will be issued in such cases.</p>
+      <p style="margin-bottom:12px;">⚠️ CircuTech Marketplace reserves the right to cancel orders in case of pricing errors, fraud suspicion, or stock unavailability. Full refund will be issued in such cases.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">4. 💳 Pricing & Payments</h3>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">4. 💳 Pricing & Payments</h3>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>All prices are listed in Indian Rupees (₹) and include applicable taxes</li>
         <li>We accept UPI, Credit/Debit Cards, Net Banking, and Cash on Delivery</li>
         <li>Payment must be completed before order processing begins</li>
@@ -1037,61 +1042,59 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
         <li>Discount codes and offers are subject to terms and cannot be combined unless specified</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">5. 🚚 Shipping & Delivery</h3>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">5. 🚚 Shipping & Delivery</h3>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>We deliver across India. Delivery timelines are estimates and may vary</li>
         <li>Free shipping is available on orders above ₹999</li>
         <li>CircuTech Marketplace is not responsible for delays caused by courier partners or natural events</li>
         <li>Risk of loss passes to you upon delivery to the shipping address provided</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">6. 🔄 Returns & Refunds</h3>
-      <p>Our return and refund policy is governed by our separate Refund & Cancellation Policy. Key points:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">6. 🔄 Returns & Refunds</h3>
+      <p style="margin-bottom:4px;">Our return and refund policy is governed by our separate Refund & Cancellation Policy. Key points:</p>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>Returns accepted within 30 days of delivery for eligible items</li>
         <li>Items must be unused, unwashed, and in original packaging with tags</li>
         <li>Refunds are processed within 5-7 business days of return approval</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">7.  ©️ Intellectual Property</h3>
-      <p>All content on CircuTech Marketplace — including logos, images, text, graphics, and software — is the property of CircuTech Marketplace / circutech Systems Private Limited and is protected by applicable intellectual property laws.</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">7. 🛡️ Intellectual Property</h3>
+      <ul style="margin-left:20px; margin-bottom:12px;">
+        <li>All content on CircuTech Marketplace — including logos, images, text, graphics, and software — is the property of CircuTech Marketplace / Circutech Systems Private Limited and is protected by applicable intellectual property laws.</li>
         <li>You may not copy, reproduce, or distribute our content without written permission</li>
         <li>Product images are for representation purposes only; actual products may vary slightly</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">8. 👤 User Accounts</h3>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">8. 👤 User Accounts</h3>
+      <ul style="margin-left:20px; margin-bottom:12px;">
         <li>You are responsible for maintaining the confidentiality of your account credentials</li>
         <li>You are responsible for all activities that occur under your account</li>
         <li>Notify us immediately of any unauthorized use of your account</li>
         <li>We reserve the right to terminate accounts that violate these terms</li>
       </ul>
 
-      <h3 style="margin-top:15px;color:var(--txt);">9. 🛡️ Limitation of Liability</h3>
-      <p>CircuTech Marketplace and circutech Systems Private Limited shall not be liable for:</p>
-      <ul style="margin:10px 0 10px 20px;">
+      <h3 style="color:var(--txt); margin-bottom:8px;">9. ⚠️ Limitation of Liability</h3>
+      <p style="margin-bottom:4px;">CircuTech Marketplace and Circutech Systems Private Limited shall not be liable for:</p>
+      <ul style="margin-left:20px; margin-bottom:8px;">
         <li>Any indirect, incidental, or consequential damages arising from use of our website</li>
         <li>Loss of data, profits, or business opportunities</li>
         <li>Damages resulting from unauthorized access to your account</li>
         <li>Product descriptions or images that may not be 100% accurate</li>
       </ul>
-      <p>Our maximum liability to you shall not exceed the amount paid for the specific product/order in question.</p>
+      <p style="margin-bottom:12px;">Our maximum liability to you shall not exceed the amount paid for the specific product/order in question.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">10. 🔄 Changes to Terms</h3>
-      <p>We reserve the right to modify these Terms & Conditions at any time. Changes will be effective immediately upon posting to the website. Continued use of the website after changes constitutes acceptance of the new terms.</p>
+      <h3 style="color:var(--txt); margin-bottom:8px;">10. 📝 Changes to Terms</h3>
+      <p style="margin-bottom:12px;">We reserve the right to modify these Terms & Conditions at any time. Changes will be effective immediately upon posting to the website. Continued use of the website after changes constitutes acceptance of the new terms.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">11. ⚖️ Governing Law</h3>
-      <p>These Terms & Conditions are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Delhi, India.</p>
+      <h3 style="color:var(--txt); margin-bottom:8px;">11. ⚖️ Governing Law</h3>
+      <p style="margin-bottom:12px;">These Terms & Conditions are governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts in Delhi, India.</p>
 
-      <h3 style="margin-top:15px;color:var(--txt);">12. 📞 Contact Us</h3>
-      <p>For any questions regarding these Terms & Conditions:</p>
-      <ul style="margin:10px 0 10px 20px; list-style:none;">
-        <li>🏢 CircuTech Marketplace (Powered by Circutech Systems Private Limited)</li>
-        <li>📧 support@circutech.in</li>
-        <li>📞 +91- 9217656981</li>
-        <li>🕒 Monday – Saturday, 10:00 AM – 7:00 PM</li>
-      </ul>
+      <h3 style="color:var(--txt); margin-bottom:8px;">12. 📞 Contact Us</h3>
+      <p style="margin-bottom:4px;">For any questions regarding these Terms & Conditions:</p>
+      <p style="margin-bottom:4px;">🏢 CircuTech Marketplace (Powered by Circutech Systems Private Limited)</p>
+      <p style="margin-bottom:4px;">📧 support@circutech.in</p>
+      <p style="margin-bottom:4px;">📞 +91-9217656981</p>
+      <p>⏰ Monday – Saturday, 10:00 AM – 7:00 PM</p>
     </div>
   </div>
 </div>
@@ -1101,7 +1104,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 <div class="modal small"><button class="close" onclick="closeModal('account')">×</button><h2>👤 Your Account</h2>
 <div id="accountContent"></div></div></div>
 
-<!-- Sell (Updated to support multiple images) -->
+<!-- Sell Modal -->
 <div class="modalbg" id="sell">
 <div class="modal"><button class="close" onclick="closeModal('sell')">×</button><h2>➕ Add your product</h2>
 <div class="formgrid">
@@ -1170,6 +1173,7 @@ footer{background:#111827;color:#cbd5e1;text-align:center;padding:32px 5%;margin
 
   <div class="admin-tab-bar">
     <button id="btnTabProds" class="active" onclick="switchAdminTab('products')">📦 Products</button>
+    <button id="btnTabOrders" onclick="switchAdminTab('orders')">📋 Manage Orders</button>
     <button id="btnTabAdmins" onclick="switchAdminTab('admins')">👑 Manage Admins</button>
     <button id="btnTabBugs" onclick="switchAdminTab('bugs')">🐛 Bug Reports</button>
     <button id="btnTabMsgs" onclick="switchAdminTab('msgs')">📩 Contact Messages</button>
@@ -1187,10 +1191,14 @@ let products = [];
 let cart = load("shopx_cart", []);
 let wishlist = load("shopx_wishlist", []);
 let orders = [];
+let allAdminOrders = []; 
+let allProfiles = [];
+let allBugReports = [];
+let allContactMessages = [];
 let user = load("shopx_user", null);
 let category = "All";
 
-let tempUploadedImages = []; // Holds preview/uploaded image URLs during submission
+let tempUploadedImages = [];
 
 function load(k,d){try{let x=localStorage.getItem(k);return x?JSON.parse(x):d}catch(e){return d}}
 function save(){localStorage.setItem("shopx_cart",JSON.stringify(cart));localStorage.setItem("shopx_wishlist",JSON.stringify(wishlist));localStorage.setItem("shopx_user",JSON.stringify(user))}
@@ -1335,14 +1343,70 @@ async function fetchProductsFromSupabase() {
 }
 
 async function fetchOrdersFromSupabase() {
-  const { data, error } = await db.from('orders').select('*, order_items(*, products(*))');
+  if (!user || !user.email) {
+    orders = [];
+    updateStats();
+    return;
+  }
+  const { data, error } = await db.from('orders').select('*').eq('customer_email', user.email);
   if (!error && data) { orders = data; updateStats(); }
+}
+
+async function fetchAllAdminOrders() {
+  const { data, error } = await db.from('orders').select('*').order('created_at', { ascending: false });
+  if (!error && data) { allAdminOrders = data; }
+}
+
+async function fetchAllProfiles() {
+  const { data, error } = await db.from('profiles').select('*');
+  if (!error && data) { allProfiles = data; }
+}
+
+async function fetchAllBugReports() {
+  const { data, error } = await db.from('bug_reports').select('*').order('created_at', { ascending: false });
+  if (!error && data) { allBugReports = data; }
+}
+
+async function fetchAllContactMessages() {
+  const { data, error } = await db.from('contact-messages').select('*').order('created_at', { ascending: false });
+  if (!error && data) { allContactMessages = data; }
+}
+
+async function sendContact(){
+  let name = document.getElementById("cName").value.trim();
+  let email = document.getElementById("cEmail").value.trim();
+  let message = document.getElementById("cMsg").value.trim();
+  if(!name || !email || !message) { notify("Please fill in all contact fields."); return; }
+
+  const { error } = await db.from('contact-messages').insert([{ name, email, message }]);
+  if(error) { notify("Error sending message: " + error.message); }
+  else {
+    notify("Message sent successfully! 📩");
+    closeModal('contact');
+    document.getElementById("cName").value = "";
+    document.getElementById("cEmail").value = "";
+    document.getElementById("cMsg").value = "";
+  }
+}
+
+async function submitBug(){
+  let title = document.getElementById("bugTitle").value.trim();
+  let desc = document.getElementById("bugDesc").value.trim();
+  if(!title || !desc) { notify("Please provide a title and description."); return; }
+
+  const { error } = await db.from('bug_reports').insert([{ title, description: desc, reporter: user ? user.email : 'Anonymous' }]);
+  if(error) { notify("Error submitting bug: " + error.message); }
+  else {
+    notify("Bug report submitted successfully! 🐛");
+    closeModal('bug');
+    document.getElementById("bugTitle").value = "";
+    document.getElementById("bugDesc").value = "";
+  }
 }
 
 function render(){
  let q = document.getElementById("search").value.toLowerCase().trim(), sort = document.getElementById("sort").value;
  
- // Flexible category matching to handle singular/plural discrepancies (e.g., "laptop" vs "laptops")
  let arr = products.filter(p => {
    let matchesCategory = true;
    if (category !== "All") {
@@ -1424,7 +1488,6 @@ function addCart(id){
 
 function toggleWish(id){let i=wishlist.indexOf(id);if(i>=0){wishlist.splice(i,1);notify("Removed from wishlist")}else{wishlist.push(id);notify("Added to wishlist ❤️")}save();render()}
 
-// --- PRODUCT DETAILS WITH MULTI-IMAGE GALLERY ---
 function showDetail(id){
  let p = products.find(x=>x.id===id); if(!p) return;
  let old = p.discount ? Math.round(p.price/(1-p.discount/100)) : 0;
@@ -1506,11 +1569,23 @@ function openWishlist(){
 
 function openOrders(){
   let el = document.getElementById("ordersContent");
-  if(!orders.length){ el.innerHTML='<div class="empty">No orders yet 📦</div>'; }
+  if(!user) {
+    el.innerHTML='<div class="empty">Please sign in to view your orders 📦</div>';
+    openModal("orders");
+    return;
+  }
+  if(!orders.length){ el.innerHTML='<div class="empty">No orders found for your account 📦</div>'; }
   else {
     el.innerHTML = orders.slice().reverse().map(o=> {
-      let itemsList = (o.order_items||[]).map(i => `${esc(i.products ? i.products.name : 'Item')} × ${i.quantity || 1}`).join(", ");
-      return `<div class="order"><div class="orderhead"><b>Order</b><span>${new Date(o.created_at||Date.now()).toLocaleString()}</span></div><p style="margin:8px 0">Status: <b style="color:#16a34a">${esc(o.status||'Confirmed')}</b></p><p>${itemsList || 'No item details'}</p><b>Total: ${money(o.total)}</b></div>`;
+      let cancelReasonText = o.cancel_reason ? `<br><small style="color:var(--red);">Reason: ${esc(o.cancel_reason)}</small>` : '';
+      return `<div class="order">
+        <div class="orderhead"><b>Order #${o.id}</b><span>${new Date(o.created_at||Date.now()).toLocaleString()}</span></div>
+        <p style="margin:8px 0">Status: <b style="color:${o.status==='Cancelled'?'#ef4444':'#16a34a'}">${esc(o.status||'Confirmed')}</b>${cancelReasonText}</p>
+        <p><b>Items:</b> ${esc(o.item_name || 'N/A')}</p>
+        <p><b>Customer:</b> ${esc(o.customer_name)} (${esc(o.customer_email || o.phone || 'No contact')})</p>
+        <p><b>Address:</b> ${esc(o.address)}</p>
+        <b>Total: ${money(o.total)}</b>
+      </div>`;
     }).join("");
   }
   openModal("orders");
@@ -1530,17 +1605,29 @@ async function placeOrder(){
      phone = document.getElementById("coPhone").value.trim(),
      payMethod = document.getElementById("coPay").value;
  if(!name || !addr || !phone){notify("Please complete delivery details");return}
+ 
  let total = cart.reduce((s,x)=>{let p=products.find(a=>a.id===x.id);return s+(p?p.price*x.q:0)},0);
+ let summaryNames = cart.map(x => {
+   let p = products.find(a => a.id === x.id);
+   return `${p ? p.name : 'Item'} (x${x.q})`;
+ }).join(", ");
 
- const { data: orderData, error: orderErr } = await db.from('orders').insert([{ customer_name: name, address: addr, phone, payment_method: payMethod, total, status: "Confirmed" }]).select();
+ const orderPayload = {
+   user_id: user.id || null,
+   status: "Confirmed",
+   phone: phone,
+   customer_name: name,
+   payment_method: payMethod,
+   customer_email: user.email || "",
+   address: addr,
+   total: total,
+   item_name: summaryNames,
+   cancel_reason: ""
+ };
+
+ const { error: orderErr } = await db.from('orders').insert([orderPayload]);
  if(orderErr) { notify("Failed to place order: " + orderErr.message); return; }
 
- const orderItemsToInsert = cart.map(x => {
-   let p = products.find(a => a.id === x.id);
-   return { order_id: orderData[0].id, product_id: p.id, quantity: x.q, price: p.price };
- });
-
- await db.from('order_items').insert(orderItemsToInsert);
  cart=[]; save(); closeModal("checkout"); fetchOrdersFromSupabase(); notify("Order placed successfully 🎉");
  setTimeout(()=>openOrders(),350);
 }
@@ -1565,31 +1652,20 @@ async function signIn(){
     if(pin !== "31414142") { notify("Incorrect PIN! Access denied."); return; }
   }
 
-  // Check if profile exists in Supabase profiles table
-  const { data: existingProfile, error: fetchErr } = await db.from('profiles').select('*').eq('email', e).maybeSingle();
+  const { data: existingProfile } = await db.from('profiles').select('*').eq('email', e).maybeSingle();
   let role = isHardcodedAdmin ? 'admin' : (existingProfile ? existingProfile.role : 'user');
 
   if(!existingProfile) {
-    // Insert new profile into Supabase profiles table
-    const { error: insertErr } = await db.from('profiles').insert([{ name: n, email: e, role }]);
-    if(insertErr) {
-      notify("Error saving profile: " + insertErr.message);
-      return;
-    }
-  } else {
-    // Optionally update name if it changed
-    if(existingProfile.name !== n || (isHardcodedAdmin && existingProfile.role !== 'admin')) {
-      await db.from('profiles').update({ name: n, role }).eq('email', e);
-    }
+    await db.from('profiles').insert([{ name: n, email: e, role }]);
   }
 
   user = { name: n, email: e, role }; save(); closeModal("account"); updateNav();
-  notify(role === 'admin' ? "Welcome back, Admin! ⚙️" : role === 'seller' ? "Welcome back, Seller! 🛍️" : "Welcome, "+n+"! 👋 (Saved to database)");
+  fetchOrdersFromSupabase();
+  notify(role === 'admin' ? "Welcome back, Admin! ⚙️" : "Welcome, "+n+"! 👋");
 }
 
-function signOut(){user=null; save(); closeModal("account"); updateNav(); notify("Signed out")}
+function signOut(){user=null; orders=[]; save(); closeModal("account"); updateNav(); notify("Signed out")}
 
-// --- MULTI-IMAGE UPLOAD & SUBMISSION HANDLERS ---
 async function previewImages(input) {
   let files = input.files;
   if (!files || files.length === 0) return;
@@ -1599,24 +1675,24 @@ async function previewImages(input) {
 
   for (let i = 0; i < files.length; i++) {
     let file = files[i];
-    let base64 = await resizeImage(file);
-    tempUploadedImages.push(base64);
-    
-    let item = document.createElement("div");
-    item.className = "image-preview-item";
-    item.innerHTML = `<img src="${base64}" alt="Preview">`;
-    container.appendChild(item);
+    let reader = new FileReader();
+    reader.onload = function(e) {
+      tempUploadedImages.push(e.target.result);
+      let item = document.createElement("div");
+      item.className = "image-preview-item";
+      item.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+      container.appendChild(item);
+    };
+    reader.readAsDataURL(file);
   }
 }
 
 function previewUrls(urlStr) {
   let container = document.getElementById("imagePreviewContainer");
   if (!urlStr) { container.innerHTML = '<div class="image-preview-item" style="width:100%">📷 Product photo previews</div>'; tempUploadedImages = []; return; }
-  
   let urls = urlStr.split(',').map(u => u.trim()).filter(Boolean);
   tempUploadedImages = urls;
   container.innerHTML = "";
-
   urls.forEach(url => {
     let item = document.createElement("div");
     item.className = "image-preview-item";
@@ -1636,212 +1712,215 @@ async function addProduct(){
  if(!n || price <= 0){notify("Enter a product name and valid price");return}
 
  let imagesArray = tempUploadedImages;
+ const { error } = await db.from('products').insert([{ name: n, price, category: cat, discount: off, stock, description: desc, images: imagesArray, seller_name: user ? user.name : "Marketplace Seller" }]);
+ if(error) { notify("Error adding product: " + error.message); return; }
 
- let fileInput = document.getElementById("sImageFiles");
- if (fileInput.files && fileInput.files.length > 0) {
-   imagesArray = [];
-   for (let i = 0; i < fileInput.files.length; i++) {
-     let file = fileInput.files[i];
-     try {
-       const fileExt = file.name.split('.').pop();
-       const fileName = `${Date.now()}_${i}.${fileExt}`;
-       const { error: uploadErr } = await db.storage.from('product-images').upload(fileName, file);
-       if (!uploadErr) {
-         const { data: publicUrlData } = db.storage.from('product-images').getPublicUrl(fileName);
-         imagesArray.push(publicUrlData.publicUrl);
-       } else {
-         imagesArray.push(await resizeImage(file));
-       }
-     } catch(err) {
-       imagesArray.push(await resizeImage(file));
-     }
-   }
- }
-
- const { error } = await db.from('products').insert([{
-   name: n,
-   price: price,
-   category: cat,
-   rating: 4.5,
-   discount: Math.min(99, Math.max(0, off)),
-   stock: stock,
-   seller_name: user ? user.name : "New Seller",
-   description: desc,
-   image_url: imagesArray.length > 0 ? imagesArray[0] : "",
-   images: imagesArray
- }]).select();
-
- if (error) {
-   notify("Error adding product: " + error.message);
-   return;
- }
-
- closeModal("sell");
- ["sName","sPrice","sImageFiles","sImageUrls","sOff","sStock","sDesc"].forEach(id => { let el = document.getElementById(id); if(el) el.value=""; });
- document.getElementById("imagePreviewContainer").innerHTML = '<div class="image-preview-item" style="width:100%">📷 Product photo previews</div>';
- tempUploadedImages = [];
- fetchProductsFromSupabase();
- notify("Product published with multiple images 🎉");
+ closeModal("sell"); fetchProductsFromSupabase(); notify("Product added successfully! 🎉");
 }
 
-async function submitBug() {
-  let title = document.getElementById("bugTitle").value.trim();
-  let desc = document.getElementById("bugDesc").value.trim();
-  let file = document.getElementById("bugFile").files[0];
-  if(!title || !desc) { notify("Please fill bug details"); return; }
+function openAdminPanel(){ openModal("adminPanel"); switchAdminTab("products"); }
 
-  let imageUrl = null;
-  if (file) {
-    try {
-      const fileName = `bug_${Date.now()}.${file.name.split('.').pop()}`;
-      const { error: uploadErr } = await db.storage.from('bug-images').upload(fileName, file);
-      if (!uploadErr) {
-        const { data: publicUrl } = db.storage.from('bug-images').getPublicUrl(fileName);
-        imageUrl = publicUrl.publicUrl;
-      }
-    } catch(e) { console.log("Bug image upload note:", e); }
-  }
-
-  const { error } = await db.from('bug_reports').insert([{ title, description: desc, image_url: imageUrl }]);
-  if(error) notify("Failed to submit bug: " + error.message);
-  else {
-    notify("Bug report submitted! Thank you ❤️");
-    document.getElementById("bugTitle").value = ""; document.getElementById("bugDesc").value = ""; document.getElementById("bugFile").value = "";
-    closeModal("bug");
-  }
-}
-
-async function sendContact() {
-  let name = document.getElementById("cName").value.trim();
-  let email = document.getElementById("cEmail").value.trim();
-  let msg = document.getElementById("cMsg").value.trim();
-  let btn = document.getElementById("sendContactBtn");
-  if(!name || !email || !msg) { notify("Please fill out all contact fields"); return; }
-
-  btn.innerText = "Sending..."; btn.disabled = true;
-  const { error } = await db.from('contact-messages').insert([{ name, email, message: msg }]);
-  btn.innerText = "Send Message"; btn.disabled = false;
-
-  if(error) notify("Failed to send message: " + error.message);
-  else {
-    notify("Message sent successfully! 📩");
-    document.getElementById("cName").value = ""; document.getElementById("cEmail").value = ""; document.getElementById("cMsg").value = "";
-    closeModal("contact");
-  }
-}
-
-let activeAdminTab = "products";
-function openAdminPanel() { openModal("adminPanel"); switchAdminTab(activeAdminTab); }
-function switchAdminTab(tab) {
-  activeAdminTab = tab;
-  document.querySelectorAll(".admin-tab-bar button").forEach(b => b.classList.remove("active"));
-  if (tab === 'products') document.getElementById("btnTabProds").classList.add("active");
-  if (tab === 'admins') document.getElementById("btnTabAdmins").classList.add("active");
-  if (tab === 'bugs') document.getElementById("btnTabBugs").classList.add("active");
-  if (tab === 'msgs') document.getElementById("btnTabMsgs").classList.add("active");
-  renderAdminTabContent();
-}
-
-async function renderAdminTabContent() {
+async function switchAdminTab(tab){
+  ["btnTabProds","btnTabOrders","btnTabAdmins","btnTabBugs","btnTabMsgs"].forEach(id => {
+    let btn = document.getElementById(id);
+    if(btn) btn.classList.remove("active");
+  });
   let content = document.getElementById("adminTabContent");
-  content.innerHTML = "<p style='padding:15px;color:var(--muted);'>Loading records...</p>";
-  
-  if (activeAdminTab === "products") {
-    content.innerHTML = `<table class="admin-table"><thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Actions</th></tr></thead><tbody>${products.map(p => `<tr><td><b>${esc(p.name)}</b></td><td>${esc(p.category)}</td><td>${money(p.price)}</td><td>${p.stock}</td><td><button class="danger" onclick="adminDeleteProduct('${p.id}')">Delete</button></td></tr>`).join('')}</tbody></table>`;
-  } else if (activeAdminTab === "admins") {
-    const { data: profiles, error } = await db.from('profiles').select('*');
-    if (error || !profiles || !profiles.length) { content.innerHTML = "<p style='padding:20px;text-align:center;'>No registered profiles found in database.</p>"; return; }
-    content.innerHTML = `<table class="admin-table"><thead><tr><th>User Name</th><th>Email</th><th>Role</th><th>Actions</th></tr></thead><tbody>${profiles.map(u => `
-      <tr>
-        <td><b>${esc(u.name)}</b></td>
-        <td>${esc(u.email)}</td>
-        <td><span style="color:${u.role==='admin'?'var(--gold)':u.role==='seller'?'var(--green)':'var(--txt)'};font-weight:bold;">${esc(u.role||'user')}</span></td>
+
+  if(tab==='products'){
+    document.getElementById("btnTabProds").classList.add("active");
+    content.innerHTML = `<h3>Manage Products</h3><table class="admin-table"><tr><th>Name</th><th>Price</th><th>Stock</th><th>Action</th></tr>${products.map(p=>`<tr><td>${esc(p.name)}</td><td>${money(p.price)}</td><td>${p.stock}</td><td><button class="danger" onclick="deleteProduct('${p.id}')">Delete</button></td></tr>`).join('')}</table>`;
+  } else if(tab==='orders'){
+    document.getElementById("btnTabOrders").classList.add("active");
+    content.innerHTML = `<h3>Manage Customer Orders</h3><p style="color:var(--muted);font-size:13px;margin-bottom:10px;">Update customer order status dynamically.</p><div id="adminOrdersTableContainer">Loading orders...</div>`;
+    await fetchAllAdminOrders();
+    renderAdminOrdersTable();
+  } else if(tab==='admins'){
+    document.getElementById("btnTabAdmins").classList.add("active");
+    content.innerHTML = `<h3>Manage Admins & Profiles</h3><p style="color:var(--muted);font-size:13px;margin-bottom:10px;">Change user roles (Admin = Yellow, Seller = Green, User = Blue).</p><div id="adminProfilesTableContainer">Loading profiles...</div>`;
+    await fetchAllProfiles();
+    renderAdminProfilesTable();
+  } else if(tab==='bugs'){
+    document.getElementById("btnTabBugs").classList.add("active");
+    content.innerHTML = `<h3>Bug Reports Panel</h3><p style="color:var(--muted);font-size:13px;margin-bottom:10px;">Review and clear reported bugs from users.</p><div id="adminBugsTableContainer">Loading bug reports...</div>`;
+    await fetchAllBugReports();
+    renderAdminBugsTable();
+  } else if(tab==='msgs'){
+    document.getElementById("btnTabMsgs").classList.add("active");
+    content.innerHTML = `<h3>Contact Messages Panel</h3><p style="color:var(--muted);font-size:13px;margin-bottom:10px;">Inquiries received from the Contact Us form.</p><div id="adminMsgsTableContainer">Loading messages...</div>`;
+    await fetchAllContactMessages();
+    renderAdminMsgsTable();
+  }
+}
+
+function renderAdminOrdersTable() {
+  let container = document.getElementById("adminOrdersTableContainer");
+  if(!container) return;
+  if(!allAdminOrders.length) {
+    container.innerHTML = `<p>No orders placed yet.</p>`;
+    return;
+  }
+
+  container.innerHTML = `<table class="admin-table">
+    <tr>
+      <th>ID</th>
+      <th>Customer</th>
+      <th>Items & Total</th>
+      <th>Status & Reason</th>
+      <th>Update Status</th>
+    </tr>
+    ${allAdminOrders.map(o => {
+      const currentStatus = o.status || 'Confirmed';
+      return `<tr>
+        <td>#${o.id}</td>
+        <td><b>${esc(o.customer_name)}</b><br><small>${esc(o.customer_email || o.phone)}</small><br><small style="color:var(--muted)">${esc(o.address)}</small></td>
+        <td>${esc(o.item_name || 'Product')}<br><b>${money(o.total)}</b></td>
         <td>
-          <select onchange="updateUserRole('${u.id}', this.value)" style="padding:4px 8px;border-radius:4px;border:1px solid var(--border);">
-            <option value="user" ${u.role==='user'?'selected':''}>User</option>
-            <option value="seller" ${u.role==='seller'?'selected':''}>Seller</option>
-            <option value="admin" ${u.role==='admin'?'selected':''}>Admin</option>
+          <span style="font-weight:bold; color:${currentStatus==='Cancelled'?'#ef4444':'#16a34a'}">${esc(currentStatus)}</span>
+          ${o.cancel_reason ? `<br><small style="color:var(--red)">Reason: ${esc(o.cancel_reason)}</small>` : ''}
+        </td>
+        <td>
+          <select id="statusSelect_${o.id}" onchange="handleAdminStatusChange('${o.id}', this.value)" style="padding:6px; font-size:12px; border-radius:6px;">
+            <option value="Confirmed" ${currentStatus==='Confirmed'?'selected':''}>Confirmed</option>
+            <option value="Packed" ${currentStatus==='Packed'?'selected':''}>Packed</option>
+            <option value="Out for shipping" ${currentStatus==='Out for shipping'?'selected':''}>Out for shipping</option>
+            <option value="Out for delivery" ${currentStatus==='Out for delivery'?'selected':''}>Out for delivery</option>
+            <option value="Delivered" ${currentStatus==='Delivered'?'selected':''}>Delivered</option>
+            <option value="Cancelled" ${currentStatus==='Cancelled'?'selected':''}>Cancelled</option>
           </select>
         </td>
-      </tr>
-    `).join('')}</tbody></table>`;
-  } else if (activeAdminTab === "bugs") {
-    const { data: bugs } = await db.from('bug_reports').select('*');
-    if (!bugs || !bugs.length) { content.innerHTML = "<p style='padding:20px;text-align:center;'>No bug reports found ✨</p>"; return; }
-    content.innerHTML = `<table class="admin-table"><thead><tr><th>Title</th><th>Description</th><th>Submitted</th></tr></thead><tbody>${bugs.map(b => `<tr><td><b>${esc(b.title)}</b></td><td>${esc(b.description)}</td><td>${new Date(b.created_at || Date.now()).toLocaleDateString()}</td></tr>`).join('')}</tbody></table>`;
-  } else if (activeAdminTab === "msgs") {
-    const { data: msgs } = await db.from('contact-messages').select('*').order('created_at', { ascending: false });
-    if (!msgs || !msgs.length) { content.innerHTML = "<p style='padding:20px;text-align:center;'>No contact messages received yet 📩</p>"; return; }
-    content.innerHTML = `<table class="admin-table"><thead><tr><th>Sender</th><th>Email</th><th>Message</th><th>Received</th><th>Action</th></tr></thead><tbody>${msgs.map(m => `<tr><td><b>${esc(m.name || 'Anonymous')}</b></td><td><a href="mailto:${esc(m.email)}" style="color:var(--p);">${esc(m.email)}</a></td><td>${esc(m.message)}</td><td>${new Date(m.created_at || Date.now()).toLocaleString()}</td><td><button class="danger" onclick="adminDeleteMessage('${m.id}')">Delete</button></td></tr>`).join('')}</tbody></table>`;
+      </tr>`;
+    }).join('')}
+  </table>`;
+}
+
+function renderAdminProfilesTable() {
+  let container = document.getElementById("adminProfilesTableContainer");
+  if(!container) return;
+  if(!allProfiles.length) {
+    container.innerHTML = `<p>No user profiles found in database.</p>`;
+    return;
   }
+
+  container.innerHTML = `<table class="admin-table">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Current Role</th>
+      <th>Change Role</th>
+    </tr>
+    ${allProfiles.map(profile => {
+      const role = (profile.role || 'user').toLowerCase();
+      const badgeClass = role === 'admin' ? 'role-admin' : (role === 'seller' ? 'role-seller' : 'role-user');
+      return `<tr>
+        <td><b>${esc(profile.name)}</b></td>
+        <td>${esc(profile.email)}</td>
+        <td><span class="role-badge ${badgeClass}">${role}</span></td>
+        <td>
+          <select onchange="updateUserRole('${profile.email}', this.value)" style="padding:6px; font-size:12px; border-radius:6px;">
+            <option value="user" ${role==='user'?'selected':''}>User</option>
+            <option value="seller" ${role==='seller'?'selected':''}>Seller</option>
+            <option value="admin" ${role==='admin'?'selected':''}>Admin</option>
+          </select>
+        </td>
+      </tr>`;
+    }).join('')}
+  </table>`;
 }
 
-async function updateUserRole(userId, newRole) {
-  const { error } = await db.from('profiles').update({ role: newRole }).eq('id', userId);
-  if(error) {
-    notify("Failed to update role: " + error.message);
-  } else {
-    notify(`User role successfully updated to ${newRole.toUpperCase()}! 🛡️`);
-    renderAdminTabContent();
+function renderAdminBugsTable() {
+  let container = document.getElementById("adminBugsTableContainer");
+  if(!container) return;
+  if(!allBugReports.length) {
+    container.innerHTML = `<p>No bug reports submitted.</p>`;
+    return;
   }
+
+  container.innerHTML = `<table class="admin-table">
+    <tr>
+      <th>Reporter</th>
+      <th>Title & Description</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+    ${allBugReports.map(b => `<tr>
+      <td>${esc(b.reporter)}</td>
+      <td><b>${esc(b.title)}</b><br><small>${esc(b.description)}</small></td>
+      <td>${new Date(b.created_at || Date.now()).toLocaleDateString()}</td>
+      <td><button class="danger" onclick="deleteBugReport('${b.id}')">Delete</button></td>
+    </tr>`).join('')}
+  </table>`;
 }
 
-async function adminDeleteMessage(id) {
-  if (!confirm("Are you sure you want to delete this message?")) return;
-  const { error } = await db.from('contact-messages').delete().eq('id', id);
-  if (error) notify("Failed to delete message: " + error.message);
-  else { notify("Message deleted."); renderAdminTabContent(); }
+function renderAdminMsgsTable() {
+  let container = document.getElementById("adminMsgsTableContainer");
+  if(!container) return;
+  if(!allContactMessages.length) {
+    container.innerHTML = `<p>No contact messages received.</p>`;
+    return;
+  }
+
+  container.innerHTML = `<table class="admin-table">
+    <tr>
+      <th>Sender</th>
+      <th>Email</th>
+      <th>Message</th>
+      <th>Date</th>
+      <th>Action</th>
+    </tr>
+    ${allContactMessages.map(m => `<tr>
+      <td><b>${esc(m.name)}</b></td>
+      <td>${esc(m.email)}</td>
+      <td>${esc(m.message)}</td>
+      <td>${new Date(m.created_at || Date.now()).toLocaleDateString()}</td>
+      <td><button class="danger" onclick="deleteContactMsg('${m.id}')">Delete</button></td>
+    </tr>`).join('')}
+  </table>`;
 }
 
-async function adminDeleteProduct(id) {
-  if (!confirm("Are you sure you want to delete this product?")) return;
+async function handleAdminStatusChange(orderId, newStatus) {
+  let cancelReason = "";
+  if (newStatus === "Cancelled") {
+    cancelReason = prompt("Enter cancellation reason for customer:", "Out of stock / Listing error");
+    if (!cancelReason) return;
+  }
+
+  const { error } = await db.from('orders').update({ status: newStatus, cancel_reason: cancelReason }).eq('id', orderId);
+  if (error) { notify("Failed to update status: " + error.message); }
+  else { notify("Order status updated successfully!"); await fetchAllAdminOrders(); renderAdminOrdersTable(); }
+}
+
+async function updateUserRole(email, newRole) {
+  const { error } = await db.from('profiles').update({ role: newRole }).eq('email', email);
+  if (error) { notify("Failed to update role: " + error.message); }
+  else { notify(`User role updated to ${newRole}!`); await fetchAllProfiles(); renderAdminProfilesTable(); }
+}
+
+async function deleteProduct(id) {
+  if(!confirm("Are you sure you want to delete this product?")) return;
   const { error } = await db.from('products').delete().eq('id', id);
-  if (error) notify("Failed to delete product: " + error.message);
-  else { notify("Product deleted."); fetchProductsFromSupabase(); renderAdminTabContent(); }
+  if(error) notify("Error: " + error.message);
+  else { notify("Product deleted"); fetchProductsFromSupabase(); switchAdminTab('products'); }
 }
 
-function resizeImage(file, maxWidth=800, maxHeight=800, quality=0.8) {
-  return new Promise((resolve) => {
-    let reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function (e) {
-      let img = new Image();
-      img.src = e.target.result;
-      img.onload = function () {
-        let canvas = document.createElement('canvas');
-        let width = img.width, height = img.height;
-        if (width > height) { if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; } }
-        else { if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; } }
-        canvas.width = width; canvas.height = height;
-        let ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-        resolve(canvas.toDataURL('image/jpeg', quality));
-      };
-    };
-  });
+async function deleteBugReport(id) {
+  const { error } = await db.from('bug_reports').delete().eq('id', id);
+  if(!error) { notify("Bug report removed"); await fetchAllBugReports(); renderAdminBugsTable(); }
 }
 
-function toggleDark(){
-  document.body.classList.toggle("dark");
-  localStorage.setItem("shopx_dark", document.body.classList.contains("dark"));
+async function deleteContactMsg(id) {
+  const { error } = await db.from('contact-messages').delete().eq('id', id);
+  if(!error) { notify("Message removed"); await fetchAllContactMessages(); renderAdminMsgsTable(); }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  if(localStorage.getItem("shopx_dark") === "true") document.body.classList.add("dark");
+function toggleDark(){document.body.classList.toggle("dark")}
+
+window.onload = () => {
   fetchProductsFromSupabase();
-  fetchOrdersFromSupabase();
+  if(user) fetchOrdersFromSupabase();
   initGlobalThemeSync();
-
-  db.channel('public:products')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, () => {
-      fetchProductsFromSupabase();
-    }).subscribe();
-
-  db.channel('public:orders')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'orders' }, () => {
-      fetchOrdersFromSupabase();
-    }).subscribe();
-});
+  updateNav();
+};
 </script>
 </body>
 </html>
